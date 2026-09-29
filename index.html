@@ -387,8 +387,31 @@
         </main>
     </div>
 
-    <!-- JAVASCRIPT DE CONTROL Y PERSISTENCIA -->
-    <script>
+    <!-- MÓDULOS DE FIREBASE Y LÓGICA DE CONTROL -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // Configuración de tu proyecto Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCHh51DPwEqoDnqubtLVFrSKQLuIyoVrEE",
+            authDomain: "taberbypass-4ad11.firebaseapp.com",
+            projectId: "taberbypass-4ad11",
+            storageBucket: "taberbypass-4ad11.firebasestorage.app",
+            messagingSenderId: "761058213173",
+            appId: "1:761058213173:web:33bedddfd121effeeee07c",
+            measurementId: "G-5Z7XMJ31T9",
+            databaseURL: "https://taberbypass-4ad11-default-rtdb.firebaseio.com" // Asegura la conexión a tu RTDB
+        };
+
+        // Inicializar Firebase y Analytics
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getDatabase(app);
+        const dbRef = ref(db, 'taber_data');
+
+        // Datos por defecto
         const defaultData = {
             config: {
                 brand: "Taber by Pass",
@@ -415,23 +438,32 @@
             ]
         };
 
-        function getData() {
-            const raw = localStorage.getItem('tabac_data');
-            if (!raw) return defaultData;
-            
-            const data = JSON.parse(raw);
-            if (data.config && data.config.brand === "Tabernáculo Central") {
-                data.config.brand = "Taber by Pass";
-                data.config.email = "contacto@taberbypass.org";
-                localStorage.setItem('tabac_data', JSON.stringify(data));
-            }
-            return data;
-        }
+        let currentData = defaultData;
 
-        function saveData(data) {
-            localStorage.setItem('tabac_data', JSON.stringify(data));
+        // Escuchar cambios en tiempo real desde Firebase
+        onValue(dbRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                currentData = {
+                    config: data.config || defaultData.config,
+                    videos: data.videos || [],
+                    photos: data.photos || [],
+                    schedules: data.schedules || []
+                };
+            } else {
+                // Si la BD está vacía, inicializar con los datos predeterminados
+                saveData(defaultData);
+            }
             renderPublicSite();
             renderAdminLists();
+        });
+
+        function saveData(data) {
+            set(dbRef, data).then(() => {
+                console.log("Datos sincroizados exitosamente con Firebase.");
+            }).catch((err) => {
+                console.error("Error al guardar en Firebase: ", err);
+            });
         }
 
         function parseYtEmbed(urlOrId) {
@@ -446,9 +478,8 @@
         }
 
         function renderPublicSite() {
-            const data = getData();
+            const data = currentData;
             
-            // Config general
             document.getElementById('nav-brand-title').innerText = data.config.brand;
             document.getElementById('nav-brand-subtitle').innerText = data.config.subtitle;
             document.getElementById('hero-title').innerText = data.config.heroTitle;
@@ -457,16 +488,13 @@
             document.getElementById('footer-phone').innerHTML = `<i class="fa-solid fa-phone text-primary mr-2"></i> ${data.config.phone}`;
             document.getElementById('footer-email').innerHTML = `<i class="fa-solid fa-envelope text-primary mr-2"></i> ${data.config.email}`;
 
-            // Taber TV En Vivo
             const liveYtId = parseYtEmbed(data.config.liveTv);
             document.getElementById('live-container').innerHTML = `
                 <iframe class="w-full h-full" src="https://www.youtube.com/embed/${liveYtId}?autoplay=0" title="Taber TV En Vivo" frameborder="0" allowfullscreen></iframe>
             `;
 
-            // Radio Link
             document.getElementById('radio-link-btn').href = data.config.radioUrl || "#";
 
-            // Videos anteriores
             const videosGrid = document.getElementById('videos-grid');
             videosGrid.innerHTML = data.videos.map(v => {
                 const ytEmbed = parseYtEmbed(v.ytId);
@@ -483,7 +511,6 @@
                 `;
             }).join('');
 
-            // Galería
             const galeriaGrid = document.getElementById('galeria-grid');
             galeriaGrid.innerHTML = data.photos.map(p => `
                 <div class="group relative overflow-hidden rounded-2xl shadow-md aspect-square bg-gray-100">
@@ -494,7 +521,6 @@
                 </div>
             `).join('');
 
-            // Horarios
             const horariosGrid = document.getElementById('horarios-grid');
             horariosGrid.innerHTML = data.schedules.map(s => `
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 text-center">
@@ -509,7 +535,7 @@
         }
 
         function renderAdminLists() {
-            const data = getData();
+            const data = currentData;
 
             document.getElementById('cfg-brand').value = data.config.brand;
             document.getElementById('cfg-subtitle').value = data.config.subtitle;
@@ -521,7 +547,6 @@
             document.getElementById('cfg-email').value = data.config.email;
             document.getElementById('cfg-address').value = data.config.address;
 
-            // Admin Videos List
             document.getElementById('admin-videos-list').innerHTML = data.videos.map(v => `
                 <div class="flex items-center justify-between bg-gray-50 p-4 rounded-xl border">
                     <div>
@@ -535,7 +560,6 @@
                 </div>
             `).join('');
 
-            // Admin Photos List
             document.getElementById('admin-photos-list').innerHTML = data.photos.map(p => `
                 <div class="bg-gray-50 p-3 rounded-xl border flex flex-col justify-between">
                     <img src="${p.url}" class="w-full h-32 object-cover rounded-lg mb-2">
@@ -547,7 +571,6 @@
                 </div>
             `).join('');
 
-            // Admin Schedules List
             document.getElementById('admin-schedules-list').innerHTML = data.schedules.map(s => `
                 <div class="flex items-center justify-between bg-gray-50 p-4 rounded-xl border">
                     <div>
@@ -562,37 +585,37 @@
             `).join('');
         }
 
-        // Login Modal Logic
-        function openLoginModal() {
+        // Exportar funciones globales para el DOM
+        window.openLoginModal = () => {
             document.getElementById('login-modal').classList.remove('hidden');
             document.getElementById('login-user').value = '';
             document.getElementById('login-pass').value = '';
             document.getElementById('login-error').classList.add('hidden');
-        }
+        };
 
-        function closeLoginModal() {
+        window.closeLoginModal = () => {
             document.getElementById('login-modal').classList.add('hidden');
-        }
+        };
 
-        function handleLogin(e) {
+        window.handleLogin = (e) => {
             e.preventDefault();
             const user = document.getElementById('login-user').value;
             const pass = document.getElementById('login-pass').value;
 
             if (user === 'admin' && pass === 'Taber2026%') {
-                closeLoginModal();
+                window.closeLoginModal();
                 document.getElementById('admin-panel').classList.remove('hidden');
                 renderAdminLists();
             } else {
                 document.getElementById('login-error').classList.remove('hidden');
             }
-        }
+        };
 
-        function closeAdminPanel() {
+        window.closeAdminPanel = () => {
             document.getElementById('admin-panel').classList.add('hidden');
-        }
+        };
 
-        function switchTab(tabName) {
+        window.switchTab = (tabName) => {
             ['general', 'videos', 'galeria', 'horarios'].forEach(t => {
                 document.getElementById(`tab-${t}`).classList.add('hidden');
                 document.getElementById(`tab-btn-${t}`).classList.remove('text-primary', 'border-b-2', 'border-primary');
@@ -601,13 +624,11 @@
             document.getElementById(`tab-${tabName}`).classList.remove('hidden');
             document.getElementById(`tab-btn-${tabName}`).classList.add('text-primary', 'border-b-2', 'border-primary');
             document.getElementById(`tab-btn-${tabName}`).classList.remove('text-gray-500');
-        }
+        };
 
-        // Config Save
-        function saveGeneralConfig(e) {
+        window.saveGeneralConfig = (e) => {
             e.preventDefault();
-            const data = getData();
-            data.config = {
+            currentData.config = {
                 brand: document.getElementById('cfg-brand').value,
                 subtitle: document.getElementById('cfg-subtitle').value,
                 liveTv: document.getElementById('cfg-livetv').value,
@@ -618,37 +639,34 @@
                 email: document.getElementById('cfg-email').value,
                 address: document.getElementById('cfg-address').value
             };
-            saveData(data);
-            alert('¡Configuración y enlaces guardados con éxito!');
-        }
+            saveData(currentData);
+            alert('¡Configuración guardada exitosamente en Firebase!');
+        };
 
-        // --- CRUD VIDEOS CON EDICIÓN ---
-        function saveVideo(e) {
+        window.saveVideo = (e) => {
             e.preventDefault();
-            const data = getData();
             const editId = document.getElementById('vid-edit-id').value;
             const title = document.getElementById('vid-title').value;
             const author = document.getElementById('vid-author').value;
             const ytId = document.getElementById('vid-url').value;
 
             if (editId) {
-                const index = data.videos.findIndex(v => v.id === editId);
+                const index = currentData.videos.findIndex(v => v.id === editId);
                 if (index !== -1) {
-                    data.videos[index] = { id: editId, title, author, ytId };
+                    currentData.videos[index] = { id: editId, title, author, ytId };
                 }
-                alert('¡Video actualizado correctamente!');
+                alert('¡Video actualizado en Firebase!');
             } else {
                 const newVideo = { id: Date.now().toString(), title, author, ytId };
-                data.videos.unshift(newVideo);
-                alert('¡Video agregado correctamente!');
+                currentData.videos.unshift(newVideo);
+                alert('¡Video guardado en Firebase!');
             }
-            saveData(data);
-            resetVideoForm();
-        }
+            saveData(currentData);
+            window.resetVideoForm();
+        };
 
-        function editVideo(id) {
-            const data = getData();
-            const v = data.videos.find(item => item.id === id);
+        window.editVideo = (id) => {
+            const v = currentData.videos.find(item => item.id === id);
             if (v) {
                 document.getElementById('vid-edit-id').value = v.id;
                 document.getElementById('vid-title').value = v.title;
@@ -658,9 +676,9 @@
                 document.getElementById('vid-submit-btn').innerText = "Guardar Cambios";
                 document.getElementById('cancel-edit-video').classList.remove('hidden');
             }
-        }
+        };
 
-        function resetVideoForm() {
+        window.resetVideoForm = () => {
             document.getElementById('vid-edit-id').value = '';
             document.getElementById('vid-title').value = '';
             document.getElementById('vid-author').value = '';
@@ -668,42 +686,38 @@
             document.getElementById('vid-form-title').innerText = "Agregar Nuevo Mensaje / Video";
             document.getElementById('vid-submit-btn').innerText = "Agregar Video";
             document.getElementById('cancel-edit-video').classList.add('hidden');
-        }
+        };
 
-        function deleteVideo(id) {
+        window.deleteVideo = (id) => {
             if (confirm('¿Estás seguro de eliminar este video?')) {
-                const data = getData();
-                data.videos = data.videos.filter(v => v.id !== id);
-                saveData(data);
+                currentData.videos = currentData.videos.filter(v => v.id !== id);
+                saveData(currentData);
             }
-        }
+        };
 
-        // --- CRUD FOTOS CON EDICIÓN ---
-        function savePhoto(e) {
+        window.savePhoto = (e) => {
             e.preventDefault();
-            const data = getData();
             const editId = document.getElementById('photo-edit-id').value;
             const url = document.getElementById('photo-url').value;
             const desc = document.getElementById('photo-desc').value;
 
             if (editId) {
-                const index = data.photos.findIndex(p => p.id === editId);
+                const index = currentData.photos.findIndex(p => p.id === editId);
                 if (index !== -1) {
-                    data.photos[index] = { id: editId, url, desc };
+                    currentData.photos[index] = { id: editId, url, desc };
                 }
-                alert('¡Foto actualizada correctamente!');
+                alert('¡Foto actualizada en Firebase!');
             } else {
                 const newPhoto = { id: Date.now().toString(), url, desc };
-                data.photos.unshift(newPhoto);
-                alert('¡Foto agregada correctamente!');
+                currentData.photos.unshift(newPhoto);
+                alert('¡Foto guardada en Firebase!');
             }
-            saveData(data);
-            resetPhotoForm();
-        }
+            saveData(currentData);
+            window.resetPhotoForm();
+        };
 
-        function editPhoto(id) {
-            const data = getData();
-            const p = data.photos.find(item => item.id === id);
+        window.editPhoto = (id) => {
+            const p = currentData.photos.find(item => item.id === id);
             if (p) {
                 document.getElementById('photo-edit-id').value = p.id;
                 document.getElementById('photo-url').value = p.url;
@@ -712,52 +726,48 @@
                 document.getElementById('photo-submit-btn').innerText = "Guardar Cambios";
                 document.getElementById('cancel-edit-photo').classList.remove('hidden');
             }
-        }
+        };
 
-        function resetPhotoForm() {
+        window.resetPhotoForm = () => {
             document.getElementById('photo-edit-id').value = '';
             document.getElementById('photo-url').value = '';
             document.getElementById('photo-desc').value = '';
             document.getElementById('photo-form-title').innerText = "Agregar Nueva Foto a la Galería";
             document.getElementById('photo-submit-btn').innerText = "Agregar Foto";
             document.getElementById('cancel-edit-photo').classList.add('hidden');
-        }
+        };
 
-        function deletePhoto(id) {
+        window.deletePhoto = (id) => {
             if (confirm('¿Estás seguro de eliminar esta foto?')) {
-                const data = getData();
-                data.photos = data.photos.filter(p => p.id !== id);
-                saveData(data);
+                currentData.photos = currentData.photos.filter(p => p.id !== id);
+                saveData(currentData);
             }
-        }
+        };
 
-        // --- CRUD HORARIOS CON EDICIÓN ---
-        function saveSchedule(e) {
+        window.saveSchedule = (e) => {
             e.preventDefault();
-            const data = getData();
             const editId = document.getElementById('sch-edit-id').value;
             const day = document.getElementById('sch-day').value;
             const time = document.getElementById('sch-time').value;
             const desc = document.getElementById('sch-desc').value;
 
             if (editId) {
-                const index = data.schedules.findIndex(s => s.id === editId);
+                const index = currentData.schedules.findIndex(s => s.id === editId);
                 if (index !== -1) {
-                    data.schedules[index] = { id: editId, day, time, desc };
+                    currentData.schedules[index] = { id: editId, day, time, desc };
                 }
-                alert('¡Horario actualizado correctamente!');
+                alert('¡Horario actualizado en Firebase!');
             } else {
                 const newSch = { id: Date.now().toString(), day, time, desc };
-                data.schedules.push(newSch);
-                alert('¡Horario agregado correctamente!');
+                currentData.schedules.push(newSch);
+                alert('¡Horario guardado en Firebase!');
             }
-            saveData(data);
-            resetScheduleForm();
-        }
+            saveData(currentData);
+            window.resetScheduleForm();
+        };
 
-        function editSchedule(id) {
-            const data = getData();
-            const s = data.schedules.find(item => item.id === id);
+        window.editSchedule = (id) => {
+            const s = currentData.schedules.find(item => item.id === id);
             if (s) {
                 document.getElementById('sch-edit-id').value = s.id;
                 document.getElementById('sch-day').value = s.day;
@@ -767,9 +777,9 @@
                 document.getElementById('sch-submit-btn').innerText = "Guardar Cambios";
                 document.getElementById('cancel-edit-sch').classList.remove('hidden');
             }
-        }
+        };
 
-        function resetScheduleForm() {
+        window.resetScheduleForm = () => {
             document.getElementById('sch-edit-id').value = '';
             document.getElementById('sch-day').value = '';
             document.getElementById('sch-time').value = '';
@@ -777,19 +787,14 @@
             document.getElementById('sch-form-title').innerText = "Agregar Horario de Culto";
             document.getElementById('sch-submit-btn').innerText = "Agregar Horario";
             document.getElementById('cancel-edit-sch').classList.add('hidden');
-        }
+        };
 
-        function deleteSchedule(id) {
+        window.deleteSchedule = (id) => {
             if (confirm('¿Estás seguro de eliminar este horario?')) {
-                const data = getData();
-                data.schedules = data.schedules.filter(s => s.id !== id);
-                saveData(data);
+                currentData.schedules = currentData.schedules.filter(s => s.id !== id);
+                saveData(currentData);
             }
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            renderPublicSite();
-        });
+        };
     </script>
 </body>
 </html>
