@@ -28,10 +28,11 @@
     <header class="bg-white shadow-md sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
-                <!-- LOGO / TÍTULO -->
+                <!-- LOGO / TÍTULO / SLOGAN -->
                 <div class="flex items-center space-x-3">
-                    <div class="bg-primary text-white p-2.5 rounded-xl shadow-md">
-                        <i class="fa-solid fa-church text-2xl"></i>
+                    <div id="nav-brand-logo-container" class="bg-primary text-white p-2.5 rounded-xl shadow-md flex items-center justify-center overflow-hidden w-12 h-12">
+                        <i id="nav-brand-icon" class="fa-solid fa-church text-2xl"></i>
+                        <img id="nav-brand-img" src="" alt="Logo" class="hidden w-full h-full object-cover rounded-lg">
                     </div>
                     <div>
                         <span id="nav-brand-title" class="text-xl font-bold tracking-tight text-gray-900 block">Taber by Pass</span>
@@ -249,14 +250,19 @@
 
             <!-- SECCIÓN 1: CONFIGURACIÓN Y EN VIVOS -->
             <div id="tab-general" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6">
-                <h3 class="text-xl font-bold text-gray-900 border-b pb-3">Configuración General, Taber TV y Radio 106.1 FM</h3>
+                <h3 class="text-xl font-bold text-gray-900 border-b pb-3">Configuración General, Logo, Taber TV y Radio</h3>
                 <form onsubmit="saveGeneralConfig(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="md:col-span-2 bg-blue-50/50 p-4 rounded-xl border border-blue-100">
+                        <label class="block text-sm font-bold text-blue-900 mb-1"><i class="fa-solid fa-image mr-1"></i> URL del Logo de la Iglesia</label>
+                        <input type="url" id="cfg-logo" placeholder="https://ejemplo.com/logo.png" class="w-full border rounded-lg px-4 py-2 bg-white">
+                        <p class="text-xs text-blue-600 mt-1">Ingresa la URL pública de una imagen PNG o JPG. Si lo dejas vacío, se mostrará el icono de iglesia por defecto.</p>
+                    </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Nombre del Ministerio</label>
                         <input type="text" id="cfg-brand" class="w-full border rounded-lg px-4 py-2">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Lema o Subtítulo</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Slogan / Subtítulo</label>
                         <input type="text" id="cfg-subtitle" class="w-full border rounded-lg px-4 py-2">
                     </div>
                     <div class="md:col-span-2 bg-red-50 p-4 rounded-xl border border-red-200">
@@ -402,7 +408,7 @@
             messagingSenderId: "761058213173",
             appId: "1:761058213173:web:33bedddfd121effeeee07c",
             measurementId: "G-5Z7XMJ31T9",
-            databaseURL: "https://taberbypass-4ad11-default-rtdb.firebaseio.com" // Asegura la conexión a tu RTDB
+            databaseURL: "https://taberbypass-4ad11-default-rtdb.firebaseio.com"
         };
 
         // Inicializar Firebase y Analytics
@@ -414,6 +420,7 @@
         // Datos por defecto
         const defaultData = {
             config: {
+                logoUrl: "",
                 brand: "Taber by Pass",
                 subtitle: "Ministerio de Fe y Adoración",
                 liveTv: "dQw4w9WgXcQ",
@@ -451,7 +458,6 @@
                     schedules: data.schedules || []
                 };
             } else {
-                // Si la BD está vacía, inicializar con los datos predeterminados
                 saveData(defaultData);
             }
             renderPublicSite();
@@ -460,7 +466,7 @@
 
         function saveData(data) {
             set(dbRef, data).then(() => {
-                console.log("Datos sincroizados exitosamente con Firebase.");
+                console.log("Datos sincronizados exitosamente con Firebase.");
             }).catch((err) => {
                 console.error("Error al guardar en Firebase: ", err);
             });
@@ -480,6 +486,24 @@
         function renderPublicSite() {
             const data = currentData;
             
+            // Config Logo, Marca y Subtítulo
+            const iconEl = document.getElementById('nav-brand-icon');
+            const imgEl = document.getElementById('nav-brand-img');
+            const logoContainer = document.getElementById('nav-brand-logo-container');
+
+            if (data.config.logoUrl && data.config.logoUrl.trim() !== '') {
+                imgEl.src = data.config.logoUrl.trim();
+                imgEl.classList.remove('hidden');
+                iconEl.classList.add('hidden');
+                logoContainer.classList.remove('bg-primary', 'p-2.5');
+                logoContainer.classList.add('bg-transparent', 'p-0');
+            } else {
+                imgEl.classList.add('hidden');
+                iconEl.classList.remove('hidden');
+                logoContainer.classList.add('bg-primary', 'p-2.5');
+                logoContainer.classList.remove('bg-transparent', 'p-0');
+            }
+
             document.getElementById('nav-brand-title').innerText = data.config.brand;
             document.getElementById('nav-brand-subtitle').innerText = data.config.subtitle;
             document.getElementById('hero-title').innerText = data.config.heroTitle;
@@ -537,6 +561,7 @@
         function renderAdminLists() {
             const data = currentData;
 
+            document.getElementById('cfg-logo').value = data.config.logoUrl || "";
             document.getElementById('cfg-brand').value = data.config.brand;
             document.getElementById('cfg-subtitle').value = data.config.subtitle;
             document.getElementById('cfg-livetv').value = data.config.liveTv || "";
@@ -629,6 +654,7 @@
         window.saveGeneralConfig = (e) => {
             e.preventDefault();
             currentData.config = {
+                logoUrl: document.getElementById('cfg-logo').value,
                 brand: document.getElementById('cfg-brand').value,
                 subtitle: document.getElementById('cfg-subtitle').value,
                 liveTv: document.getElementById('cfg-livetv').value,
