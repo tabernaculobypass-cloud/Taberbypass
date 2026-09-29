@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taber by Pass</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a8a', /* Azul marino institucional */
+                        secondary: '#172554', /* Azul marino oscuro */
+                        darkBg: '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- HEADER & NAVBAR -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- LOGO / TÍTULO -->
+                <div class="flex items-center space-x-3">
+                    <div class="bg-primary text-white p-2.5 rounded-xl shadow-md">
+                        <i class="fa-solid fa-church text-2xl"></i>
+                    </div>
+                    <div>
+                        <span id="nav-brand-title" class="text-xl font-bold tracking-tight text-gray-900 block">Taber by Pass</span>
+                        <span id="nav-brand-subtitle" class="text-xs text-gray-500 block uppercase font-medium">Ministerio de Fe y Adoración</span>
+                    </div>
+                </div>
+
+                <!-- DESKTOP NAV -->
+                <nav class="hidden md:flex items-center space-x-6 font-medium text-sm lg:text-base">
+                    <a href="#inicio" class="text-gray-600 hover:text-primary transition">Inicio</a>
+                    <a href="#en-vivo" class="text-red-600 hover:text-red-700 font-bold transition flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-600 animate-pulse"></span><span>Taber TV En Vivo</span></a>
+                    <a href="#radio" class="text-gray-600 hover:text-primary transition flex items-center space-x-1.5"><i class="fa-solid fa-radio text-primary"></i><span>Radio 106.1 FM</span></a>
+                    <a href="#transmision" class="text-gray-600 hover:text-primary transition">Mensajes</a>
+                    <a href="#horarios" class="text-gray-600 hover:text-primary transition">Horarios</a>
+                    <a href="#galeria" class="text-gray-600 hover:text-primary transition">Galería</a>
+                </nav>
+
+                <!-- ADMIN BUTTON -->
+                <div class="flex items-center">
+                    <button onclick="openLoginModal()" class="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-sm font-medium shadow transition flex items-center space-x-2">
+                        <i class="fa-solid fa-lock text-xs"></i>
+                        <span>Panel Admin</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-grow">
+
+        <!-- HERO SECTION -->
+        <section id="inicio" class="relative bg-gradient-to-r from-gray-900 via-secondary to-primary text-white py-24 px-4 sm:px-6 lg:px-8 overflow-hidden shadow-inner">
+            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <span id="hero-badge" class="bg-white/10 text-blue-200 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-widest border border-white/20">Bienvenidos a Casa</span>
+                <h1 id="hero-title" class="text-4xl sm:text-6xl font-extrabold tracking-tight mt-4 mb-6 leading-tight">Un lugar de esperanza y salvación</h1>
+                <p id="hero-subtitle" class="text-lg sm:text-xl text-gray-200 mb-8 max-w-2xl mx-auto font-light">"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos."</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#en-vivo" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-tv"></i>
+                        <span>Ver Taber TV En Vivo</span>
+                    </a>
+                    <a href="#radio" class="bg-white text-gray-900 hover:bg-gray-100 font-semibold px-8 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-radio text-primary"></i>
+                        <span>Escuchar Radio 106.1 FM</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN TABER TV EN VIVO -->
+        <section id="en-vivo" class="py-16 bg-gray-900 text-white px-4 sm:px-6 lg:px-8">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-10">
+                    <div class="inline-flex items-center space-x-2 bg-red-600/20 text-red-400 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-3 border border-red-500/30">
+                        <span class="w-2.5 h-2.5 rounded-full bg-red-600 animate-ping"></span>
+                        <span>Señal en Directo</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Taber TV En Vivo</h2>
+                    <p class="text-gray-400 mt-2">Disfruta de nuestros cultos y servicios transmitidos en tiempo real</p>
+                </div>
+                
+                <div class="bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
+                    <div class="aspect-video w-full" id="live-container">
+                        <!-- Se llena dinámicamente -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN RADIO BAUTISTA 106.1 FM -->
+        <section id="radio" class="py-16 bg-blue-950 text-white px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto bg-gradient-to-br from-blue-900 to-blue-950 p-8 sm:p-12 rounded-3xl shadow-xl border border-blue-800 flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="space-y-4 text-center md:text-left">
+                    <div class="inline-flex items-center space-x-2 bg-blue-800/60 text-blue-300 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-blue-700">
+                        <i class="fa-solid fa-tower-broadcast text-blue-400"></i>
+                        <span>Señal Radial 24/7</span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold tracking-tight">Radio Bautista 106.1 FM</h2>
+                    <p class="text-blue-200/80 text-sm sm:text-base max-w-md">Llevando la palabra de Dios y alabanzas edificantes a cada rincón de tu hogar a través de la señal radial.</p>
+                </div>
+                <div class="flex flex-col items-center justify-center bg-blue-900/80 p-6 rounded-2xl border border-blue-700/50 min-w-[260px]">
+                    <div class="w-16 h-16 rounded-full bg-blue-700 text-white flex items-center justify-center text-2xl mb-4 shadow-inner animate-pulse">
+                        <i class="fa-solid fa-radio"></i>
+                    </div>
+                    <span class="font-bold text-lg mb-3">106.1 FM En Vivo</span>
+                    <a id="radio-link-btn" href="#" target="_blank" class="w-full bg-white text-blue-900 hover:bg-blue-50 font-bold px-6 py-3 rounded-xl transition text-center shadow-md flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-play text-xs text-primary"></i>
+                        <span>Sintonizar Radio</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN VIDEOS / MENSAJES ANTERIORES -->
+        <section id="transmision" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900">Mensajes Anteriores</h2>
+                <p class="text-gray-500 mt-2">Revive nuestras prédicas pasadas y edifica tu vida espiritual</p>
+            </div>
+            <div id="videos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Se llena dinámicamente -->
+            </div>
+        </section>
+
+        <!-- HORARIOS -->
+        <section id="horarios" class="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8 border-y border-gray-200">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Horarios de Servicios</h2>
+                    <p class="text-gray-500 mt-2">Acompaña a nuestra familia en cada uno de nuestros cultos semanales</p>
+                </div>
+                <div id="horarios-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Se llena dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- GALERÍA DE FOTOS -->
+        <section id="galeria" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900">Galería Fotográfica</h2>
+                <p class="text-gray-500 mt-2">Momentos especiales compartidos en nuestra comunidad</p>
+            </div>
+            <div id="galeria-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Se llena dinámicamente -->
+            </div>
+        </section>
+
+        <!-- CONTACTO / UBICACIÓN -->
+        <section id="contacto" class="bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Visítanos</h3>
+                    <p id="footer-address" class="text-gray-400 mb-6"><i class="fa-solid fa-location-dot text-primary mr-2"></i> Dirección Principal, Ciudad, País</p>
+                    <p id="footer-phone" class="text-gray-400 mb-2"><i class="fa-solid fa-phone text-primary mr-2"></i> +00 0000-0000</p>
+                    <p id="footer-email" class="text-gray-400 mb-6"><i class="fa-solid fa-envelope text-primary mr-2"></i> contacto@taberbypass.org</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Envíanos un mensaje</h3>
+                    <form onsubmit="event.preventDefault(); alert('¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.');" class="space-y-4">
+                        <input type="text" placeholder="Tu Nombre" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary">
+                        <input type="email" placeholder="Correo Electrónico" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary">
+                        <textarea placeholder="Tu Petición o Mensaje" rows="3" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary"></textarea>
+                        <button type="submit" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-3 rounded-lg transition w-full">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-gray-500 text-center py-6 text-sm border-t border-gray-800">
+        <p>&copy; 2026 Taber by Pass. Todos los derechos reservados. | Diseñado para GitHub Pages.</p>
+    </footer>
+
+    <!-- MODAL DE LOGIN ADMIN -->
+    <div id="login-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-8 shadow-2xl relative">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="bg-primary/10 text-primary w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 text-xl">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900">Acceso Administrativo</h3>
+                <p class="text-sm text-gray-500 mt-1">Ingresa tus credenciales para administrar el sitio</p>
+            </div>
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Usuario</label>
+                    <input type="text" id="login-user" required class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                    <input type="password" id="login-pass" required class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:outline-none">
+                </div>
+                <div id="login-error" class="text-red-500 text-sm hidden">Usuario o contraseña incorrectos.</div>
+                <button type="submit" class="w-full bg-primary hover:bg-secondary text-white font-semibold py-3 rounded-lg transition shadow-md">Ingresar al Panel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PANEL DE ADMINISTRACIÓN -->
+    <div id="admin-panel" class="fixed inset-0 z-50 bg-gray-100 hidden flex flex-col overflow-y-auto">
+        <!-- Admin Header -->
+        <header class="bg-gray-900 text-white shadow sticky top-0 z-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-gauge-high text-primary text-xl"></i>
+                    <span class="font-bold text-lg">Panel de Control - Taber by Pass</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="closeAdminPanel()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-2">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <span>Salir del Panel</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Admin Content -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow space-y-8">
+            
+            <!-- TABS DE NAVEGACIÓN ADMIN -->
+            <div class="flex border-b border-gray-300 space-x-6 overflow-x-auto">
+                <button onclick="switchTab('general')" id="tab-btn-general" class="pb-3 font-semibold text-primary border-b-2 border-primary transition whitespace-nowrap">Config y En Vivos</button>
+                <button onclick="switchTab('videos')" id="tab-btn-videos" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Mensajes</button>
+                <button onclick="switchTab('galeria')" id="tab-btn-galeria" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Galería</button>
+                <button onclick="switchTab('horarios')" id="tab-btn-horarios" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Horarios</button>
+            </div>
+
+            <!-- SECCIÓN 1: CONFIGURACIÓN Y EN VIVOS -->
+            <div id="tab-general" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6">
+                <h3 class="text-xl font-bold text-gray-900 border-b pb-3">Configuración General, Taber TV y Radio 106.1 FM</h3>
+                <form onsubmit="saveGeneralConfig(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nombre del Ministerio</label>
+                        <input type="text" id="cfg-brand" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Lema o Subtítulo</label>
+                        <input type="text" id="cfg-subtitle" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div class="md:col-span-2 bg-red-50 p-4 rounded-xl border border-red-200">
+                        <label class="block text-sm font-bold text-red-700 mb-1"><i class="fa-solid fa-tv mr-1"></i> Enlace de Taber TV En Vivo (ID de YouTube o URL completa)</label>
+                        <input type="text" id="cfg-livetv" placeholder="Ej. dQw4w9WgXcQ o enlace completo" class="w-full border rounded-lg px-4 py-2 bg-white">
+                        <p class="text-xs text-red-500 mt-1">Aquí puedes pegar el enlace o ID del video en vivo actual.</p>
+                    </div>
+                    <div class="md:col-span-2 bg-blue-50 p-4 rounded-xl border border-blue-200">
+                        <label class="block text-sm font-bold text-blue-800 mb-1"><i class="fa-solid fa-radio mr-1"></i> Enlace de la Radio Bautista 106.1 FM</label>
+                        <input type="url" id="cfg-radio" placeholder="https://tu-estacion-radio.com/stream" class="w-full border rounded-lg px-4 py-2 bg-white">
+                        <p class="text-xs text-blue-600 mt-1">Enlace streaming o página web oficial de la radio.</p>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Título Principal (Banner)</label>
+                        <input type="text" id="cfg-hero-title" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Versículo / Texto Destacado</label>
+                        <textarea id="cfg-hero-sub" rows="2" class="w-full border rounded-lg px-4 py-2"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono de Contacto</label>
+                        <input type="text" id="cfg-phone" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                        <input type="email" id="cfg-email" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Dirección Física</label>
+                        <input type="text" id="cfg-address" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div>
+                        <button type="submit" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow">Guardar Configuración</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- SECCIÓN 2: VIDEOS / MENSAJES -->
+            <div id="tab-videos" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <h3 id="vid-form-title" class="text-xl font-bold text-gray-900">Agregar Nuevo Mensaje / Video</h3>
+                    <button type="button" id="cancel-edit-video" onclick="resetVideoForm()" class="text-sm text-gray-500 hover:text-gray-800 hidden">Cancelar Edición</button>
+                </div>
+                <form onsubmit="saveVideo(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end bg-gray-50 p-4 rounded-xl border">
+                    <input type="hidden" id="vid-edit-id">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Título del Mensaje</label>
+                        <input type="text" id="vid-title" placeholder="Ej. El poder de la fe" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Predicador / Pastor</label>
+                        <input type="text" id="vid-author" placeholder="Ej. Pastor Principal" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">ID o URL de YouTube</label>
+                        <input type="text" id="vid-url" placeholder="Ej. dQw4w9WgXcQ" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-3">
+                        <button type="submit" id="vid-submit-btn" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow">Agregar Video</button>
+                    </div>
+                </form>
+
+                <h4 class="font-bold text-gray-800 pt-4">Videos Registrados</h4>
+                <div id="admin-videos-list" class="space-y-3">
+                    <!-- Listado dinámico -->
+                </div>
+            </div>
+
+            <!-- SECCIÓN 3: GALERÍA DE FOTOS -->
+            <div id="tab-galeria" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <h3 id="photo-form-title" class="text-xl font-bold text-gray-900">Agregar Nueva Foto a la Galería</h3>
+                    <button type="button" id="cancel-edit-photo" onclick="resetPhotoForm()" class="text-sm text-gray-500 hover:text-gray-800 hidden">Cancelar Edición</button>
+                </div>
+                <form onsubmit="savePhoto(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end bg-gray-50 p-4 rounded-xl border">
+                    <input type="hidden" id="photo-edit-id">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">URL de la Imagen</label>
+                        <input type="url" id="photo-url" placeholder="https://ejemplo.com/imagen.jpg" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Descripción / Título</label>
+                        <input type="text" id="photo-desc" placeholder="Ej. Culto Dominical" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" id="photo-submit-btn" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow">Agregar Foto</button>
+                    </div>
+                </form>
+
+                <h4 class="font-bold text-gray-800 pt-4">Fotos Registradas</h4>
+                <div id="admin-photos-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <!-- Listado dinámico -->
+                </div>
+            </div>
+
+            <!-- SECCIÓN 4: HORARIOS -->
+            <div id="tab-horarios" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <h3 id="sch-form-title" class="text-xl font-bold text-gray-900">Agregar Horario de Culto</h3>
+                    <button type="button" id="cancel-edit-sch" onclick="resetScheduleForm()" class="text-sm text-gray-500 hover:text-gray-800 hidden">Cancelar Edición</button>
+                </div>
+                <form onsubmit="saveSchedule(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end bg-gray-50 p-4 rounded-xl border">
+                    <input type="hidden" id="sch-edit-id">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Día / Nombre del Culto</label>
+                        <input type="text" id="sch-day" placeholder="Ej. Miércoles de Estudio" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Hora</label>
+                        <input type="text" id="sch-time" placeholder="Ej. 7:00 PM" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Descripción Breve</label>
+                        <input type="text" id="sch-desc" placeholder="Ej. Reunión de oración y doctrina" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-3">
+                        <button type="submit" id="sch-submit-btn" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow">Agregar Horario</button>
+                    </div>
+                </form>
+
+                <h4 class="font-bold text-gray-800 pt-4">Horarios Registrados</h4>
+                <div id="admin-schedules-list" class="space-y-3">
+                    <!-- Listado dinámico -->
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- JAVASCRIPT DE CONTROL Y PERSISTENCIA -->
+    <script>
+        const defaultData = {
+            config: {
+                brand: "Taber by Pass",
+                subtitle: "Ministerio de Fe y Adoración",
+                liveTv: "dQw4w9WgXcQ",
+                radioUrl: "https://radiobautista.example.com",
+                heroTitle: "Un lugar de esperanza y salvación",
+                heroSub: "\"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos.\"",
+                phone: "+503 2222-3333",
+                email: "contacto@taberbypass.org",
+                address: "Avenida Principal #123, Ciudad Central"
+            },
+            videos: [
+                { id: "1", title: "El Poder de la Oración Ferviente", author: "Pastor Principal", ytId: "dQw4w9WgXcQ" },
+                { id: "2", title: "Caminando en Integridad y Fe", author: "Co-Pastor", ytId: "dQw4w9WgXcQ" }
+            ],
+            photos: [
+                { id: "1", url: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800", desc: "Reunión de Jóvenes" },
+                { id: "2", url: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800", desc: "Coro y Alabanza" }
+            ],
+            schedules: [
+                { id: "1", day: "Domingo de Adoración", time: "9:00 AM", desc: "Culto General y Escuela Dominical" },
+                { id: "2", day: "Miércoles Bíblico", time: "7:00 PM", desc: "Estudio de la Palabra y Oración" }
+            ]
+        };
+
+        function getData() {
+            const raw = localStorage.getItem('tabac_data');
+            if (!raw) return defaultData;
+            
+            const data = JSON.parse(raw);
+            if (data.config && data.config.brand === "Tabernáculo Central") {
+                data.config.brand = "Taber by Pass";
+                data.config.email = "contacto@taberbypass.org";
+                localStorage.setItem('tabac_data', JSON.stringify(data));
+            }
+            return data;
+        }
+
+        function saveData(data) {
+            localStorage.setItem('tabac_data', JSON.stringify(data));
+            renderPublicSite();
+            renderAdminLists();
+        }
+
+        function parseYtEmbed(urlOrId) {
+            if (!urlOrId) return "dQw4w9WgXcQ";
+            let ytEmbed = urlOrId.trim();
+            if (ytEmbed.includes('v=')) {
+                ytEmbed = ytEmbed.split('v=')[1].split('&')[0];
+            } else if (ytEmbed.includes('youtu.be/')) {
+                ytEmbed = ytEmbed.split('youtu.be/')[1].split('?')[0];
+            }
+            return ytEmbed;
+        }
+
+        function renderPublicSite() {
+            const data = getData();
+            
+            // Config general
+            document.getElementById('nav-brand-title').innerText = data.config.brand;
+            document.getElementById('nav-brand-subtitle').innerText = data.config.subtitle;
+            document.getElementById('hero-title').innerText = data.config.heroTitle;
+            document.getElementById('hero-subtitle').innerText = data.config.heroSub;
+            document.getElementById('footer-address').innerHTML = `<i class="fa-solid fa-location-dot text-primary mr-2"></i> ${data.config.address}`;
+            document.getElementById('footer-phone').innerHTML = `<i class="fa-solid fa-phone text-primary mr-2"></i> ${data.config.phone}`;
+            document.getElementById('footer-email').innerHTML = `<i class="fa-solid fa-envelope text-primary mr-2"></i> ${data.config.email}`;
+
+            // Taber TV En Vivo
+            const liveYtId = parseYtEmbed(data.config.liveTv);
+            document.getElementById('live-container').innerHTML = `
+                <iframe class="w-full h-full" src="https://www.youtube.com/embed/${liveYtId}?autoplay=0" title="Taber TV En Vivo" frameborder="0" allowfullscreen></iframe>
+            `;
+
+            // Radio Link
+            document.getElementById('radio-link-btn').href = data.config.radioUrl || "#";
+
+            // Videos anteriores
+            const videosGrid = document.getElementById('videos-grid');
+            videosGrid.innerHTML = data.videos.map(v => {
+                const ytEmbed = parseYtEmbed(v.ytId);
+                return `
+                    <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col">
+                        <div class="aspect-video w-full bg-black">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/${ytEmbed}" title="${v.title}" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="text-xs font-semibold text-primary uppercase tracking-wider mb-1">${v.author}</span>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">${v.title}</h3>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Galería
+            const galeriaGrid = document.getElementById('galeria-grid');
+            galeriaGrid.innerHTML = data.photos.map(p => `
+                <div class="group relative overflow-hidden rounded-2xl shadow-md aspect-square bg-gray-100">
+                    <img src="${p.url}" alt="${p.desc}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                        <p class="text-white font-medium text-sm">${p.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Horarios
+            const horariosGrid = document.getElementById('horarios-grid');
+            horariosGrid.innerHTML = data.schedules.map(s => `
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 text-center">
+                    <div class="bg-primary/10 text-primary w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 text-xl">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-gray-900 mb-1">${s.day}</h3>
+                    <p class="text-primary font-semibold text-xl mb-2">${s.time}</p>
+                    <p class="text-gray-500 text-sm">${s.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderAdminLists() {
+            const data = getData();
+
+            document.getElementById('cfg-brand').value = data.config.brand;
+            document.getElementById('cfg-subtitle').value = data.config.subtitle;
+            document.getElementById('cfg-livetv').value = data.config.liveTv || "";
+            document.getElementById('cfg-radio').value = data.config.radioUrl || "";
+            document.getElementById('cfg-hero-title').value = data.config.heroTitle;
+            document.getElementById('cfg-hero-sub').value = data.config.heroSub;
+            document.getElementById('cfg-phone').value = data.config.phone;
+            document.getElementById('cfg-email').value = data.config.email;
+            document.getElementById('cfg-address').value = data.config.address;
+
+            // Admin Videos List
+            document.getElementById('admin-videos-list').innerHTML = data.videos.map(v => `
+                <div class="flex items-center justify-between bg-gray-50 p-4 rounded-xl border">
+                    <div>
+                        <h5 class="font-bold text-gray-900">${v.title}</h5>
+                        <p class="text-xs text-gray-500">${v.author} | ID: ${v.ytId}</p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="editVideo('${v.id}')" class="text-blue-600 hover:text-blue-800 px-3 py-1 rounded-lg text-sm font-semibold bg-blue-50 hover:bg-blue-100 transition">Editar</button>
+                        <button onclick="deleteVideo('${v.id}')" class="text-red-500 hover:text-red-700 px-3 py-1 rounded-lg text-sm font-semibold bg-red-50 hover:bg-red-100 transition">Eliminar</button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Admin Photos List
+            document.getElementById('admin-photos-list').innerHTML = data.photos.map(p => `
+                <div class="bg-gray-50 p-3 rounded-xl border flex flex-col justify-between">
+                    <img src="${p.url}" class="w-full h-32 object-cover rounded-lg mb-2">
+                    <p class="text-xs font-medium text-gray-800 truncate mb-2">${p.desc}</p>
+                    <div class="flex space-x-2">
+                        <button onclick="editPhoto('${p.id}')" class="flex-1 text-blue-600 text-xs font-semibold bg-blue-50 hover:bg-blue-100 py-1.5 rounded transition">Editar</button>
+                        <button onclick="deletePhoto('${p.id}')" class="flex-1 text-red-500 text-xs font-semibold bg-red-50 hover:bg-red-100 py-1.5 rounded transition">Eliminar</button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Admin Schedules List
+            document.getElementById('admin-schedules-list').innerHTML = data.schedules.map(s => `
+                <div class="flex items-center justify-between bg-gray-50 p-4 rounded-xl border">
+                    <div>
+                        <h5 class="font-bold text-gray-900">${s.day} - <span class="text-primary">${s.time}</span></h5>
+                        <p class="text-xs text-gray-500">${s.desc}</p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="editSchedule('${s.id}')" class="text-blue-600 hover:text-blue-800 px-3 py-1 rounded-lg text-sm font-semibold bg-blue-50 hover:bg-blue-100 transition">Editar</button>
+                        <button onclick="deleteSchedule('${s.id}')" class="text-red-500 hover:text-red-700 px-3 py-1 rounded-lg text-sm font-semibold bg-red-50 hover:bg-red-100 transition">Eliminar</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Login Modal Logic
+        function openLoginModal() {
+            document.getElementById('login-modal').classList.remove('hidden');
+            document.getElementById('login-user').value = '';
+            document.getElementById('login-pass').value = '';
+            document.getElementById('login-error').classList.add('hidden');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').classList.add('hidden');
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById('login-user').value;
+            const pass = document.getElementById('login-pass').value;
+
+            if (user === 'admin' && pass === 'Taber2026%') {
+                closeLoginModal();
+                document.getElementById('admin-panel').classList.remove('hidden');
+                renderAdminLists();
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('admin-panel').classList.add('hidden');
+        }
+
+        function switchTab(tabName) {
+            ['general', 'videos', 'galeria', 'horarios'].forEach(t => {
+                document.getElementById(`tab-${t}`).classList.add('hidden');
+                document.getElementById(`tab-btn-${t}`).classList.remove('text-primary', 'border-b-2', 'border-primary');
+                document.getElementById(`tab-btn-${t}`).classList.add('text-gray-500');
+            });
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-btn-${tabName}`).classList.add('text-primary', 'border-b-2', 'border-primary');
+            document.getElementById(`tab-btn-${tabName}`).classList.remove('text-gray-500');
+        }
+
+        // Config Save
+        function saveGeneralConfig(e) {
+            e.preventDefault();
+            const data = getData();
+            data.config = {
+                brand: document.getElementById('cfg-brand').value,
+                subtitle: document.getElementById('cfg-subtitle').value,
+                liveTv: document.getElementById('cfg-livetv').value,
+                radioUrl: document.getElementById('cfg-radio').value,
+                heroTitle: document.getElementById('cfg-hero-title').value,
+                heroSub: document.getElementById('cfg-hero-sub').value,
+                phone: document.getElementById('cfg-phone').value,
+                email: document.getElementById('cfg-email').value,
+                address: document.getElementById('cfg-address').value
+            };
+            saveData(data);
+            alert('¡Configuración y enlaces guardados con éxito!');
+        }
+
+        // --- CRUD VIDEOS CON EDICIÓN ---
+        function saveVideo(e) {
+            e.preventDefault();
+            const data = getData();
+            const editId = document.getElementById('vid-edit-id').value;
+            const title = document.getElementById('vid-title').value;
+            const author = document.getElementById('vid-author').value;
+            const ytId = document.getElementById('vid-url').value;
+
+            if (editId) {
+                const index = data.videos.findIndex(v => v.id === editId);
+                if (index !== -1) {
+                    data.videos[index] = { id: editId, title, author, ytId };
+                }
+                alert('¡Video actualizado correctamente!');
+            } else {
+                const newVideo = { id: Date.now().toString(), title, author, ytId };
+                data.videos.unshift(newVideo);
+                alert('¡Video agregado correctamente!');
+            }
+            saveData(data);
+            resetVideoForm();
+        }
+
+        function editVideo(id) {
+            const data = getData();
+            const v = data.videos.find(item => item.id === id);
+            if (v) {
+                document.getElementById('vid-edit-id').value = v.id;
+                document.getElementById('vid-title').value = v.title;
+                document.getElementById('vid-author').value = v.author;
+                document.getElementById('vid-url').value = v.ytId;
+                document.getElementById('vid-form-title').innerText = "Editar Mensaje / Video";
+                document.getElementById('vid-submit-btn').innerText = "Guardar Cambios";
+                document.getElementById('cancel-edit-video').classList.remove('hidden');
+            }
+        }
+
+        function resetVideoForm() {
+            document.getElementById('vid-edit-id').value = '';
+            document.getElementById('vid-title').value = '';
+            document.getElementById('vid-author').value = '';
+            document.getElementById('vid-url').value = '';
+            document.getElementById('vid-form-title').innerText = "Agregar Nuevo Mensaje / Video";
+            document.getElementById('vid-submit-btn').innerText = "Agregar Video";
+            document.getElementById('cancel-edit-video').classList.add('hidden');
+        }
+
+        function deleteVideo(id) {
+            if (confirm('¿Estás seguro de eliminar este video?')) {
+                const data = getData();
+                data.videos = data.videos.filter(v => v.id !== id);
+                saveData(data);
+            }
+        }
+
+        // --- CRUD FOTOS CON EDICIÓN ---
+        function savePhoto(e) {
+            e.preventDefault();
+            const data = getData();
+            const editId = document.getElementById('photo-edit-id').value;
+            const url = document.getElementById('photo-url').value;
+            const desc = document.getElementById('photo-desc').value;
+
+            if (editId) {
+                const index = data.photos.findIndex(p => p.id === editId);
+                if (index !== -1) {
+                    data.photos[index] = { id: editId, url, desc };
+                }
+                alert('¡Foto actualizada correctamente!');
+            } else {
+                const newPhoto = { id: Date.now().toString(), url, desc };
+                data.photos.unshift(newPhoto);
+                alert('¡Foto agregada correctamente!');
+            }
+            saveData(data);
+            resetPhotoForm();
+        }
+
+        function editPhoto(id) {
+            const data = getData();
+            const p = data.photos.find(item => item.id === id);
+            if (p) {
+                document.getElementById('photo-edit-id').value = p.id;
+                document.getElementById('photo-url').value = p.url;
+                document.getElementById('photo-desc').value = p.desc;
+                document.getElementById('photo-form-title').innerText = "Editar Foto";
+                document.getElementById('photo-submit-btn').innerText = "Guardar Cambios";
+                document.getElementById('cancel-edit-photo').classList.remove('hidden');
+            }
+        }
+
+        function resetPhotoForm() {
+            document.getElementById('photo-edit-id').value = '';
+            document.getElementById('photo-url').value = '';
+            document.getElementById('photo-desc').value = '';
+            document.getElementById('photo-form-title').innerText = "Agregar Nueva Foto a la Galería";
+            document.getElementById('photo-submit-btn').innerText = "Agregar Foto";
+            document.getElementById('cancel-edit-photo').classList.add('hidden');
+        }
+
+        function deletePhoto(id) {
+            if (confirm('¿Estás seguro de eliminar esta foto?')) {
+                const data = getData();
+                data.photos = data.photos.filter(p => p.id !== id);
+                saveData(data);
+            }
+        }
+
+        // --- CRUD HORARIOS CON EDICIÓN ---
+        function saveSchedule(e) {
+            e.preventDefault();
+            const data = getData();
+            const editId = document.getElementById('sch-edit-id').value;
+            const day = document.getElementById('sch-day').value;
+            const time = document.getElementById('sch-time').value;
+            const desc = document.getElementById('sch-desc').value;
+
+            if (editId) {
+                const index = data.schedules.findIndex(s => s.id === editId);
+                if (index !== -1) {
+                    data.schedules[index] = { id: editId, day, time, desc };
+                }
+                alert('¡Horario actualizado correctamente!');
+            } else {
+                const newSch = { id: Date.now().toString(), day, time, desc };
+                data.schedules.push(newSch);
+                alert('¡Horario agregado correctamente!');
+            }
+            saveData(data);
+            resetScheduleForm();
+        }
+
+        function editSchedule(id) {
+            const data = getData();
+            const s = data.schedules.find(item => item.id === id);
+            if (s) {
+                document.getElementById('sch-edit-id').value = s.id;
+                document.getElementById('sch-day').value = s.day;
+                document.getElementById('sch-time').value = s.time;
+                document.getElementById('sch-desc').value = s.desc;
+                document.getElementById('sch-form-title').innerText = "Editar Horario de Culto";
+                document.getElementById('sch-submit-btn').innerText = "Guardar Cambios";
+                document.getElementById('cancel-edit-sch').classList.remove('hidden');
+            }
+        }
+
+        function resetScheduleForm() {
+            document.getElementById('sch-edit-id').value = '';
+            document.getElementById('sch-day').value = '';
+            document.getElementById('sch-time').value = '';
+            document.getElementById('sch-desc').value = '';
+            document.getElementById('sch-form-title').innerText = "Agregar Horario de Culto";
+            document.getElementById('sch-submit-btn').innerText = "Agregar Horario";
+            document.getElementById('cancel-edit-sch').classList.add('hidden');
+        }
+
+        function deleteSchedule(id) {
+            if (confirm('¿Estás seguro de eliminar este horario?')) {
+                const data = getData();
+                data.schedules = data.schedules.filter(s => s.id !== id);
+                saveData(data);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderPublicSite();
+        });
+    </script>
+</body>
+</html>
