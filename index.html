@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- HLS.js CDN para transmisión .m3u8 -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -97,8 +99,8 @@
                 </div>
                 
                 <div class="bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
-                    <div class="aspect-video w-full" id="live-container">
-                        <!-- Se llena dinámicamente -->
+                    <div class="aspect-video w-full bg-black relative flex items-center justify-center" id="live-container">
+                        <video id="hls-player" controls class="w-full h-full object-contain" poster=""></video>
                     </div>
                 </div>
             </div>
@@ -250,12 +252,12 @@
 
             <!-- SECCIÓN 1: CONFIGURACIÓN Y EN VIVOS -->
             <div id="tab-general" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6">
-                <h3 class="text-xl font-bold text-gray-900 border-b pb-3">Configuración General, Logo, Taber TV y Radio</h3>
+                <h3 class="text-xl font-bold text-gray-900 border-b pb-3">Configuración General, Logo, Taber TV (.m3u8) y Radio</h3>
                 <form onsubmit="saveGeneralConfig(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="md:col-span-2 bg-blue-50/50 p-4 rounded-xl border border-blue-100">
                         <label class="block text-sm font-bold text-blue-900 mb-1"><i class="fa-solid fa-image mr-1"></i> URL del Logo de la Iglesia</label>
                         <input type="url" id="cfg-logo" placeholder="https://ejemplo.com/logo.png" class="w-full border rounded-lg px-4 py-2 bg-white">
-                        <p class="text-xs text-blue-600 mt-1">Ingresa la URL pública de una imagen PNG o JPG. Si lo dejas vacío, se mostrará el icono de iglesia por defecto.</p>
+                        <p class="text-xs text-blue-600 mt-1">Ingresa la URL pública de una imagen PNG o JPG.</p>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Nombre del Ministerio</label>
@@ -266,9 +268,9 @@
                         <input type="text" id="cfg-subtitle" class="w-full border rounded-lg px-4 py-2">
                     </div>
                     <div class="md:col-span-2 bg-red-50 p-4 rounded-xl border border-red-200">
-                        <label class="block text-sm font-bold text-red-700 mb-1"><i class="fa-solid fa-tv mr-1"></i> Enlace de Taber TV En Vivo (ID de YouTube o URL completa)</label>
-                        <input type="text" id="cfg-livetv" placeholder="Ej. dQw4w9WgXcQ o enlace completo" class="w-full border rounded-lg px-4 py-2 bg-white">
-                        <p class="text-xs text-red-500 mt-1">Aquí puedes pegar el enlace o ID del video en vivo actual.</p>
+                        <label class="block text-sm font-bold text-red-700 mb-1"><i class="fa-solid fa-tv mr-1"></i> Enlace HLS / IPTV (.m3u8) de Taber TV En Vivo</label>
+                        <input type="url" id="cfg-livetv" placeholder="https://ejemplo.com/live/stream.m3u8" class="w-full border rounded-lg px-4 py-2 bg-white">
+                        <p class="text-xs text-red-500 mt-1">Pega la URL completa que finaliza en <strong>.m3u8</strong> para reproducir la señal IPTV en directo.</p>
                     </div>
                     <div class="md:col-span-2 bg-blue-50 p-4 rounded-xl border border-blue-200">
                         <label class="block text-sm font-bold text-blue-800 mb-1"><i class="fa-solid fa-radio mr-1"></i> Enlace de la Radio Bautista 106.1 FM</label>
@@ -417,13 +419,16 @@
         const db = getDatabase(app);
         const dbRef = ref(db, 'taber_data');
 
+        // Instancia global de HLS
+        let hlsInstance = null;
+
         // Datos por defecto
         const defaultData = {
             config: {
                 logoUrl: "",
                 brand: "Taber by Pass",
                 subtitle: "Ministerio de Fe y Adoración",
-                liveTv: "dQw4w9WgXcQ",
+                liveTv: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", // Stream HLS de prueba por defecto
                 radioUrl: "https://radiobautista.example.com",
                 heroTitle: "Un lugar de esperanza y salvación",
                 heroSub: "\"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos.\"",
@@ -483,6 +488,30 @@
             return ytEmbed;
         }
 
+        function loadHlsStream(m3u8Url) {
+            const video = document.getElementById('hls-player');
+            if (!m3u8Url || m3u8Url.trim() === '') return;
+
+            const streamUrl = m3u8Url.trim();
+
+            if (hlsInstance) {
+                hlsInstance.destroy();
+                hlsInstance = null;
+            }
+
+            if (Hls.isSupported()) {
+                hlsInstance = new Hls({
+                    enableWorker: true,
+                    lowLatencyMode: true
+                });
+                hlsInstance.loadSource(streamUrl);
+                hlsInstance.attachMedia(video);
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                // Soporte nativo de Safari HLS
+                video.src = streamUrl;
+            }
+        }
+
         function renderPublicSite() {
             const data = currentData;
             
@@ -512,10 +541,8 @@
             document.getElementById('footer-phone').innerHTML = `<i class="fa-solid fa-phone text-primary mr-2"></i> ${data.config.phone}`;
             document.getElementById('footer-email').innerHTML = `<i class="fa-solid fa-envelope text-primary mr-2"></i> ${data.config.email}`;
 
-            const liveYtId = parseYtEmbed(data.config.liveTv);
-            document.getElementById('live-container').innerHTML = `
-                <iframe class="w-full h-full" src="https://www.youtube.com/embed/${liveYtId}?autoplay=0" title="Taber TV En Vivo" frameborder="0" allowfullscreen></iframe>
-            `;
+            // Cargar streaming HLS (.m3u8)
+            loadHlsStream(data.config.liveTv);
 
             document.getElementById('radio-link-btn').href = data.config.radioUrl || "#";
 
