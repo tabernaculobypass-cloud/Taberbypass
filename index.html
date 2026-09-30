@@ -106,29 +106,31 @@
             </div>
         </section>
 
-        <!-- SECCIÓN RADIO BAUTISTA 106.1 FM (REPRODUCTOR / PÁGINA EMBEBIDA) -->
+        <!-- SECCIÓN RADIO BAUTISTA 106.1 FM (REPRODUCTOR SOLO AUDIO) -->
         <section id="radio" class="py-16 bg-blue-950 text-white px-4 sm:px-6 lg:px-8">
-            <div class="max-w-5xl mx-auto bg-gradient-to-br from-blue-900 to-blue-950 p-6 sm:p-10 rounded-3xl shadow-xl border border-blue-800 space-y-6">
-                <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-                    <div class="space-y-2">
-                        <div class="inline-flex items-center space-x-2 bg-blue-800/60 text-blue-300 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-blue-700">
-                            <i class="fa-solid fa-tower-broadcast text-blue-400"></i>
-                            <span>Señal Radial 24/7 En Vivo</span>
-                        </div>
-                        <h2 class="text-3xl font-extrabold tracking-tight">Radio Bautista 106.1 FM</h2>
-                        <p class="text-blue-200/80 text-sm sm:text-base max-w-xl">Escucha nuestra programación radial en vivo desde el reproductor integrado a continuación.</p>
+            <div class="max-w-4xl mx-auto bg-gradient-to-br from-blue-900 to-blue-950 p-8 sm:p-12 rounded-3xl shadow-xl border border-blue-800 flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="space-y-4 text-center md:text-left">
+                    <div class="inline-flex items-center space-x-2 bg-blue-800/60 text-blue-300 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-blue-700">
+                        <i class="fa-solid fa-tower-broadcast text-blue-400"></i>
+                        <span>Señal Radial 24/7 En Vivo</span>
                     </div>
-                    <div class="flex items-center space-x-3">
-                        <button onclick="loadRadioIframe()" class="bg-white text-blue-900 hover:bg-blue-50 font-bold px-6 py-3 rounded-xl transition shadow-md flex items-center space-x-2">
-                            <i class="fa-solid fa-rotate-right text-primary"></i>
-                            <span>Cargar / Recargar Radio</span>
-                        </button>
-                    </div>
+                    <h2 class="text-3xl font-extrabold tracking-tight">Radio Bautista 106.1 FM</h2>
+                    <p class="text-blue-200/80 text-sm sm:text-base max-w-md">Llevando la palabra de Dios y alabanzas edificantes a cada rincón de tu hogar a través de nuestra señal en directo.</p>
                 </div>
-
-                <!-- CONTENEDOR DE LA PÁGINA / REPRODUCTOR DE LA RADIO -->
-                <div class="bg-black/40 rounded-2xl overflow-hidden border border-blue-800 shadow-2xl relative min-h-[420px] flex items-center justify-center">
-                    <iframe id="radio-iframe" class="w-full h-[450px] border-0 rounded-2xl" allow="autoplay; encrypted-media"></iframe>
+                <div class="flex flex-col items-center justify-center bg-blue-900/80 p-6 rounded-2xl border border-blue-700/50 min-w-[280px] w-full md:w-auto shadow-inner">
+                    <div class="w-16 h-16 rounded-full bg-blue-700 text-white flex items-center justify-center text-2xl mb-3 shadow-md animate-pulse">
+                        <i class="fa-solid fa-radio"></i>
+                    </div>
+                    <span class="font-bold text-lg mb-4 text-white">106.1 FM En Directo</span>
+                    
+                    <!-- Elemento Audio para streaming directo -->
+                    <audio id="radio-audio-player" preload="none"></audio>
+                    
+                    <button id="radio-toggle-btn" onclick="toggleRadioPlay()" class="w-full bg-white text-blue-900 hover:bg-blue-50 font-bold px-6 py-3.5 rounded-xl transition text-center shadow-md flex items-center justify-center space-x-2">
+                        <i id="radio-btn-icon" class="fa-solid fa-play text-primary"></i>
+                        <span id="radio-btn-text">Reproducir Radio</span>
+                    </button>
+                    <p id="radio-status-text" class="text-xs text-blue-300 mt-3 font-medium">Presiona para iniciar reproducción</p>
                 </div>
             </div>
         </section>
@@ -276,9 +278,9 @@
                         <p class="text-xs text-red-500 mt-1">Pega la URL completa que finaliza en <strong>.m3u8</strong> para reproducir la señal IPTV en directo.</p>
                     </div>
                     <div class="md:col-span-2 bg-blue-50 p-4 rounded-xl border border-blue-200">
-                        <label class="block text-sm font-bold text-blue-800 mb-1"><i class="fa-solid fa-radio mr-1"></i> Enlace Web / Streaming de Radio Bautista 106.1 FM</label>
+                        <label class="block text-sm font-bold text-blue-800 mb-1"><i class="fa-solid fa-radio mr-1"></i> Enlace Streaming de Radio Bautista 106.1 FM</label>
                         <input type="url" id="cfg-radio" placeholder="https://radiobautista106uno.radiostream123.com/" class="w-full border rounded-lg px-4 py-2 bg-white">
-                        <p class="text-xs text-blue-600 mt-1">URL de la radio para cargar dentro de la página web.</p>
+                        <p class="text-xs text-blue-600 mt-1">Enlace de streaming directo de la radio.</p>
                     </div>
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Título Principal (Banner)</label>
@@ -425,14 +427,14 @@
         // Instancia global de HLS
         let hlsInstance = null;
 
-        // Datos por defecto con el enlace exacto proporcionado
+        // Datos por defecto
         const defaultData = {
             config: {
                 logoUrl: "",
                 brand: "Taber by Pass",
                 subtitle: "Ministerio de Fe y Adoración",
                 liveTv: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-                radioUrl: "https://radiobautista106uno.radiostream123.com/", // Enlace configurado
+                radioUrl: "https://radiobautista106uno.radiostream123.com/", // URL de la radio
                 heroTitle: "Un lugar de esperanza y salvación",
                 heroSub: "\"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos.\"",
                 phone: "+503 2222-3333",
@@ -514,11 +516,34 @@
             }
         }
 
-        // Cargar el marco iframe de la radio
-        window.loadRadioIframe = () => {
-            const iframe = document.getElementById('radio-iframe');
-            if (currentData.config.radioUrl) {
-                iframe.src = currentData.config.radioUrl;
+        // --- REPRODUCTOR DE AUDIO DIRECTO PARA RADIO ---
+        window.toggleRadioPlay = () => {
+            const player = document.getElementById('radio-audio-player');
+            const btnIcon = document.getElementById('radio-btn-icon');
+            const btnText = document.getElementById('radio-btn-text');
+            const statusText = document.getElementById('radio-status-text');
+
+            const streamUrl = currentData.config.radioUrl || "";
+
+            if (!player.src || player.src === "" || player.src === window.location.href) {
+                player.src = streamUrl;
+            }
+
+            if (player.paused) {
+                statusText.innerText = "Conectando con Radio Bautista...";
+                player.play().then(() => {
+                    btnIcon.className = "fa-solid fa-pause text-red-600";
+                    btnText.innerText = "Pausar Radio";
+                    statusText.innerText = "Sintonizando Radio Bautista 106.1 FM";
+                }).catch(err => {
+                    console.error("Error al reproducir audio directo:", err);
+                    statusText.innerText = "Error al conectar. Verifica el enlace en el Admin.";
+                });
+            } else {
+                player.pause();
+                btnIcon.className = "fa-solid fa-play text-primary";
+                btnText.innerText = "Reproducir Radio";
+                statusText.innerText = "Reproducción pausada";
             }
         };
 
@@ -554,10 +579,10 @@
             // Cargar streaming TV HLS (.m3u8)
             loadHlsStream(data.config.liveTv);
 
-            // Cargar página de la Radio dentro del iframe
-            const radioIframe = document.getElementById('radio-iframe');
-            if (data.config.radioUrl && radioIframe.src !== data.config.radioUrl) {
-                radioIframe.src = data.config.radioUrl;
+            // Actualizar fuente del reproductor de audio
+            const radioPlayer = document.getElementById('radio-audio-player');
+            if (data.config.radioUrl && radioPlayer.src !== data.config.radioUrl) {
+                radioPlayer.src = data.config.radioUrl;
             }
 
             const videosGrid = document.getElementById('videos-grid');
