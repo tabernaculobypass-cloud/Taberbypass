@@ -3,7 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taber by Pass</title>
+    
+    <!-- METADATOS Y MINIATURA PARA ENLACES (OPEN GRAPH / SOCIAL MEDIA) -->
+    <title>Taber by Pass - Ministerio de Fe y Adoración</title>
+    <meta name="description" content="Un lugar de esperanza y salvación. Transmisiones en vivo, radio 106.1 FM y mensajes bíblicos.">
+    
+    <!-- Open Graph (Facebook, WhatsApp, Telegram) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tabernaculobypass-cloud.github.io/Taberbypass/#inicio">
+    <meta property="og:title" content="Taber by Pass - Ministerio de Fe y Adoración">
+    <meta property="og:description" content="Un lugar de esperanza y salvación. Sintoniza Taber TV y Radio Bautista 106.1 FM en vivo.">
+    <meta property="og:image" content="https://iili.io/nY8LbTu.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://tabernaculobypass-cloud.github.io/Taberbypass/#inicio">
+    <meta name="twitter:title" content="Taber by Pass - Ministerio de Fe y Adoración">
+    <meta name="twitter:description" content="Un lugar de esperanza y salvación. Sintoniza Taber TV y Radio Bautista 106.1 FM en vivo.">
+    <meta name="twitter:image" content="https://iili.io/nY8LbTu.jpg">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -67,13 +87,19 @@
     <main class="flex-grow">
 
         <!-- HERO SECTION -->
-        <section id="inicio" class="relative bg-gradient-to-r from-gray-900 via-secondary to-primary text-white py-24 px-4 sm:px-6 lg:px-8 overflow-hidden shadow-inner">
-            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-            <div class="max-w-4xl mx-auto text-center relative z-10">
+        <section id="inicio" class="relative bg-gradient-to-r from-gray-900 via-secondary to-primary text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden shadow-inner">
+            <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <div class="max-w-6xl mx-auto text-center relative z-10 flex flex-col items-center">
+                
+                <div class="mb-6 rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20 max-w-md w-full aspect-video bg-black/40">
+                    <img id="hero-img-display" src="https://iili.io/nY8LbTu.jpg" alt="Taber by Pass - Inicio" class="w-full h-full object-cover">
+                </div>
+
                 <span id="hero-badge" class="bg-white/10 text-blue-200 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-widest border border-white/20">Bienvenidos a Casa</span>
-                <h1 id="hero-title" class="text-4xl sm:text-6xl font-extrabold tracking-tight mt-4 mb-6 leading-tight">Un lugar de esperanza y salvación</h1>
+                <h1 id="hero-title" class="text-4xl sm:text-6xl font-extrabold tracking-tight mt-4 mb-4 leading-tight">Un lugar de esperanza y salvación</h1>
                 <p id="hero-subtitle" class="text-lg sm:text-xl text-gray-200 mb-8 max-w-2xl mx-auto font-light">"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos."</p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4 w-full max-w-md">
                     <a href="#en-vivo" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-tv"></i>
                         <span>Ver Taber TV En Vivo</span>
@@ -100,13 +126,13 @@
                 
                 <div class="bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
                     <div class="aspect-video w-full bg-black relative flex items-center justify-center" id="live-container">
-                        <video id="hls-player" controls class="w-full h-full object-contain" poster=""></video>
+                        <video id="hls-player" controls class="w-full h-full object-contain" poster="https://iili.io/nY8LbTu.jpg"></video>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN RADIO BAUTISTA 106.1 FM (SISTEMA DE REPRODUCCIÓN MEJORADO) -->
+        <!-- SECCIÓN RADIO BAUTISTA 106.1 FM -->
         <section id="radio" class="py-16 bg-blue-950 text-white px-4 sm:px-6 lg:px-8">
             <div class="max-w-4xl mx-auto bg-gradient-to-br from-blue-900 to-blue-950 p-8 sm:p-12 rounded-3xl shadow-xl border border-blue-800 flex flex-col md:flex-row items-center justify-between gap-8">
                 <div class="space-y-4 text-center md:text-left">
@@ -123,10 +149,7 @@
                     </div>
                     <span class="font-bold text-lg mb-4 text-white">106.1 FM En Directo</span>
                     
-                    <!-- Reproductor de Audio nativo -->
                     <audio id="radio-audio-player" preload="none"></audio>
-                    
-                    <!-- Contenedor oculto para la página si se requiere fallback -->
                     <iframe id="radio-hidden-iframe" class="hidden w-0 h-0" allow="autoplay"></iframe>
 
                     <button id="radio-toggle-btn" onclick="toggleRadioPlay()" class="w-full bg-white text-blue-900 hover:bg-blue-50 font-bold px-6 py-3.5 rounded-xl transition text-center shadow-md flex items-center justify-center space-x-2">
@@ -135,7 +158,6 @@
                     </button>
                     
                     <p id="radio-status-text" class="text-xs text-blue-300 mt-3 font-medium text-center">Presiona para iniciar reproducción</p>
-                    
                     <a id="radio-external-link" href="https://radiobautista106uno.radiostream123.com/" target="_blank" class="mt-2 text-xs text-blue-400 underline hover:text-white transition hidden">Abrir señal externa en otra pestaña</a>
                 </div>
             </div>
@@ -165,14 +187,14 @@
             </div>
         </section>
 
-        <!-- GALERÍA DE FOTOS -->
+        <!-- GALERÍA DE ÁLBUMES DE FOTOS -->
         <section id="galeria" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold tracking-tight text-gray-900">Galería Fotográfica</h2>
-                <p class="text-gray-500 mt-2">Momentos especiales compartidos en nuestra comunidad</p>
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900">Álbumes Fotográficos</h2>
+                <p class="text-gray-500 mt-2">Haz clic en un álbum para explorar las fotografías y momentos compartidos</p>
             </div>
-            <div id="galeria-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Se llena dinámicamente -->
+            <div id="albums-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
+                <!-- Álbumes dinámicos -->
             </div>
         </section>
 
@@ -199,10 +221,28 @@
 
     </main>
 
-    <!-- FOOTER -->
+    <!-- FOOTER ACTUALIZADO -->
     <footer class="bg-black text-gray-500 text-center py-6 text-sm border-t border-gray-800">
-        <p>&copy; 2026 Taber by Pass. Todos los derechos reservados. | Diseñado para GitHub Pages.</p>
+        <p>&copy; 2026 Taber by Pass. Todos los derechos reservados. | Diseñado por Departamento Multimedia By Pass.</p>
     </footer>
+
+    <!-- MODAL DE VISUALIZACIÓN DE ÁLBUM -->
+    <div id="album-view-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[90vh] flex flex-col shadow-2xl relative overflow-hidden">
+            <div class="p-6 border-b flex justify-between items-center bg-gray-50">
+                <div>
+                    <h3 id="modal-album-title" class="text-2xl font-bold text-gray-900">Título del Álbum</h3>
+                    <p id="modal-album-desc" class="text-sm text-gray-600 mt-1">Descripción del álbum</p>
+                </div>
+                <button onclick="closeAlbumModal()" class="text-gray-400 hover:text-gray-700 p-2 text-2xl transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="modal-album-photos" class="p-6 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <!-- Fotos del álbum -->
+            </div>
+        </div>
+    </div>
 
     <!-- MODAL DE LOGIN ADMIN -->
     <div id="login-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
@@ -257,7 +297,7 @@
             <div class="flex border-b border-gray-300 space-x-6 overflow-x-auto">
                 <button onclick="switchTab('general')" id="tab-btn-general" class="pb-3 font-semibold text-primary border-b-2 border-primary transition whitespace-nowrap">Config y En Vivos</button>
                 <button onclick="switchTab('videos')" id="tab-btn-videos" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Mensajes</button>
-                <button onclick="switchTab('galeria')" id="tab-btn-galeria" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Galería</button>
+                <button onclick="switchTab('galeria')" id="tab-btn-galeria" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Álbumes de Galería</button>
                 <button onclick="switchTab('horarios')" id="tab-btn-horarios" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Horarios</button>
             </div>
 
@@ -266,9 +306,8 @@
                 <h3 class="text-xl font-bold text-gray-900 border-b pb-3">Configuración General, Logo, Taber TV (.m3u8) y Radio</h3>
                 <form onsubmit="saveGeneralConfig(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="md:col-span-2 bg-blue-50/50 p-4 rounded-xl border border-blue-100">
-                        <label class="block text-sm font-bold text-blue-900 mb-1"><i class="fa-solid fa-image mr-1"></i> URL del Logo de la Iglesia</label>
-                        <input type="url" id="cfg-logo" placeholder="https://ejemplo.com/logo.png" class="w-full border rounded-lg px-4 py-2 bg-white">
-                        <p class="text-xs text-blue-600 mt-1">Ingresa la URL pública de una imagen PNG o JPG.</p>
+                        <label class="block text-sm font-bold text-blue-900 mb-1"><i class="fa-solid fa-image mr-1"></i> URL del Logo / Imagen de Miniatura</label>
+                        <input type="url" id="cfg-logo" placeholder="https://iili.io/nY8LbTu.jpg" class="w-full border rounded-lg px-4 py-2 bg-white">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Nombre del Ministerio</label>
@@ -281,12 +320,10 @@
                     <div class="md:col-span-2 bg-red-50 p-4 rounded-xl border border-red-200">
                         <label class="block text-sm font-bold text-red-700 mb-1"><i class="fa-solid fa-tv mr-1"></i> Enlace HLS / IPTV (.m3u8) de Taber TV En Vivo</label>
                         <input type="url" id="cfg-livetv" placeholder="https://ejemplo.com/live/stream.m3u8" class="w-full border rounded-lg px-4 py-2 bg-white">
-                        <p class="text-xs text-red-500 mt-1">Pega la URL completa que finaliza en <strong>.m3u8</strong> para reproducir la señal IPTV en directo.</p>
                     </div>
                     <div class="md:col-span-2 bg-blue-50 p-4 rounded-xl border border-blue-200">
                         <label class="block text-sm font-bold text-blue-800 mb-1"><i class="fa-solid fa-radio mr-1"></i> Enlace de la Radio Bautista 106.1 FM</label>
                         <input type="url" id="cfg-radio" placeholder="https://radiobautista106uno.radiostream123.com/" class="w-full border rounded-lg px-4 py-2 bg-white">
-                        <p class="text-xs text-blue-600 mt-1">Puedes colocar la URL del streaming o la URL de la radio.</p>
                     </div>
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Título Principal (Banner)</label>
@@ -345,30 +382,38 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 3: GALERÍA DE FOTOS -->
+            <!-- SECCIÓN 3: ADMINISTRACIÓN DE ÁLBUMES DE FOTOS -->
             <div id="tab-galeria" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
                 <div class="flex justify-between items-center border-b pb-3">
-                    <h3 id="photo-form-title" class="text-xl font-bold text-gray-900">Agregar Nueva Foto a la Galería</h3>
-                    <button type="button" id="cancel-edit-photo" onclick="resetPhotoForm()" class="text-sm text-gray-500 hover:text-gray-800 hidden">Cancelar Edición</button>
+                    <h3 id="album-form-title" class="text-xl font-bold text-gray-900">Crear / Editar Álbum Fotográfico</h3>
+                    <button type="button" id="cancel-edit-album" onclick="resetAlbumForm()" class="text-sm text-gray-500 hover:text-gray-800 hidden">Cancelar Edición</button>
                 </div>
-                <form onsubmit="savePhoto(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end bg-gray-50 p-4 rounded-xl border">
-                    <input type="hidden" id="photo-edit-id">
+                <form onsubmit="saveAlbum(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end bg-gray-50 p-4 rounded-xl border">
+                    <input type="hidden" id="album-edit-id">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">URL de la Imagen</label>
-                        <input type="url" id="photo-url" placeholder="https://ejemplo.com/imagen.jpg" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Título del Álbum</label>
+                        <input type="text" id="album-title" placeholder="Ej. Culto de Aniversario 2026" required class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Descripción / Título</label>
-                        <input type="text" id="photo-desc" placeholder="Ej. Culto Dominical" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">URL de la Portada</label>
+                        <input type="url" id="album-cover" placeholder="https://ejemplo.com/portada.jpg" required class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div class="md:col-span-2">
-                        <button type="submit" id="photo-submit-btn" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow">Agregar Foto</button>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Descripción del Álbum</label>
+                        <input type="text" id="album-desc" placeholder="Ej. Hermosos momentos vividos en nuestro servicio especial" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">URLs de las Fotos (Una URL por línea)</label>
+                        <textarea id="album-photos" rows="4" placeholder="https://ejemplo.com/foto1.jpg&#10;https://ejemplo.com/foto2.jpg" required class="w-full border rounded-lg px-3 py-2 bg-white font-mono text-xs"></textarea>
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" id="album-submit-btn" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow">Guardar Álbum</button>
                     </div>
                 </form>
 
-                <h4 class="font-bold text-gray-800 pt-4">Fotos Registradas</h4>
-                <div id="admin-photos-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <!-- Listado dinámico -->
+                <h4 class="font-bold text-gray-800 pt-4">Álbumes Creados</h4>
+                <div id="admin-albums-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Listado dinámico de álbumes en admin -->
                 </div>
             </div>
 
@@ -436,7 +481,7 @@
         // Datos por defecto
         const defaultData = {
             config: {
-                logoUrl: "",
+                logoUrl: "https://iili.io/nY8LbTu.jpg",
                 brand: "Taber by Pass",
                 subtitle: "Ministerio de Fe y Adoración",
                 liveTv: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
@@ -451,9 +496,17 @@
                 { id: "1", title: "El Poder de la Oración Ferviente", author: "Pastor Principal", ytId: "dQw4w9WgXcQ" },
                 { id: "2", title: "Caminando en Integridad y Fe", author: "Co-Pastor", ytId: "dQw4w9WgXcQ" }
             ],
-            photos: [
-                { id: "1", url: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800", desc: "Reunión de Jóvenes" },
-                { id: "2", url: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800", desc: "Coro y Alabanza" }
+            albums: [
+                {
+                    id: "1",
+                    title: "Culto de Aniversario y Alabanza",
+                    desc: "Celebración especial con nuestra congregación en agradecimiento a Dios.",
+                    cover: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800",
+                    photos: [
+                        "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800",
+                        "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800"
+                    ]
+                }
             ],
             schedules: [
                 { id: "1", day: "Domingo de Adoración", time: "9:00 AM", desc: "Culto General y Escuela Dominical" },
@@ -470,7 +523,7 @@
                 currentData = {
                     config: data.config || defaultData.config,
                     videos: data.videos || [],
-                    photos: data.photos || [],
+                    albums: data.albums || defaultData.albums,
                     schedules: data.schedules || []
                 };
             } else {
@@ -522,7 +575,7 @@
             }
         }
 
-        // LÓGICA REPRODUCTOR RADIO BAUTISTA CON FALLBACK
+        // REPRODUCTOR DE RADIO
         window.toggleRadioPlay = () => {
             const player = document.getElementById('radio-audio-player');
             const hiddenIframe = document.getElementById('radio-hidden-iframe');
@@ -533,7 +586,6 @@
 
             const rawUrl = currentData.config.radioUrl || "";
 
-            // Si es un iframe / reproductor que ya está corriendo
             if (hiddenIframe.src && hiddenIframe.src !== "" && hiddenIframe.src !== window.location.href) {
                 hiddenIframe.src = "";
                 btnIcon.className = "fa-solid fa-play text-primary";
@@ -552,7 +604,6 @@
 
             statusText.innerText = "Conectando con Radio Bautista...";
 
-            // Asignar e intentar reproducir audio directo
             player.src = rawUrl;
             player.play().then(() => {
                 btnIcon.className = "fa-solid fa-pause text-red-600";
@@ -560,7 +611,6 @@
                 statusText.innerText = "Sintonizando Radio Bautista 106.1 FM";
                 externalLink.classList.add('hidden');
             }).catch(() => {
-                // Si falla audio directo por CORS/HTML, usamos el iframe en background
                 hiddenIframe.src = rawUrl;
                 btnIcon.className = "fa-solid fa-pause text-red-600";
                 btnText.innerText = "Detener Radio";
@@ -570,25 +620,46 @@
             });
         };
 
+        // APERTURA DE MÓDULO ÁLBUM
+        window.openAlbumModal = (albumId) => {
+            const album = currentData.albums.find(a => a.id === albumId);
+            if (!album) return;
+
+            document.getElementById('modal-album-title').innerText = album.title;
+            document.getElementById('modal-album-desc').innerText = album.desc;
+
+            const photosContainer = document.getElementById('modal-album-photos');
+            photosContainer.innerHTML = album.photos.map(pUrl => `
+                <div class="rounded-xl overflow-hidden shadow border bg-black/5 aspect-square">
+                    <img src="${pUrl}" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                </div>
+            `).join('');
+
+            document.getElementById('album-view-modal').classList.remove('hidden');
+        };
+
+        window.closeAlbumModal = () => {
+            document.getElementById('album-view-modal').classList.add('hidden');
+        };
+
         function renderPublicSite() {
             const data = currentData;
             
-            // Config Logo, Marca y Subtítulo
             const iconEl = document.getElementById('nav-brand-icon');
             const imgEl = document.getElementById('nav-brand-img');
             const logoContainer = document.getElementById('nav-brand-logo-container');
+            const heroImgDisplay = document.getElementById('hero-img-display');
 
-            if (data.config.logoUrl && data.config.logoUrl.trim() !== '') {
-                imgEl.src = data.config.logoUrl.trim();
-                imgEl.classList.remove('hidden');
-                iconEl.classList.add('hidden');
-                logoContainer.classList.remove('bg-primary', 'p-2.5');
-                logoContainer.classList.add('bg-transparent', 'p-0');
-            } else {
-                imgEl.classList.add('hidden');
-                iconEl.classList.remove('hidden');
-                logoContainer.classList.add('bg-primary', 'p-2.5');
-                logoContainer.classList.remove('bg-transparent', 'p-0');
+            const imgUrl = (data.config.logoUrl && data.config.logoUrl.trim() !== '') ? data.config.logoUrl.trim() : "https://iili.io/nY8LbTu.jpg";
+
+            imgEl.src = imgUrl;
+            imgEl.classList.remove('hidden');
+            iconEl.classList.add('hidden');
+            logoContainer.classList.remove('bg-primary', 'p-2.5');
+            logoContainer.classList.add('bg-transparent', 'p-0');
+
+            if (heroImgDisplay) {
+                heroImgDisplay.src = imgUrl;
             }
 
             document.getElementById('nav-brand-title').innerText = data.config.brand;
@@ -599,7 +670,6 @@
             document.getElementById('footer-phone').innerHTML = `<i class="fa-solid fa-phone text-primary mr-2"></i> ${data.config.phone}`;
             document.getElementById('footer-email').innerHTML = `<i class="fa-solid fa-envelope text-primary mr-2"></i> ${data.config.email}`;
 
-            // Cargar streaming TV HLS (.m3u8)
             loadHlsStream(data.config.liveTv);
 
             const videosGrid = document.getElementById('videos-grid');
@@ -618,12 +688,20 @@
                 `;
             }).join('');
 
-            const galeriaGrid = document.getElementById('galeria-grid');
-            galeriaGrid.innerHTML = data.photos.map(p => `
-                <div class="group relative overflow-hidden rounded-2xl shadow-md aspect-square bg-gray-100">
-                    <img src="${p.url}" alt="${p.desc}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
-                        <p class="text-white font-medium text-sm">${p.desc}</p>
+            // Renderizar Álbumes de Galería
+            const albumsGrid = document.getElementById('albums-grid');
+            albumsGrid.innerHTML = (data.albums || []).map(album => `
+                <div onclick="openAlbumModal('${album.id}')" class="group bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 cursor-pointer hover:shadow-xl transition duration-300 flex flex-col">
+                    <div class="relative aspect-video overflow-hidden bg-gray-100">
+                        <img src="${album.cover}" alt="${album.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <div class="absolute top-3 right-3 bg-black/60 text-white text-xs px-2.5 py-1 rounded-full backdrop-blur-sm flex items-center space-x-1">
+                            <i class="fa-solid fa-images text-xs"></i>
+                            <span>${(album.photos || []).length} fotos</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-lg font-bold text-gray-900 group-hover:text-primary transition mb-2">${album.title}</h3>
+                        <p class="text-gray-500 text-sm line-clamp-2">${album.desc}</p>
                     </div>
                 </div>
             `).join('');
@@ -644,7 +722,7 @@
         function renderAdminLists() {
             const data = currentData;
 
-            document.getElementById('cfg-logo').value = data.config.logoUrl || "";
+            document.getElementById('cfg-logo').value = data.config.logoUrl || "https://iili.io/nY8LbTu.jpg";
             document.getElementById('cfg-brand').value = data.config.brand;
             document.getElementById('cfg-subtitle').value = data.config.subtitle;
             document.getElementById('cfg-livetv').value = data.config.liveTv || "";
@@ -668,13 +746,20 @@
                 </div>
             `).join('');
 
-            document.getElementById('admin-photos-list').innerHTML = data.photos.map(p => `
-                <div class="bg-gray-50 p-3 rounded-xl border flex flex-col justify-between">
-                    <img src="${p.url}" class="w-full h-32 object-cover rounded-lg mb-2">
-                    <p class="text-xs font-medium text-gray-800 truncate mb-2">${p.desc}</p>
-                    <div class="flex space-x-2">
-                        <button onclick="editPhoto('${p.id}')" class="flex-1 text-blue-600 text-xs font-semibold bg-blue-50 hover:bg-blue-100 py-1.5 rounded transition">Editar</button>
-                        <button onclick="deletePhoto('${p.id}')" class="flex-1 text-red-500 text-xs font-semibold bg-red-50 hover:bg-red-100 py-1.5 rounded transition">Eliminar</button>
+            // Renderizar Álbumes en Admin
+            document.getElementById('admin-albums-list').innerHTML = (data.albums || []).map(a => `
+                <div class="bg-gray-50 p-4 rounded-xl border flex flex-col justify-between">
+                    <div class="flex space-x-4">
+                        <img src="${a.cover}" class="w-24 h-24 object-cover rounded-lg border">
+                        <div class="overflow-hidden">
+                            <h5 class="font-bold text-gray-900 truncate">${a.title}</h5>
+                            <p class="text-xs text-gray-500 line-clamp-2 mt-1">${a.desc}</p>
+                            <span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-semibold px-2 py-0.5 rounded mt-2">${(a.photos || []).length} fotos</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2 mt-4 pt-3 border-t">
+                        <button onclick="editAlbum('${a.id}')" class="flex-1 text-blue-600 text-xs font-semibold bg-blue-50 hover:bg-blue-100 py-2 rounded-lg transition">Editar Álbum</button>
+                        <button onclick="deleteAlbum('${a.id}')" class="flex-1 text-red-500 text-xs font-semibold bg-red-50 hover:bg-red-100 py-2 rounded-lg transition">Eliminar</button>
                     </div>
                 </div>
             `).join('');
@@ -693,7 +778,7 @@
             `).join('');
         }
 
-        // Exportar funciones globales para el DOM
+        // Exportar funciones globales
         window.openLoginModal = () => {
             document.getElementById('login-modal').classList.remove('hidden');
             document.getElementById('login-user').value = '';
@@ -804,51 +889,61 @@
             }
         };
 
-        window.savePhoto = (e) => {
+        // LÓGICA DE GESTIÓN DE ÁLBUMES DE GALERÍA
+        window.saveAlbum = (e) => {
             e.preventDefault();
-            const editId = document.getElementById('photo-edit-id').value;
-            const url = document.getElementById('photo-url').value;
-            const desc = document.getElementById('photo-desc').value;
+            const editId = document.getElementById('album-edit-id').value;
+            const title = document.getElementById('album-title').value;
+            const cover = document.getElementById('album-cover').value;
+            const desc = document.getElementById('album-desc').value;
+            const photosRaw = document.getElementById('album-photos').value;
+
+            const photos = photosRaw.split('\n').map(url => url.trim()).filter(url => url !== '');
 
             if (editId) {
-                const index = currentData.photos.findIndex(p => p.id === editId);
+                const index = (currentData.albums || []).findIndex(a => a.id === editId);
                 if (index !== -1) {
-                    currentData.photos[index] = { id: editId, url, desc };
+                    currentData.albums[index] = { id: editId, title, cover, desc, photos };
                 }
-                alert('¡Foto actualizada en Firebase!');
+                alert('¡Álbum actualizado en Firebase!');
             } else {
-                const newPhoto = { id: Date.now().toString(), url, desc };
-                currentData.photos.unshift(newPhoto);
-                alert('¡Foto guardada en Firebase!');
+                const newAlbum = { id: Date.now().toString(), title, cover, desc, photos };
+                if (!currentData.albums) currentData.albums = [];
+                currentData.albums.unshift(newAlbum);
+                alert('¡Álbum guardado en Firebase!');
             }
             saveData(currentData);
-            window.resetPhotoForm();
+            window.resetAlbumForm();
         };
 
-        window.editPhoto = (id) => {
-            const p = currentData.photos.find(item => item.id === id);
-            if (p) {
-                document.getElementById('photo-edit-id').value = p.id;
-                document.getElementById('photo-url').value = p.url;
-                document.getElementById('photo-desc').value = p.desc;
-                document.getElementById('photo-form-title').innerText = "Editar Foto";
-                document.getElementById('photo-submit-btn').innerText = "Guardar Cambios";
-                document.getElementById('cancel-edit-photo').classList.remove('hidden');
+        window.editAlbum = (id) => {
+            const a = (currentData.albums || []).find(item => item.id === id);
+            if (a) {
+                document.getElementById('album-edit-id').value = a.id;
+                document.getElementById('album-title').value = a.title;
+                document.getElementById('album-cover').value = a.cover;
+                document.getElementById('album-desc').value = a.desc;
+                document.getElementById('album-photos').value = (a.photos || []).join('\n');
+                document.getElementById('album-form-title').innerText = "Editar Álbum Fotográfico";
+                document.getElementById('album-submit-btn').innerText = "Guardar Cambios";
+                document.getElementById('cancel-edit-album').classList.remove('hidden');
             }
         };
 
-        window.resetPhotoForm = () => {
-            document.getElementById('photo-edit-id').value = '';
-            document.getElementById('photo-url').value = '';
-            document.getElementById('photo-desc').value = '';
-            document.getElementById('photo-form-title').innerText = "Agregar Nueva Foto a la Galería";
-            document.getElementById('photo-submit-btn').innerText = "Agregar Foto";
-            document.getElementById('cancel-edit-photo').classList.add('hidden');
+        window.resetAlbumForm = () => {
+            document.getElementById('album-edit-id').value = '';
+            document.getElementById('album-title').value = '';
+            document.getElementById('album-cover').value = '';
+            document.getElementById('album-desc').value = '';
+            document.getElementById('album-photos').value = '';
+            document.getElementById('album-form-title').innerText = "Crear / Editar Álbum Fotográfico";
+            document.getElementById('album-submit-btn').innerText = "Guardar Álbum";
+            document.getElementById('cancel-edit-album').classList.add('hidden');
         };
 
-        window.deletePhoto = (id) => {
-            if (confirm('¿Estás seguro de eliminar esta foto?')) {
-                currentData.photos = currentData.photos.filter(p => p.id !== id);
+        window.deleteAlbum = (id) => {
+            if (confirm('¿Estás seguro de eliminar este álbum?')) {
+                currentData.albums = (currentData.albums || []).filter(a => a.id !== id);
                 saveData(currentData);
             }
         };
