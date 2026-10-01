@@ -26,7 +26,7 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- HEADER & NAVBAR -->
+    <!-- HEADER & NAVBAR DINÁMICO -->
     <header class="bg-white shadow-md sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
@@ -42,14 +42,9 @@
                     </div>
                 </div>
 
-                <!-- DESKTOP NAV -->
-                <nav class="hidden md:flex items-center space-x-6 font-medium text-sm lg:text-base">
-                    <a href="#inicio" class="text-gray-600 hover:text-primary transition">Inicio</a>
-                    <a href="#en-vivo" class="text-red-600 hover:text-red-700 font-bold transition flex items-center space-x-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-600 animate-pulse"></span><span>Taber TV En Vivo</span></a>
-                    <a href="#radio" class="text-gray-600 hover:text-primary transition flex items-center space-x-1.5"><i class="fa-solid fa-radio text-primary"></i><span>Radio 106.1 FM</span></a>
-                    <a href="#transmision" class="text-gray-600 hover:text-primary transition">Mensajes</a>
-                    <a href="#horarios" class="text-gray-600 hover:text-primary transition">Horarios</a>
-                    <a href="#galeria" class="text-gray-600 hover:text-primary transition">Galería</a>
+                <!-- DESKTOP NAV DINÁMICO -->
+                <nav id="dynamic-nav-links" class="hidden md:flex items-center space-x-6 font-medium text-sm lg:text-base">
+                    <!-- Enlaces generados automáticamente -->
                 </nav>
 
                 <!-- ADMIN BUTTON -->
@@ -66,14 +61,15 @@
     <!-- CONTENIDO PRINCIPAL -->
     <main class="flex-grow">
 
-        <!-- HERO SECTION (RESTAURADO SIN IMAGEN) -->
+        <!-- HERO SECTION -->
         <section id="inicio" class="relative bg-gradient-to-r from-gray-900 via-secondary to-primary text-white py-24 px-4 sm:px-6 lg:px-8 overflow-hidden shadow-inner">
             <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
             <div class="max-w-4xl mx-auto text-center relative z-10">
                 <span id="hero-badge" class="bg-white/10 text-blue-200 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-widest border border-white/20">Bienvenidos a Casa</span>
                 <h1 id="hero-title" class="text-4xl sm:text-6xl font-extrabold tracking-tight mt-4 mb-6 leading-tight">Un lugar de esperanza y salvación</h1>
                 <p id="hero-subtitle" class="text-lg sm:text-xl text-gray-200 mb-8 max-w-2xl mx-auto font-light">"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos."</p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
                     <a href="#en-vivo" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-tv"></i>
                         <span>Ver Taber TV En Vivo</span>
@@ -82,6 +78,11 @@
                         <i class="fa-solid fa-radio text-primary"></i>
                         <span>Escuchar Radio 106.1 FM</span>
                     </a>
+                </div>
+
+                <!-- REDES SOCIALES DE LA IGLESIA -->
+                <div class="pt-4 border-t border-white/10 flex items-center justify-center space-x-4" id="social-links-container">
+                    <!-- Redes cargadas dinámicamente -->
                 </div>
             </div>
         </section>
@@ -148,15 +149,15 @@
             </div>
         </section>
 
-        <!-- HORARIOS -->
+        <!-- HORARIOS CRONOLÓGICAMENTE ORDENADOS -->
         <section id="horarios" class="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8 border-y border-gray-200">
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-bold tracking-tight text-gray-900">Horarios de Servicios</h2>
-                    <p class="text-gray-500 mt-2">Acompaña a nuestra familia en cada uno de nuestros cultos semanales</p>
+                    <p class="text-gray-500 mt-2">Organizados semanalmente de Domingo a Sábado para tu comodidad</p>
                 </div>
                 <div id="horarios-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Se llena dinámicamente -->
+                    <!-- Horarios ordenados dinámicamente -->
                 </div>
             </div>
         </section>
@@ -269,20 +270,20 @@
             
             <!-- TABS DE NAVEGACIÓN ADMIN -->
             <div class="flex border-b border-gray-300 space-x-6 overflow-x-auto">
-                <button onclick="switchTab('general')" id="tab-btn-general" class="pb-3 font-semibold text-primary border-b-2 border-primary transition whitespace-nowrap">Config y En Vivos</button>
+                <button onclick="switchTab('general')" id="tab-btn-general" class="pb-3 font-semibold text-primary border-b-2 border-primary transition whitespace-nowrap">Config y Redes</button>
+                <button onclick="switchTab('menu')" id="tab-btn-menu" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Navegación y Menú</button>
                 <button onclick="switchTab('videos')" id="tab-btn-videos" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Mensajes</button>
                 <button onclick="switchTab('galeria')" id="tab-btn-galeria" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Álbumes de Galería</button>
                 <button onclick="switchTab('horarios')" id="tab-btn-horarios" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Horarios</button>
             </div>
 
-            <!-- SECCIÓN 1: CONFIGURACIÓN Y EN VIVOS -->
+            <!-- SECCIÓN 1: CONFIGURACIÓN GENERAL Y REDES SOCIALES -->
             <div id="tab-general" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6">
-                <h3 class="text-xl font-bold text-gray-900 border-b pb-3">Configuración General, Logo, Taber TV (.m3u8) y Radio</h3>
+                <h3 class="text-xl font-bold text-gray-900 border-b pb-3">Configuración General, Transmisiones y Redes Sociales</h3>
                 <form onsubmit="saveGeneralConfig(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="md:col-span-2 bg-blue-50/50 p-4 rounded-xl border border-blue-100">
                         <label class="block text-sm font-bold text-blue-900 mb-1"><i class="fa-solid fa-image mr-1"></i> URL del Logo de la Iglesia</label>
                         <input type="url" id="cfg-logo" placeholder="https://ejemplo.com/logo.png" class="w-full border rounded-lg px-4 py-2 bg-white">
-                        <p class="text-xs text-blue-600 mt-1">Ingresa la URL pública de una imagen PNG o JPG.</p>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Nombre del Ministerio</label>
@@ -308,6 +309,32 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1">Versículo / Texto Destacado</label>
                         <textarea id="cfg-hero-sub" rows="2" class="w-full border rounded-lg px-4 py-2"></textarea>
                     </div>
+
+                    <!-- CAMPOS DE REDES SOCIALES -->
+                    <div class="md:col-span-2 border-t pt-4">
+                        <h4 class="font-bold text-gray-800 mb-3"><i class="fa-solid fa-share-nodes text-primary mr-1"></i> Redes Sociales Oficiales</h4>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 mb-1">Página de Facebook</label>
+                        <input type="url" id="cfg-fb" placeholder="https://facebook.com/tupagina" class="w-full border rounded-lg px-3 py-2 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 mb-1">Canal de YouTube</label>
+                        <input type="url" id="cfg-yt" placeholder="https://youtube.com/@tucanal" class="w-full border rounded-lg px-3 py-2 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 mb-1">Perfil de Instagram</label>
+                        <input type="url" id="cfg-ig" placeholder="https://instagram.com/tuperfil" class="w-full border rounded-lg px-3 py-2 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 mb-1">Número de WhatsApp (con código de país)</label>
+                        <input type="text" id="cfg-wa" placeholder="https://wa.me/50300000000" class="w-full border rounded-lg px-3 py-2 text-sm">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-medium text-gray-600 mb-1">Perfil de TikTok</label>
+                        <input type="url" id="cfg-tk" placeholder="https://tiktok.com/@tuperfil" class="w-full border rounded-lg px-3 py-2 text-sm">
+                    </div>
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono de Contacto</label>
                         <input type="text" id="cfg-phone" class="w-full border rounded-lg px-4 py-2">
@@ -324,6 +351,33 @@
                         <button type="submit" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow">Guardar Configuración</button>
                     </div>
                 </form>
+            </div>
+
+            <!-- SECCIÓN NUEVA: ADMINISTRACIÓN DEL MENÚ DE NAVEGACIÓN -->
+            <div id="tab-menu" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <h3 id="menu-form-title" class="text-xl font-bold text-gray-900">Agregar Enlace al Menú Principal</h3>
+                    <button type="button" id="cancel-edit-menu" onclick="resetMenuForm()" class="text-sm text-gray-500 hover:text-gray-800 hidden">Cancelar Edición</button>
+                </div>
+                <form onsubmit="saveMenuItem(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end bg-gray-50 p-4 rounded-xl border">
+                    <input type="hidden" id="menu-edit-id">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nombre del Enlace</label>
+                        <input type="text" id="menu-title" placeholder="Ej. Canal, Ministerio, Donaciones" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Enlace / Destino (URL o #Sección)</label>
+                        <input type="text" id="menu-link" placeholder="Ej. #radio o https://ejemplo.com" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <button type="submit" id="menu-submit-btn" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Agregar Enlace</button>
+                    </div>
+                </form>
+
+                <h4 class="font-bold text-gray-800 pt-4">Enlaces del Menú Actuales</h4>
+                <div id="admin-menu-list" class="space-y-3">
+                    <!-- Listado dinámico de enlaces -->
+                </div>
             </div>
 
             <!-- SECCIÓN 2: VIDEOS / MENSAJES -->
@@ -392,7 +446,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 4: HORARIOS -->
+            <!-- SECCIÓN 4: HORARIOS CON ORDENAMIENTO -->
             <div id="tab-horarios" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
                 <div class="flex justify-between items-center border-b pb-3">
                     <h3 id="sch-form-title" class="text-xl font-bold text-gray-900">Agregar Horario de Culto</h3>
@@ -401,12 +455,12 @@
                 <form onsubmit="saveSchedule(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end bg-gray-50 p-4 rounded-xl border">
                     <input type="hidden" id="sch-edit-id">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Día / Nombre del Culto</label>
-                        <input type="text" id="sch-day" placeholder="Ej. Miércoles de Estudio" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Día (Ej. Domingo, Lunes...)</label>
+                        <input type="text" id="sch-day" placeholder="Ej. Domingo de Adoración" required class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Hora</label>
-                        <input type="text" id="sch-time" placeholder="Ej. 7:00 PM" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                        <input type="text" id="sch-time" placeholder="Ej. 9:00 AM" required class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Descripción Breve</label>
@@ -417,7 +471,7 @@
                     </div>
                 </form>
 
-                <h4 class="font-bold text-gray-800 pt-4">Horarios Registrados</h4>
+                <h4 class="font-bold text-gray-800 pt-4">Horarios Registrados (Ordenados de Domingo a Sábado)</h4>
                 <div id="admin-schedules-list" class="space-y-3">
                     <!-- Listado dinámico -->
                 </div>
@@ -453,6 +507,28 @@
         // Instancia global de HLS
         let hlsInstance = null;
 
+        // Mapeo de días de la semana para orden cronológico (Domingo a Sábado)
+        const daysMap = {
+            'domingo': 1,
+            'lunes': 2,
+            'martes': 3,
+            'miercoles': 4, 'miércoles': 4,
+            'jueves': 5,
+            'viernes': 6,
+            'sabado': 7, 'sábado': 7
+        };
+
+        function getDayOrder(dayStr) {
+            if (!dayStr) return 99;
+            const lower = dayStr.toLowerCase();
+            for (let day in daysMap) {
+                if (lower.includes(day)) {
+                    return daysMap[day];
+                }
+            }
+            return 99; // Si no coincide, ponerlo al final
+        }
+
         // Datos por defecto
         const defaultData = {
             config: {
@@ -465,8 +541,21 @@
                 heroSub: "\"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos.\"",
                 phone: "+503 2222-3333",
                 email: "contacto@taberbypass.org",
-                address: "Avenida Principal #123, Ciudad Central"
+                address: "Avenida Principal #123, Ciudad Central",
+                fb: "https://facebook.com",
+                yt: "https://youtube.com",
+                ig: "https://instagram.com",
+                wa: "",
+                tk: ""
             },
+            menuItems: [
+                { id: "1", title: "Inicio", link: "#inicio" },
+                { id: "2", title: "Taber TV En Vivo", link: "#en-vivo" },
+                { id: "3", title: "Radio 106.1 FM", link: "#radio" },
+                { id: "4", title: "Mensajes", link: "#transmision" },
+                { id: "5", title: "Horarios", link: "#horarios" },
+                { id: "6", title: "Galería", link: "#galeria" }
+            ],
             videos: [
                 { id: "1", title: "El Poder de la Oración Ferviente", author: "Pastor Principal", ytId: "dQw4w9WgXcQ" },
                 { id: "2", title: "Caminando en Integridad y Fe", author: "Co-Pastor", ytId: "dQw4w9WgXcQ" }
@@ -497,6 +586,7 @@
             if (data) {
                 currentData = {
                     config: data.config || defaultData.config,
+                    menuItems: data.menuItems || defaultData.menuItems,
                     videos: data.videos || [],
                     albums: data.albums || defaultData.albums,
                     schedules: data.schedules || []
@@ -619,7 +709,23 @@
 
         function renderPublicSite() {
             const data = currentData;
-            
+
+            // Renderizar Enlaces de Menú
+            const navContainer = document.getElementById('dynamic-nav-links');
+            navContainer.innerHTML = (data.menuItems || []).map(item => `
+                <a href="${item.link}" class="text-gray-600 hover:text-primary transition font-medium">${item.title}</a>
+            `).join('');
+
+            // Renderizar Redes Sociales
+            const socialContainer = document.getElementById('social-links-container');
+            let socialHTML = '';
+            if (data.config.fb) socialHTML += `<a href="${data.config.fb}" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"><i class="fa-brands fa-facebook-f"></i></a>`;
+            if (data.config.yt) socialHTML += `<a href="${data.config.yt}" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"><i class="fa-brands fa-youtube"></i></a>`;
+            if (data.config.ig) socialHTML += `<a href="${data.config.ig}" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"><i class="fa-brands fa-instagram"></i></a>`;
+            if (data.config.wa) socialHTML += `<a href="${data.config.wa}" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"><i class="fa-brands fa-whatsapp"></i></a>`;
+            if (data.config.tk) socialHTML += `<a href="${data.config.tk}" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition"><i class="fa-brands fa-tiktok"></i></a>`;
+            socialContainer.innerHTML = socialHTML;
+
             const iconEl = document.getElementById('nav-brand-icon');
             const imgEl = document.getElementById('nav-brand-img');
             const logoContainer = document.getElementById('nav-brand-logo-container');
@@ -681,8 +787,10 @@
                 </div>
             `).join('');
 
+            // Renderizar Horarios Ordenados Cronológicamente (Domingo a Sábado)
+            const sortedSchedules = [...data.schedules].sort((a, b) => getDayOrder(a.day) - getDayOrder(b.day));
             const horariosGrid = document.getElementById('horarios-grid');
-            horariosGrid.innerHTML = data.schedules.map(s => `
+            horariosGrid.innerHTML = sortedSchedules.map(s => `
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 text-center">
                     <div class="bg-primary/10 text-primary w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 text-xl">
                         <i class="fa-solid fa-clock"></i>
@@ -708,6 +816,26 @@
             document.getElementById('cfg-email').value = data.config.email;
             document.getElementById('cfg-address').value = data.config.address;
 
+            document.getElementById('cfg-fb').value = data.config.fb || "";
+            document.getElementById('cfg-yt').value = data.config.yt || "";
+            document.getElementById('cfg-ig').value = data.config.ig || "";
+            document.getElementById('cfg-wa').value = data.config.wa || "";
+            document.getElementById('cfg-tk').value = data.config.tk || "";
+
+            // Renderizar Lista de Menú Admin
+            document.getElementById('admin-menu-list').innerHTML = (data.menuItems || []).map(m => `
+                <div class="flex items-center justify-between bg-gray-50 p-3 rounded-xl border">
+                    <div>
+                        <h5 class="font-bold text-gray-900">${m.title}</h5>
+                        <p class="text-xs text-gray-500">${m.link}</p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="editMenuItem('${m.id}')" class="text-blue-600 hover:text-blue-800 px-3 py-1 rounded-lg text-xs font-semibold bg-blue-50 transition">Editar</button>
+                        <button onclick="deleteMenuItem('${m.id}')" class="text-red-500 hover:text-red-700 px-3 py-1 rounded-lg text-xs font-semibold bg-red-50 transition">Eliminar</button>
+                    </div>
+                </div>
+            `).join('');
+
             document.getElementById('admin-videos-list').innerHTML = data.videos.map(v => `
                 <div class="flex items-center justify-between bg-gray-50 p-4 rounded-xl border">
                     <div>
@@ -721,7 +849,6 @@
                 </div>
             `).join('');
 
-            // Renderizar Álbumes en Admin
             document.getElementById('admin-albums-list').innerHTML = (data.albums || []).map(a => `
                 <div class="bg-gray-50 p-4 rounded-xl border flex flex-col justify-between">
                     <div class="flex space-x-4">
@@ -739,7 +866,8 @@
                 </div>
             `).join('');
 
-            document.getElementById('admin-schedules-list').innerHTML = data.schedules.map(s => `
+            const sortedSchedules = [...data.schedules].sort((a, b) => getDayOrder(a.day) - getDayOrder(b.day));
+            document.getElementById('admin-schedules-list').innerHTML = sortedSchedules.map(s => `
                 <div class="flex items-center justify-between bg-gray-50 p-4 rounded-xl border">
                     <div>
                         <h5 class="font-bold text-gray-900">${s.day} - <span class="text-primary">${s.time}</span></h5>
@@ -784,7 +912,7 @@
         };
 
         window.switchTab = (tabName) => {
-            ['general', 'videos', 'galeria', 'horarios'].forEach(t => {
+            ['general', 'menu', 'videos', 'galeria', 'horarios'].forEach(t => {
                 document.getElementById(`tab-${t}`).classList.add('hidden');
                 document.getElementById(`tab-btn-${t}`).classList.remove('text-primary', 'border-b-2', 'border-primary');
                 document.getElementById(`tab-btn-${t}`).classList.add('text-gray-500');
@@ -806,10 +934,64 @@
                 heroSub: document.getElementById('cfg-hero-sub').value,
                 phone: document.getElementById('cfg-phone').value,
                 email: document.getElementById('cfg-email').value,
-                address: document.getElementById('cfg-address').value
+                address: document.getElementById('cfg-address').value,
+                fb: document.getElementById('cfg-fb').value,
+                yt: document.getElementById('cfg-yt').value,
+                ig: document.getElementById('cfg-ig').value,
+                wa: document.getElementById('cfg-wa').value,
+                tk: document.getElementById('cfg-tk').value
             };
             saveData(currentData);
             alert('¡Configuración guardada exitosamente en Firebase!');
+        };
+
+        // GESTIÓN DE MENÚ DE NAVEGACIÓN DINÁMICO
+        window.saveMenuItem = (e) => {
+            e.preventDefault();
+            const editId = document.getElementById('menu-edit-id').value;
+            const title = document.getElementById('menu-title').value;
+            const link = document.getElementById('menu-link').value;
+
+            if (editId) {
+                const index = (currentData.menuItems || []).findIndex(m => m.id === editId);
+                if (index !== -1) {
+                    currentData.menuItems[index] = { id: editId, title, link };
+                }
+            } else {
+                const newItem = { id: Date.now().toString(), title, link };
+                if (!currentData.menuItems) currentData.menuItems = [];
+                currentData.menuItems.push(newItem);
+            }
+            saveData(currentData);
+            window.resetMenuForm();
+        };
+
+        window.editMenuItem = (id) => {
+            const item = (currentData.menuItems || []).find(m => m.id === id);
+            if (item) {
+                document.getElementById('menu-edit-id').value = item.id;
+                document.getElementById('menu-title').value = item.title;
+                document.getElementById('menu-link').value = item.link;
+                document.getElementById('menu-form-title').innerText = "Editar Enlace del Menú";
+                document.getElementById('menu-submit-btn').innerText = "Guardar Cambios";
+                document.getElementById('cancel-edit-menu').classList.remove('hidden');
+            }
+        };
+
+        window.resetMenuForm = () => {
+            document.getElementById('menu-edit-id').value = '';
+            document.getElementById('menu-title').value = '';
+            document.getElementById('menu-link').value = '';
+            document.getElementById('menu-form-title').innerText = "Agregar Enlace al Menú Principal";
+            document.getElementById('menu-submit-btn').innerText = "Agregar Enlace";
+            document.getElementById('cancel-edit-menu').classList.add('hidden');
+        };
+
+        window.deleteMenuItem = (id) => {
+            if (confirm('¿Deseas eliminar este enlace del menú?')) {
+                currentData.menuItems = (currentData.menuItems || []).filter(m => m.id !== id);
+                saveData(currentData);
+            }
         };
 
         window.saveVideo = (e) => {
@@ -864,7 +1046,6 @@
             }
         };
 
-        // LÓGICA DE GESTIÓN DE ÁLBUMES DE GALERÍA
         window.saveAlbum = (e) => {
             e.preventDefault();
             const editId = document.getElementById('album-edit-id').value;
