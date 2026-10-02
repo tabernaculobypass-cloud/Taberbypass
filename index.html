@@ -3,7 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taber by Pass</title>
+    
+    <!-- TÍTULO Y DESCRIPCIÓN POR DEFECTO -->
+    <title id="page-title">Taber by Pass - Ministerio de Fe y Adoración</title>
+    <meta id="meta-desc" name="description" content="Bienvenidos a Taber by Pass. Un lugar de esperanza y salvación. Sermones, Radio 106.1 FM y Taber TV en vivo.">
+
+    <!-- METADATOS OPEN GRAPH PARA VISTA PREVIA EN WHATSAPP, FACEBOOK, TELEGRAM Y TWITTER -->
+    <meta id="og-title" property="og:title" content="Taber by Pass - Ministerio de Fe y Adoración">
+    <meta id="og-desc" property="og:description" content="Un lugar de esperanza y salvación. Disfruta de nuestros sermones, radio y transmisión en vivo.">
+    <meta id="og-image" property="og:image" content="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200">
+    <meta id="og-image-secure" property="og:image:secure_url" content="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta id="og-url" property="og:url" content="">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Taber by Pass">
+
+    <!-- TWITTER CARDS -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta id="tw-title" name="twitter:title" content="Taber by Pass - Ministerio de Fe y Adoración">
+    <meta id="tw-desc" name="twitter:description" content="Un lugar de esperanza y salvación. Sermones, Radio 106.1 FM y Taber TV en vivo.">
+    <meta id="tw-image" name="twitter:image" content="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -299,7 +321,7 @@
         <p>&copy; 2026 Taber by Pass. Todos los derechos reservados. | Diseñado por Departamento Multimedia By Pass.</p>
     </footer>
 
-    <!-- MODAL LECTOR DE BLOG -->
+    <!-- MODAL LECTOR DE BLOG CON VISTA PREVIA PROFESIONAL -->
     <div id="blog-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden relative">
             <button onclick="closeBlogModal()" class="absolute top-4 right-4 bg-black/60 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-black transition z-10">
@@ -308,7 +330,7 @@
             <div class="overflow-y-auto">
                 <img id="blog-modal-img" src="" class="w-full h-72 object-cover">
                 <div class="p-8 space-y-4">
-                    <div class="flex items-center justify-between text-xs text-gray-500 font-semibold border-b pb-3">
+                    <div class="flex flex-wrap items-center justify-between text-xs text-gray-500 font-semibold border-b pb-3 gap-2">
                         <div class="flex items-center space-x-3 uppercase">
                             <span id="blog-modal-author" class="text-primary"><i class="fa-solid fa-user mr-1"></i> Autor</span>
                             <span>•</span>
@@ -494,7 +516,7 @@
                         <input type="text" id="banner-subtitle" placeholder="Ej: Este Próximo Sábado 15 de Octubre" class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">URL de la Imagen Promocional</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">URL de la Imagen Promocional (Min: 1200x675)</label>
                         <input type="url" id="banner-img" required placeholder="https://..." class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div>
@@ -562,7 +584,7 @@
                         <input type="text" id="blog-date" required class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">URL Foto Destacada</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">URL Foto Destacada / Miniatura (1280x720)</label>
                         <input type="url" id="blog-img" required class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div class="md:col-span-2">
@@ -718,7 +740,6 @@
             return 99;
         }
 
-        // CONVERTIDOR DE ENLACES JUMPSHARE A REPRODUCTOR EMBEBIDO
         function getAudioEmbedData(rawUrl) {
             if (!rawUrl || rawUrl.trim() === '') return { isJumpshare: false, url: '' };
             let trimmed = rawUrl.trim();
@@ -780,7 +801,7 @@
             blogs: [
                 {
                     id: "1", title: "Perseverando en medio de las pruebas", author: "Pastor Principal", date: "1 de Octubre, 2026",
-                    img: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=800",
+                    img: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200",
                     content: "La palabra de Dios nos recuerda en Santiago 1:12 que bienaventurado es el varón que soporta la tentación..."
                 }
             ],
@@ -799,6 +820,25 @@
 
         let currentData = defaultData;
 
+        // DETECTAR PARÁMETROS DE URL PARA ACTUALIZAR METADATOS DE MINIATURA SI SE COMPARTE UN ARTÍCULO
+        function updateMetaTagsForArticle(articleId) {
+            const blog = (currentData.blogs || []).find(b => b.id === articleId);
+            if (!blog) return;
+
+            document.getElementById('page-title').innerText = `${blog.title} - Taber by Pass`;
+            document.getElementById('meta-desc').setAttribute('content', blog.content.replace(/<[^>]*>?/gm, '').substring(0, 160));
+            
+            document.getElementById('og-title').setAttribute('content', blog.title);
+            document.getElementById('og-desc').setAttribute('content', blog.content.replace(/<[^>]*>?/gm, '').substring(0, 160));
+            document.getElementById('og-image').setAttribute('content', blog.img);
+            document.getElementById('og-image-secure').setAttribute('content', blog.img);
+            document.getElementById('og-url').setAttribute('content', window.location.href);
+
+            document.getElementById('tw-title').setAttribute('content', blog.title);
+            document.getElementById('tw-desc').setAttribute('content', blog.content.replace(/<[^>]*>?/gm, '').substring(0, 160));
+            document.getElementById('tw-image').setAttribute('content', blog.img);
+        }
+
         // Cargar datos en tiempo real desde Firebase
         onValue(dbRef, (snapshot) => {
             const data = snapshot.val();
@@ -815,9 +855,19 @@
             } else {
                 saveData(defaultData);
             }
+
             renderPublicSite();
             renderAdminLists();
             initBannerCarousel();
+
+            // Verificar si hay parámetro de compartir artículo en la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const sharedArticle = urlParams.get('article');
+            if (sharedArticle) {
+                updateMetaTagsForArticle(sharedArticle);
+                openBlogModal(sharedArticle);
+            }
+
             setTimeout(() => { AOS.refresh(); }, 200);
         });
 
@@ -848,7 +898,6 @@
             }
         }
 
-        // LÓGICA DEL CARRUSEL DE BANNERS (5 SEGUNDOS)
         function initBannerCarousel() {
             if (bannerInterval) clearInterval(bannerInterval);
             const banners = currentData.banners || [];
@@ -859,7 +908,7 @@
             bannerInterval = setInterval(() => {
                 currentBannerIndex = (currentBannerIndex + 1) % banners.length;
                 renderBannerSlide(currentBannerIndex);
-            }, 5000); // 5000ms = 5 Segundos
+            }, 5000);
         }
 
         function renderBannerSlide(index) {
@@ -876,11 +925,8 @@
             const b = banners[index];
             container.innerHTML = `
                 <div class="relative w-full h-full min-h-[300px] sm:min-h-[420px] flex items-center justify-center transition-all duration-700">
-                    <!-- IMAGEN DE FONDO -->
                     <img src="${b.img}" alt="${b.title}" class="absolute inset-0 w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30"></div>
-                    
-                    <!-- CONTENIDO SOBREPUESTO -->
                     <div class="relative z-10 text-center text-white px-6 max-w-3xl space-y-3">
                         ${b.subtitle ? `<span class="inline-block bg-amber-500 text-black text-xs font-black uppercase px-3 py-1 rounded-full shadow">${b.subtitle}</span>` : ''}
                         <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight drop-shadow-md">${b.title}</h2>
@@ -896,7 +942,6 @@
                 </div>
             `;
 
-            // Indicadores de puntos
             dotsContainer.innerHTML = banners.map((_, i) => `
                 <button onclick="goToBannerSlide(${i})" class="w-3 h-3 rounded-full transition-all duration-300 ${i === index ? 'bg-amber-400 w-8' : 'bg-white/50 hover:bg-white'}"></button>
             `).join('');
@@ -934,7 +979,6 @@
             if (el) el.scrollIntoView({ behavior: 'smooth' });
         };
 
-        // NAVEGACIÓN INDEPENDIENTE
         window.showSingleView = (targetLink) => {
             const mainContainer = document.getElementById('main-sections-container');
             const dedicatedContainer = document.getElementById('dedicated-view-container');
@@ -943,7 +987,6 @@
             const backBar = document.getElementById('back-to-home-bar');
             const badge = document.getElementById('current-view-badge');
 
-            // Caso Inicio
             if (targetLink === 'inicio' || targetLink === '#inicio') {
                 mainContainer.classList.remove('hidden');
                 dedicatedContainer.classList.add('hidden');
@@ -1019,7 +1062,6 @@
             setTimeout(() => { AOS.refresh(); }, 150);
         };
 
-        // RENDER DE SERMONES CON SOPORTE JUMPSHARE
         function renderSermonsHTML(videoList) {
             if (!videoList || videoList.length === 0) {
                 return `<p class="text-center text-gray-500 col-span-full">No hay sermones disponibles en este momento.</p>`;
@@ -1128,12 +1170,30 @@
             `).join('');
         }
 
-        // COMPARTIR SERMÓN
+        // COMPARTIR BLOG CON VISTA PREVIA PROFESIONAL Y MINIATURA
+        window.shareArticle = (blogId, platform) => {
+            const b = (currentData.blogs || []).find(item => item.id === blogId);
+            if (!b) return;
+
+            const articleUrl = `${window.location.origin}${window.location.pathname}?article=${blogId}`;
+            const textMsg = `📖 *${b.title}*\n${b.content.replace(/<[^>]*>?/gm, '').substring(0, 100)}...\n\nLee el artículo completo aquí:`;
+
+            if (platform === 'wa') {
+                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textMsg + '\n' + articleUrl)}`, '_blank');
+            } else if (platform === 'fb') {
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl)}`, '_blank');
+            } else if (platform === 'copy') {
+                navigator.clipboard.writeText(articleUrl).then(() => {
+                    alert('¡Enlace con miniatura copiado al portapapeles! Ya puedes pegarlo en WhatsApp o redes sociales.');
+                }).catch(() => alert('Enlace del artículo: ' + articleUrl));
+            }
+        };
+
         window.shareSermon = (sermonId, platform) => {
             const v = (currentData.videos || []).find(item => item.id === sermonId);
             if (!v) return;
 
-            const pageUrl = window.location.origin + window.location.pathname + `?sermon=${sermonId}`;
+            const pageUrl = `${window.location.origin}${window.location.pathname}?sermon=${sermonId}`;
             const textMsg = `🎥 Te invito a ver / escuchar el sermón: "${v.title}" por ${v.author} - Taber by Pass`;
 
             if (platform === 'wa') window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textMsg + ' ' + pageUrl)}`, '_blank');
@@ -1143,7 +1203,6 @@
             }
         };
 
-        // REPRODUCTOR RADIO
         window.toggleRadioPlay = () => {
             const player = document.getElementById('radio-audio-player');
             const hiddenIframe = document.getElementById('radio-hidden-iframe');
@@ -1186,7 +1245,6 @@
             });
         };
 
-        // CONTACTO
         window.handleContactSubmit = (e) => {
             e.preventDefault();
             const name = document.getElementById('contact-name').value;
@@ -1203,10 +1261,11 @@
             document.getElementById('contact-msg').value = '';
         };
 
-        // MODAL BLOG
         window.openBlogModal = (blogId) => {
             const b = (currentData.blogs || []).find(item => item.id === blogId);
             if (!b) return;
+
+            updateMetaTagsForArticle(b.id);
 
             document.getElementById('blog-modal-title').innerText = b.title;
             document.getElementById('blog-modal-author').innerHTML = `<i class="fa-solid fa-user mr-1"></i> ${b.author}`;
@@ -1216,9 +1275,10 @@
 
             document.getElementById('blog-modal-share-container').innerHTML = `
                 <div class="flex items-center space-x-2">
-                    <button onclick="shareArticle('${b.id}', 'wa')" class="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition shadow"><i class="fa-brands fa-whatsapp text-xs"></i></button>
-                    <button onclick="shareArticle('${b.id}', 'fb')" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition shadow"><i class="fa-brands fa-facebook-f text-xs"></i></button>
-                    <button onclick="shareArticle('${b.id}', 'copy')" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-gray-300 transition shadow"><i class="fa-solid fa-link text-xs"></i></button>
+                    <span class="text-xs font-bold text-gray-500 mr-1">Compartir:</span>
+                    <button onclick="shareArticle('${b.id}', 'wa')" class="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition shadow" title="Compartir en WhatsApp"><i class="fa-brands fa-whatsapp text-xs"></i></button>
+                    <button onclick="shareArticle('${b.id}', 'fb')" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition shadow" title="Compartir en Facebook"><i class="fa-brands fa-facebook-f text-xs"></i></button>
+                    <button onclick="shareArticle('${b.id}', 'copy')" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-gray-300 transition shadow" title="Copiar enlace con foto"><i class="fa-solid fa-link text-xs"></i></button>
                 </div>
             `;
             document.getElementById('blog-modal').classList.remove('hidden');
@@ -1226,22 +1286,6 @@
 
         window.closeBlogModal = () => document.getElementById('blog-modal').classList.add('hidden');
 
-        // COMPARTIR BLOG
-        window.shareArticle = (blogId, platform) => {
-            const b = (currentData.blogs || []).find(item => item.id === blogId);
-            if (!b) return;
-
-            const pageUrl = window.location.origin + window.location.pathname + `?article=${blogId}`;
-            const textMsg = `📖 Te invito a leer este artículo: "${b.title}" - Taber by Pass`;
-
-            if (platform === 'wa') window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textMsg + ' ' + pageUrl)}`, '_blank');
-            else if (platform === 'fb') window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`, '_blank');
-            else if (platform === 'copy') {
-                navigator.clipboard.writeText(pageUrl).then(() => alert('¡Enlace copiado al portapapeles!')).catch(() => alert('Enlace: ' + pageUrl));
-            }
-        };
-
-        // MODO SERMÓN
         window.switchSermonMode = (sermonId, mode) => {
             const videoBox = document.getElementById(`sermon-video-${sermonId}`);
             const audioBox = document.getElementById(`sermon-audio-${sermonId}`);
@@ -1261,7 +1305,6 @@
             }
         };
 
-        // MODAL ÁLBUM
         window.openAlbumModal = (albumId) => {
             const album = currentData.albums.find(a => a.id === albumId);
             if (!album) return;
@@ -1278,17 +1321,14 @@
 
         window.closeAlbumModal = () => document.getElementById('album-view-modal').classList.add('hidden');
 
-        // RENDERIZAR VISTA INICIAL PÚBLICA
         function renderPublicSite() {
             const data = currentData;
 
-            // Enlaces de navegación
             const navContainer = document.getElementById('dynamic-nav-links');
             navContainer.innerHTML = (data.menuItems || []).map(item => `
                 <button onclick="showSingleView('${item.link}')" class="text-gray-600 hover:text-primary transition font-medium hover:-translate-y-0.5 transform duration-150">${item.title}</button>
             `).join('');
 
-            // Redes sociales
             const socialContainer = document.getElementById('social-links-container');
             let socialHTML = '';
             if (data.config.fb) socialHTML += `<a href="${data.config.fb}" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition hover:scale-110 duration-200"><i class="fa-brands fa-facebook-f"></i></a>`;
@@ -1298,7 +1338,6 @@
             if (data.config.tk) socialHTML += `<a href="${data.config.tk}" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition hover:scale-110 duration-200"><i class="fa-brands fa-tiktok"></i></a>`;
             socialContainer.innerHTML = socialHTML;
 
-            // Marca / Logo
             const iconEl = document.getElementById('nav-brand-icon');
             const imgEl = document.getElementById('nav-brand-img');
             const logoContainer = document.getElementById('nav-brand-logo-container');
@@ -1326,7 +1365,6 @@
 
             loadHlsStream(data.config.liveTv);
 
-            // MUESTRA HASTA 4 EN LA VISTA DE INICIO
             const videoList = data.videos || [];
             document.getElementById('videos-grid').innerHTML = renderSermonsHTML(videoList.slice(0, 4));
 
@@ -1347,7 +1385,6 @@
                 blogMoreContainer.classList.add('hidden');
             }
 
-            // Álbumes
             const albumsGrid = document.getElementById('albums-grid');
             albumsGrid.innerHTML = (data.albums || []).map((album, idx) => `
                 <div onclick="openAlbumModal('${album.id}')" class="group bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col">
@@ -1365,7 +1402,6 @@
                 </div>
             `).join('');
 
-            // Horarios
             const sortedSchedules = [...data.schedules].sort((a, b) => getDayOrder(a.day) - getDayOrder(b.day));
             document.getElementById('horarios-grid').innerHTML = sortedSchedules.map((s, idx) => `
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 text-center hover:shadow-lg hover:-translate-y-1 transition duration-300">
@@ -1379,7 +1415,6 @@
             `).join('');
         }
 
-        // RENDER ADMIN
         function renderAdminLists() {
             const data = currentData;
 
@@ -1401,7 +1436,6 @@
             document.getElementById('cfg-wa').value = data.config.wa || "";
             document.getElementById('cfg-tk').value = data.config.tk || "";
 
-            // LISTA ADMIN BANNERS
             document.getElementById('admin-banners-list').innerHTML = (data.banners || []).map(b => `
                 <div class="bg-gray-50 p-4 rounded-xl border flex flex-col justify-between">
                     <div class="flex space-x-4">
@@ -1495,7 +1529,6 @@
             `).join('');
         }
 
-        // FUNCIONES GLOBAL ADMIN
         window.openLoginModal = () => {
             document.getElementById('login-modal').classList.remove('hidden');
             document.getElementById('login-user').value = '';
@@ -1556,7 +1589,6 @@
             alert('¡Configuración guardada exitosamente en Firebase!');
         };
 
-        // ADMIN BANNERS
         window.saveBanner = (e) => {
             e.preventDefault();
             const editId = document.getElementById('banner-edit-id').value;
