@@ -8,7 +8,7 @@
     <title id="page-title">Taber by Pass - Una iglesia de Fe</title>
     <meta id="meta-desc" name="description" content="Bienvenidos a Taber by Pass. Una iglesia de Fe, esperanza y salvación. Sermones, Radio 106.1 FM y Taber TV en vivo.">
 
-    <!-- METADATOS OPEN GRAPH PARA VISTA PREVIA EN WHATSAPP, FACEBOOK, TELEGRAM Y TWITTER -->
+    <!-- METADATOS OPEN GRAPH PARA VISTA PREVIA -->
     <meta id="og-title" property="og:title" content="Taber by Pass - Una iglesia de Fe">
     <meta id="og-desc" property="og:description" content="Una iglesia de Fe, esperanza y salvación. Disfruta de nuestros sermones, radio y transmisión en vivo.">
     <meta id="og-image" property="og:image" content="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200">
@@ -283,22 +283,10 @@
             </section>
         </div>
 
-        <!-- VISTA DEDICADA COMPLETA (BIBLIA Y SERMONES AGRUPADOS) -->
+        <!-- VISTA DEDICADA COMPLETA -->
         <div id="dedicated-view-container" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hidden">
             <div id="dedicated-content"></div>
         </div>
-
-        <!-- PÁGINA PERSONALIZADA ADMIN -->
-        <section id="custom-page-view" class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 hidden">
-            <div class="bg-white rounded-3xl shadow-lg border p-8 sm:p-12 space-y-6">
-                <button onclick="showSingleView('inicio')" class="text-primary hover:underline text-sm font-semibold flex items-center space-x-2">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>Volver al Inicio</span>
-                </button>
-                <h2 id="custom-page-title" class="text-3xl sm:text-4xl font-extrabold text-gray-900 border-b pb-4">Título</h2>
-                <div id="custom-page-content" class="text-gray-700 leading-relaxed text-base space-y-4"></div>
-            </div>
-        </section>
 
         <!-- CONTACTO -->
         <section id="contacto" class="bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8">
@@ -328,7 +316,7 @@
         <p>&copy; 2026 Taber by Pass. Todos los derechos reservados. | Diseñado por Departamento Multimedia By Pass.</p>
     </footer>
 
-    <!-- MODAL LECTOR DE BLOG CON COMPARTIR -->
+    <!-- MODAL LECTOR DE BLOG -->
     <div id="blog-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden relative">
             <button onclick="closeBlogModal()" class="absolute top-4 right-4 bg-black/60 text-white w-10 h-10 rounded-full flex items-center justify-center z-10"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -442,7 +430,7 @@
 
             <!-- TAB BANNERS -->
             <div id="tab-banners" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
-                <h3 class="text-xl font-bold text-gray-900">Agregar Banner</h3>
+                <h3 class="text-xl font-bold text-gray-900">Agregar o Modificar Banner</h3>
                 <form onsubmit="saveBanner(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-xl border">
                     <input type="hidden" id="banner-edit-id">
                     <div>
@@ -457,16 +445,18 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1">URL Imagen</label>
                         <input type="url" id="banner-img" required class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
-                    <div class="md:col-span-2">
-                        <button type="submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Guardar Banner</button>
+                    <div class="md:col-span-2 flex space-x-2">
+                        <button type="submit" id="banner-btn-submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow flex-1">Guardar Banner</button>
+                        <button type="button" onclick="cancelBannerEdit()" class="bg-gray-200 text-gray-700 font-semibold px-4 py-2.5 rounded-lg transition hidden" id="banner-btn-cancel">Cancelar</button>
                     </div>
                 </form>
+                <h4 class="font-bold text-gray-800 border-b pb-2">Banners Registrados</h4>
                 <div id="admin-banners-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
             </div>
 
             <!-- TAB MENU -->
             <div id="tab-menu" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
-                <h3 class="text-xl font-bold text-gray-900">Agregar Enlace al Menú</h3>
+                <h3 class="text-xl font-bold text-gray-900">Agregar / Modificar Enlace al Menú</h3>
                 <form onsubmit="saveMenuItem(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-xl border">
                     <input type="hidden" id="menu-edit-id">
                     <div>
@@ -477,16 +467,18 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1">Enlace / Destino (#Sección)</label>
                         <input type="text" id="menu-link" required class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
-                    <div class="md:col-span-2">
-                        <button type="submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Guardar Enlace</button>
+                    <div class="md:col-span-2 flex space-x-2">
+                        <button type="submit" id="menu-btn-submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow flex-1">Guardar Enlace</button>
+                        <button type="button" onclick="cancelMenuEdit()" class="bg-gray-200 text-gray-700 font-semibold px-4 py-2.5 rounded-lg transition hidden" id="menu-btn-cancel">Cancelar</button>
                     </div>
                 </form>
+                <h4 class="font-bold text-gray-800 border-b pb-2">Enlaces Activos</h4>
                 <div id="admin-menu-list" class="space-y-3"></div>
             </div>
 
             <!-- TAB BLOG -->
             <div id="tab-blog" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
-                <h3 class="text-xl font-bold text-gray-900">Publicar Artículo de Blog</h3>
+                <h3 class="text-xl font-bold text-gray-900">Publicar / Modificar Artículo de Blog</h3>
                 <form onsubmit="saveBlog(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-xl border">
                     <input type="hidden" id="blog-edit-id">
                     <div>
@@ -509,16 +501,18 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1">Contenido</label>
                         <textarea id="blog-content" rows="4" required class="w-full border rounded-lg px-3 py-2 bg-white text-sm"></textarea>
                     </div>
-                    <div class="md:col-span-2">
-                        <button type="submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Publicar Artículo</button>
+                    <div class="md:col-span-2 flex space-x-2">
+                        <button type="submit" id="blog-btn-submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow flex-1">Publicar Artículo</button>
+                        <button type="button" onclick="cancelBlogEdit()" class="bg-gray-200 text-gray-700 font-semibold px-4 py-2.5 rounded-lg transition hidden" id="blog-btn-cancel">Cancelar</button>
                     </div>
                 </form>
+                <h4 class="font-bold text-gray-800 border-b pb-2">Artículos Publicados</h4>
                 <div id="admin-blog-list" class="space-y-3"></div>
             </div>
 
             <!-- TAB VIDEOS / SERMONES -->
             <div id="tab-videos" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
-                <h3 class="text-xl font-bold text-gray-900">Agregar Sermón</h3>
+                <h3 class="text-xl font-bold text-gray-900">Agregar / Modificar Sermón</h3>
                 <form onsubmit="saveVideo(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-xl border">
                     <input type="hidden" id="vid-edit-id">
                     <div>
@@ -537,10 +531,12 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1">Audio Jumpshare (Opcional)</label>
                         <input type="url" id="vid-audio-url" class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
-                    <div class="md:col-span-2">
-                        <button type="submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Guardar Sermón</button>
+                    <div class="md:col-span-2 flex space-x-2">
+                        <button type="submit" id="vid-btn-submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow flex-1">Guardar Sermón</button>
+                        <button type="button" onclick="cancelVidEdit()" class="bg-gray-200 text-gray-700 font-semibold px-4 py-2.5 rounded-lg transition hidden" id="vid-btn-cancel">Cancelar</button>
                     </div>
                 </form>
+                <h4 class="font-bold text-gray-800 border-b pb-2">Sermones Registrados</h4>
                 <div id="admin-videos-list" class="space-y-3"></div>
             </div>
 
@@ -565,10 +561,12 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1">URLs de Fotos (Una por línea)</label>
                         <textarea id="album-photos" rows="3" required class="w-full border rounded-lg px-3 py-2 bg-white text-xs font-mono"></textarea>
                     </div>
-                    <div class="md:col-span-2">
-                        <button type="submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Guardar Álbum</button>
+                    <div class="md:col-span-2 flex space-x-2">
+                        <button type="submit" id="album-btn-submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow flex-1">Guardar Álbum</button>
+                        <button type="button" onclick="cancelAlbumEdit()" class="bg-gray-200 text-gray-700 font-semibold px-4 py-2.5 rounded-lg transition hidden" id="album-btn-cancel">Cancelar</button>
                     </div>
                 </form>
+                <h4 class="font-bold text-gray-800 border-b pb-2">Álbumes Creados</h4>
                 <div id="admin-albums-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
             </div>
 
@@ -589,10 +587,12 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
                         <input type="text" id="sch-desc" required class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
-                    <div class="md:col-span-3">
-                        <button type="submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Guardar Horario</button>
+                    <div class="md:col-span-3 flex space-x-2">
+                        <button type="submit" id="sch-btn-submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow flex-1">Guardar Horario</button>
+                        <button type="button" onclick="cancelSchEdit()" class="bg-gray-200 text-gray-700 font-semibold px-4 py-2.5 rounded-lg transition hidden" id="sch-btn-cancel">Cancelar</button>
                     </div>
                 </form>
+                <h4 class="font-bold text-gray-800 border-b pb-2">Horarios Registrados</h4>
                 <div id="admin-schedules-list" class="space-y-3"></div>
             </div>
 
@@ -602,7 +602,7 @@
     <!-- AOS JS CDN -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <!-- MÓDULO PRINCIPAL DE JAVASCRIPT CON FIREBASE Y COMPARTIR -->
+    <!-- MÓDULO PRINCIPAL DE JAVASCRIPT CON FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -655,7 +655,6 @@
             });
         };
 
-        // FUNCIONES DE COMPARTIR CONTENIDO
         window.shareVerse = (platform) => {
             const verseText = document.getElementById('daily-verse-text').innerText;
             const verseRef = document.getElementById('daily-verse-ref').innerText;
@@ -756,7 +755,7 @@
                 currentData = {
                     config: data.config || defaultData.config,
                     banners: Object.values(data.banners || defaultData.banners),
-                    menuItems: data.menuItems || defaultData.menuItems,
+                    menuItems: Object.values(data.menuItems || defaultData.menuItems),
                     blogs: Object.values(data.blogs || defaultData.blogs),
                     videos: Object.values(data.videos || defaultData.videos),
                     albums: Object.values(data.albums || defaultData.albums),
@@ -866,7 +865,6 @@
         window.scrollToSection = (targetHash) => {
             document.getElementById('main-sections-container').classList.remove('hidden');
             document.getElementById('dedicated-view-container').classList.add('hidden');
-            document.getElementById('custom-page-view').classList.add('hidden');
             document.getElementById('back-to-home-bar').classList.add('hidden');
 
             const el = document.querySelector(targetHash);
@@ -877,14 +875,12 @@
             const mainContainer = document.getElementById('main-sections-container');
             const dedicatedContainer = document.getElementById('dedicated-view-container');
             const dedicatedContent = document.getElementById('dedicated-content');
-            const customView = document.getElementById('custom-page-view');
             const backBar = document.getElementById('back-to-home-bar');
             const badge = document.getElementById('current-view-badge');
 
             if (targetLink === 'inicio' || targetLink === '#inicio') {
                 mainContainer.classList.remove('hidden');
                 dedicatedContainer.classList.add('hidden');
-                customView.classList.add('hidden');
                 backBar.classList.add('hidden');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 return;
@@ -892,7 +888,6 @@
 
             if (targetLink === '#biblia') {
                 mainContainer.classList.add('hidden');
-                customView.classList.add('hidden');
                 dedicatedContainer.classList.remove('hidden');
                 badge.innerText = "Santa Biblia RV1960";
                 backBar.classList.remove('hidden');
@@ -937,7 +932,6 @@
                 fetchBibleChapter();
             } else if (targetLink === '#transmision') {
                 mainContainer.classList.add('hidden');
-                customView.classList.add('hidden');
                 dedicatedContainer.classList.remove('hidden');
                 badge.innerText = "Sermones";
                 backBar.classList.remove('hidden');
@@ -978,7 +972,6 @@
             } else {
                 mainContainer.classList.remove('hidden');
                 dedicatedContainer.classList.add('hidden');
-                customView.classList.add('hidden');
                 backBar.classList.add('hidden');
                 const el = document.querySelector(targetLink);
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -1166,13 +1159,241 @@
 
         window.closeAlbumModal = () => document.getElementById('album-view-modal').classList.add('hidden');
 
+        // RENDERING DE LISTAS ADMIN CON EDITAR Y ELIMINAR
         function renderAdminLists() {
             const data = currentData;
-            document.getElementById('cfg-brand').value = data.config.brand;
-            document.getElementById('cfg-subtitle').value = data.config.subtitle;
+            document.getElementById('cfg-brand').value = data.config.brand || "";
+            document.getElementById('cfg-subtitle').value = data.config.subtitle || "";
             document.getElementById('cfg-livetv').value = data.config.liveTv || "";
             document.getElementById('cfg-radio').value = data.config.radioUrl || "";
+
+            // Banners
+            document.getElementById('admin-banners-list').innerHTML = (data.banners || []).map(b => `
+                <div class="bg-gray-50 p-4 rounded-xl border flex items-center justify-between">
+                    <div class="flex items-center space-x-3 overflow-hidden">
+                        <img src="${b.img}" class="w-12 h-12 rounded-lg object-cover flex-shrink-0">
+                        <div class="truncate">
+                            <h5 class="font-bold text-sm text-gray-900 truncate">${b.title}</h5>
+                            <p class="text-xs text-gray-500 truncate">${b.subtitle || ''}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 flex-shrink-0">
+                        <button onclick="editBanner('${b.id}')" class="bg-blue-100 text-blue-700 p-2 rounded-lg hover:bg-blue-200"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button onclick="deleteItem('banners', '${b.id}')" class="bg-red-100 text-red-700 p-2 rounded-lg hover:bg-red-200"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Menú
+            document.getElementById('admin-menu-list').innerHTML = (data.menuItems || []).map(m => `
+                <div class="bg-gray-50 p-3 rounded-xl border flex items-center justify-between">
+                    <div>
+                        <span class="font-bold text-sm text-gray-900">${m.title}</span>
+                        <span class="text-xs text-gray-500 ml-2">(${m.link})</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="editMenuItem('${m.id}')" class="bg-blue-100 text-blue-700 p-2 rounded-lg hover:bg-blue-200"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button onclick="deleteItem('menuItems', '${m.id}')" class="bg-red-100 text-red-700 p-2 rounded-lg hover:bg-red-200"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Blog
+            document.getElementById('admin-blog-list').innerHTML = (data.blogs || []).map(b => `
+                <div class="bg-gray-50 p-3 rounded-xl border flex items-center justify-between">
+                    <div class="flex items-center space-x-3 overflow-hidden">
+                        <img src="${b.img}" class="w-10 h-10 rounded-lg object-cover flex-shrink-0">
+                        <div class="truncate">
+                            <h5 class="font-bold text-sm text-gray-900 truncate">${b.title}</h5>
+                            <span class="text-xs text-gray-500">${b.author} - ${b.date}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 flex-shrink-0">
+                        <button onclick="editBlog('${b.id}')" class="bg-blue-100 text-blue-700 p-2 rounded-lg hover:bg-blue-200"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button onclick="deleteItem('blogs', '${b.id}')" class="bg-red-100 text-red-700 p-2 rounded-lg hover:bg-red-200"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Sermones
+            document.getElementById('admin-videos-list').innerHTML = (data.videos || []).map(v => `
+                <div class="bg-gray-50 p-3 rounded-xl border flex items-center justify-between">
+                    <div>
+                        <h5 class="font-bold text-sm text-gray-900">${v.title}</h5>
+                        <span class="text-xs text-primary font-semibold">${v.author}</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="editVideo('${v.id}')" class="bg-blue-100 text-blue-700 p-2 rounded-lg hover:bg-blue-200"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button onclick="deleteItem('videos', '${v.id}')" class="bg-red-100 text-red-700 p-2 rounded-lg hover:bg-red-200"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Galería
+            document.getElementById('admin-albums-list').innerHTML = (data.albums || []).map(a => `
+                <div class="bg-gray-50 p-3 rounded-xl border flex items-center justify-between">
+                    <div class="flex items-center space-x-3 overflow-hidden">
+                        <img src="${a.cover}" class="w-12 h-12 rounded-lg object-cover flex-shrink-0">
+                        <div class="truncate">
+                            <h5 class="font-bold text-sm text-gray-900 truncate">${a.title}</h5>
+                            <span class="text-xs text-gray-500">${(a.photos || []).length} fotos</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 flex-shrink-0">
+                        <button onclick="editAlbum('${a.id}')" class="bg-blue-100 text-blue-700 p-2 rounded-lg hover:bg-blue-200"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button onclick="deleteItem('albums', '${a.id}')" class="bg-red-100 text-red-700 p-2 rounded-lg hover:bg-red-200"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Horarios
+            document.getElementById('admin-schedules-list').innerHTML = (data.schedules || []).map(s => `
+                <div class="bg-gray-50 p-3 rounded-xl border flex items-center justify-between">
+                    <div>
+                        <span class="font-bold text-sm text-gray-900">${s.day}</span>
+                        <span class="text-xs text-primary font-bold ml-2">${s.time}</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="editSchedule('${s.id}')" class="bg-blue-100 text-blue-700 p-2 rounded-lg hover:bg-blue-200"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button onclick="deleteItem('schedules', '${s.id}')" class="bg-red-100 text-red-700 p-2 rounded-lg hover:bg-red-200"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                </div>
+            `).join('');
         }
+
+        // FUNCIONES DE EDICIÓN Y BORRADO
+        window.deleteItem = (category, id) => {
+            if (confirm('¿Estás seguro de borrar este registro?')) {
+                currentData[category] = (currentData[category] || []).filter(item => item.id !== id);
+                saveData(currentData);
+            }
+        };
+
+        window.editBanner = (id) => {
+            const b = (currentData.banners || []).find(item => item.id === id);
+            if (!b) return;
+            document.getElementById('banner-edit-id').value = b.id;
+            document.getElementById('banner-title').value = b.title;
+            document.getElementById('banner-subtitle').value = b.subtitle || '';
+            document.getElementById('banner-img').value = b.img;
+            document.getElementById('banner-btn-submit').innerText = "Actualizar Banner";
+            document.getElementById('banner-btn-cancel').classList.remove('hidden');
+        };
+
+        window.cancelBannerEdit = () => {
+            document.getElementById('banner-edit-id').value = '';
+            document.getElementById('banner-title').value = '';
+            document.getElementById('banner-subtitle').value = '';
+            document.getElementById('banner-img').value = '';
+            document.getElementById('banner-btn-submit').innerText = "Guardar Banner";
+            document.getElementById('banner-btn-cancel').classList.add('hidden');
+        };
+
+        window.editMenuItem = (id) => {
+            const m = (currentData.menuItems || []).find(item => item.id === id);
+            if (!m) return;
+            document.getElementById('menu-edit-id').value = m.id;
+            document.getElementById('menu-title').value = m.title;
+            document.getElementById('menu-link').value = m.link;
+            document.getElementById('menu-btn-submit').innerText = "Actualizar Enlace";
+            document.getElementById('menu-btn-cancel').classList.remove('hidden');
+        };
+
+        window.cancelMenuEdit = () => {
+            document.getElementById('menu-edit-id').value = '';
+            document.getElementById('menu-title').value = '';
+            document.getElementById('menu-link').value = '';
+            document.getElementById('menu-btn-submit').innerText = "Guardar Enlace";
+            document.getElementById('menu-btn-cancel').classList.add('hidden');
+        };
+
+        window.editBlog = (id) => {
+            const b = (currentData.blogs || []).find(item => item.id === id);
+            if (!b) return;
+            document.getElementById('blog-edit-id').value = b.id;
+            document.getElementById('blog-title').value = b.title;
+            document.getElementById('blog-author').value = b.author;
+            document.getElementById('blog-date').value = b.date;
+            document.getElementById('blog-img').value = b.img;
+            document.getElementById('blog-content').value = b.content;
+            document.getElementById('blog-btn-submit').innerText = "Actualizar Artículo";
+            document.getElementById('blog-btn-cancel').classList.remove('hidden');
+        };
+
+        window.cancelBlogEdit = () => {
+            document.getElementById('blog-edit-id').value = '';
+            document.getElementById('blog-title').value = '';
+            document.getElementById('blog-author').value = '';
+            document.getElementById('blog-date').value = '';
+            document.getElementById('blog-img').value = '';
+            document.getElementById('blog-content').value = '';
+            document.getElementById('blog-btn-submit').innerText = "Publicar Artículo";
+            document.getElementById('blog-btn-cancel').classList.add('hidden');
+        };
+
+        window.editVideo = (id) => {
+            const v = (currentData.videos || []).find(item => item.id === id);
+            if (!v) return;
+            document.getElementById('vid-edit-id').value = v.id;
+            document.getElementById('vid-title').value = v.title;
+            document.getElementById('vid-author').value = v.author;
+            document.getElementById('vid-url').value = v.ytId;
+            document.getElementById('vid-audio-url').value = v.audioUrl || '';
+            document.getElementById('vid-btn-submit').innerText = "Actualizar Sermón";
+            document.getElementById('vid-btn-cancel').classList.remove('hidden');
+        };
+
+        window.cancelVidEdit = () => {
+            document.getElementById('vid-edit-id').value = '';
+            document.getElementById('vid-title').value = '';
+            document.getElementById('vid-author').value = '';
+            document.getElementById('vid-url').value = '';
+            document.getElementById('vid-audio-url').value = '';
+            document.getElementById('vid-btn-submit').innerText = "Guardar Sermón";
+            document.getElementById('vid-btn-cancel').classList.add('hidden');
+        };
+
+        window.editAlbum = (id) => {
+            const a = (currentData.albums || []).find(item => item.id === id);
+            if (!a) return;
+            document.getElementById('album-edit-id').value = a.id;
+            document.getElementById('album-title').value = a.title;
+            document.getElementById('album-cover').value = a.cover;
+            document.getElementById('album-desc').value = a.desc;
+            document.getElementById('album-photos').value = (a.photos || []).join('\n');
+            document.getElementById('album-btn-submit').innerText = "Actualizar Álbum";
+            document.getElementById('album-btn-cancel').classList.remove('hidden');
+        };
+
+        window.cancelAlbumEdit = () => {
+            document.getElementById('album-edit-id').value = '';
+            document.getElementById('album-title').value = '';
+            document.getElementById('album-cover').value = '';
+            document.getElementById('album-desc').value = '';
+            document.getElementById('album-photos').value = '';
+            document.getElementById('album-btn-submit').innerText = "Guardar Álbum";
+            document.getElementById('album-btn-cancel').classList.add('hidden');
+        };
+
+        window.editSchedule = (id) => {
+            const s = (currentData.schedules || []).find(item => item.id === id);
+            if (!s) return;
+            document.getElementById('sch-edit-id').value = s.id;
+            document.getElementById('sch-day').value = s.day;
+            document.getElementById('sch-time').value = s.time;
+            document.getElementById('sch-desc').value = s.desc;
+            document.getElementById('sch-btn-submit').innerText = "Actualizar Horario";
+            document.getElementById('sch-btn-cancel').classList.remove('hidden');
+        };
+
+        window.cancelSchEdit = () => {
+            document.getElementById('sch-edit-id').value = '';
+            document.getElementById('sch-day').value = '';
+            document.getElementById('sch-time').value = '';
+            document.getElementById('sch-desc').value = '';
+            document.getElementById('sch-btn-submit').innerText = "Guardar Horario";
+            document.getElementById('sch-btn-cancel').classList.add('hidden');
+        };
 
         window.openLoginModal = () => document.getElementById('login-modal').classList.remove('hidden');
         window.closeLoginModal = () => document.getElementById('login-modal').classList.add('hidden');
@@ -1213,56 +1434,137 @@
 
         window.saveBanner = (e) => {
             e.preventDefault();
-            const newBanner = { id: Date.now().toString(), title: document.getElementById('banner-title').value, subtitle: document.getElementById('banner-subtitle').value, img: document.getElementById('banner-img').value };
+            const editId = document.getElementById('banner-edit-id').value;
+            const bannerData = {
+                id: editId || Date.now().toString(),
+                title: document.getElementById('banner-title').value,
+                subtitle: document.getElementById('banner-subtitle').value,
+                img: document.getElementById('banner-img').value
+            };
+
             if (!currentData.banners) currentData.banners = [];
-            currentData.banners.unshift(newBanner);
+            if (editId) {
+                const idx = currentData.banners.findIndex(b => b.id === editId);
+                if (idx !== -1) currentData.banners[idx] = bannerData;
+            } else {
+                currentData.banners.unshift(bannerData);
+            }
             saveData(currentData);
-            alert('Banner agregado!');
+            cancelBannerEdit();
+            alert('Banner guardado correctamente!');
         };
 
         window.saveMenuItem = (e) => {
             e.preventDefault();
-            const newItem = { id: Date.now().toString(), title: document.getElementById('menu-title').value, link: document.getElementById('menu-link').value };
+            const editId = document.getElementById('menu-edit-id').value;
+            const menuData = {
+                id: editId || Date.now().toString(),
+                title: document.getElementById('menu-title').value,
+                link: document.getElementById('menu-link').value
+            };
+
             if (!currentData.menuItems) currentData.menuItems = [];
-            currentData.menuItems.push(newItem);
+            if (editId) {
+                const idx = currentData.menuItems.findIndex(m => m.id === editId);
+                if (idx !== -1) currentData.menuItems[idx] = menuData;
+            } else {
+                currentData.menuItems.push(menuData);
+            }
             saveData(currentData);
-            alert('Enlace agregado!');
+            cancelMenuEdit();
+            alert('Enlace del menú guardado!');
         };
 
         window.saveBlog = (e) => {
             e.preventDefault();
-            const newBlog = { id: Date.now().toString(), title: document.getElementById('blog-title').value, author: document.getElementById('blog-author').value, date: document.getElementById('blog-date').value, img: document.getElementById('blog-img').value, content: document.getElementById('blog-content').value };
+            const editId = document.getElementById('blog-edit-id').value;
+            const blogData = {
+                id: editId || Date.now().toString(),
+                title: document.getElementById('blog-title').value,
+                author: document.getElementById('blog-author').value,
+                date: document.getElementById('blog-date').value,
+                img: document.getElementById('blog-img').value,
+                content: document.getElementById('blog-content').value
+            };
+
             if (!currentData.blogs) currentData.blogs = [];
-            currentData.blogs.unshift(newBlog);
+            if (editId) {
+                const idx = currentData.blogs.findIndex(b => b.id === editId);
+                if (idx !== -1) currentData.blogs[idx] = blogData;
+            } else {
+                currentData.blogs.unshift(blogData);
+            }
             saveData(currentData);
-            alert('Artículo publicado!');
+            cancelBlogEdit();
+            alert('Artículo guardado correctamente!');
         };
 
         window.saveVideo = (e) => {
             e.preventDefault();
-            const newVideo = { id: Date.now().toString(), title: document.getElementById('vid-title').value, author: document.getElementById('vid-author').value, ytId: document.getElementById('vid-url').value, audioUrl: document.getElementById('vid-audio-url').value };
+            const editId = document.getElementById('vid-edit-id').value;
+            const vidData = {
+                id: editId || Date.now().toString(),
+                title: document.getElementById('vid-title').value,
+                author: document.getElementById('vid-author').value,
+                ytId: document.getElementById('vid-url').value,
+                audioUrl: document.getElementById('vid-audio-url').value
+            };
+
             if (!currentData.videos) currentData.videos = [];
-            currentData.videos.unshift(newVideo);
+            if (editId) {
+                const idx = currentData.videos.findIndex(v => v.id === editId);
+                if (idx !== -1) currentData.videos[idx] = vidData;
+            } else {
+                currentData.videos.unshift(vidData);
+            }
             saveData(currentData);
-            alert('Sermón guardado!');
+            cancelVidEdit();
+            alert('Sermón guardado correctamente!');
         };
 
         window.saveAlbum = (e) => {
             e.preventDefault();
-            const newAlbum = { id: Date.now().toString(), title: document.getElementById('album-title').value, cover: document.getElementById('album-cover').value, desc: document.getElementById('album-desc').value, photos: document.getElementById('album-photos').value.split('\n') };
+            const editId = document.getElementById('album-edit-id').value;
+            const albumData = {
+                id: editId || Date.now().toString(),
+                title: document.getElementById('album-title').value,
+                cover: document.getElementById('album-cover').value,
+                desc: document.getElementById('album-desc').value,
+                photos: document.getElementById('album-photos').value.split('\n').filter(p => p.trim() !== '')
+            };
+
             if (!currentData.albums) currentData.albums = [];
-            currentData.albums.unshift(newAlbum);
+            if (editId) {
+                const idx = currentData.albums.findIndex(a => a.id === editId);
+                if (idx !== -1) currentData.albums[idx] = albumData;
+            } else {
+                currentData.albums.unshift(albumData);
+            }
             saveData(currentData);
-            alert('Álbum guardado!');
+            cancelAlbumEdit();
+            alert('Álbum guardado correctamente!');
         };
 
         window.saveSchedule = (e) => {
             e.preventDefault();
-            const newSch = { id: Date.now().toString(), day: document.getElementById('sch-day').value, time: document.getElementById('sch-time').value, desc: document.getElementById('sch-desc').value };
+            const editId = document.getElementById('sch-edit-id').value;
+            const schData = {
+                id: editId || Date.now().toString(),
+                day: document.getElementById('sch-day').value,
+                time: document.getElementById('sch-time').value,
+                desc: document.getElementById('sch-desc').value
+            };
+
             if (!currentData.schedules) currentData.schedules = [];
-            currentData.schedules.push(newSch);
+            if (editId) {
+                const idx = currentData.schedules.findIndex(s => s.id === editId);
+                if (idx !== -1) currentData.schedules[idx] = schData;
+            } else {
+                currentData.schedules.push(schData);
+            }
             saveData(currentData);
-            alert('Horario guardado!');
+            cancelSchEdit();
+            alert('Horario guardado correctamente!');
         };
     </script>
 </body>
