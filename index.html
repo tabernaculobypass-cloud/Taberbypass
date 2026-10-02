@@ -59,9 +59,9 @@
             <div class="flex justify-between h-20 items-center">
                 <!-- LOGO / TÍTULO -->
                 <div class="flex items-center space-x-3 cursor-pointer group" onclick="showSingleView('inicio')">
-                    <div id="nav-brand-logo-container" class="bg-primary text-white p-2.5 rounded-xl shadow-md flex items-center justify-center overflow-hidden w-12 h-12 group-hover:scale-105 transition duration-300">
+                    <div id="nav-brand-logo-container" class="bg-primary text-white rounded-xl shadow-md flex items-center justify-center overflow-hidden w-12 h-12 group-hover:scale-105 transition duration-300">
                         <i id="nav-brand-icon" class="fa-solid fa-church text-2xl"></i>
-                        <img id="nav-brand-img" src="" alt="Logo" class="hidden w-full h-full object-cover rounded-lg">
+                        <img id="nav-brand-img" src="" alt="Logo" class="hidden w-full h-full object-cover rounded-xl">
                     </div>
                     <div>
                         <span id="nav-brand-title" class="text-xl font-bold tracking-tight text-gray-900 block group-hover:text-primary transition">Taber by Pass</span>
@@ -402,9 +402,9 @@
                 <button onclick="switchTab('horarios')" id="tab-btn-horarios" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Horarios</button>
             </div>
 
-            <!-- TAB GENERAL -->
+            <!-- TAB GENERAL Y CONFIGURACIÓN DE INFORMACIÓN INSTITUCIONAL -->
             <div id="tab-general" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6">
-                <h3 class="text-xl font-bold text-gray-900 border-b pb-3">Configuración General</h3>
+                <h3 class="text-xl font-bold text-gray-900 border-b pb-3">Configuración de Información, Logo y Redes</h3>
                 <form onsubmit="saveGeneralConfig(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Nombre del Ministerio</label>
@@ -415,15 +415,61 @@
                         <input type="text" id="cfg-subtitle" class="w-full border rounded-lg px-4 py-2">
                     </div>
                     <div class="md:col-span-2">
-                        <label class="block text-sm font-bold text-red-700 mb-1">Enlace IPTV / HLS (.m3u8)</label>
+                        <label class="block text-sm font-bold text-primary mb-1">URL / Enlace del Logo de la Página</label>
+                        <input type="url" id="cfg-logo" placeholder="https://ejemplo.com/logo.png" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono de Contacto</label>
+                        <input type="text" id="cfg-phone" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Correo Público Visible</label>
+                        <input type="email" id="cfg-email" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-bold text-emerald-700 mb-1">Correo para Recibir Mensajes (Contacto)</label>
+                        <input type="email" id="cfg-receiver-email" placeholder="correo.donde.llegaran.mensajes@gmail.com" class="w-full border border-emerald-300 bg-emerald-50/50 rounded-lg px-4 py-2">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Dirección Física</label>
+                        <input type="text" id="cfg-address" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div class="md:col-span-2 border-t pt-4">
+                        <h4 class="font-bold text-gray-800 mb-3">Señales Transmisión</h4>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-bold text-red-700 mb-1">Enlace IPTV / HLS Taber TV (.m3u8)</label>
                         <input type="url" id="cfg-livetv" class="w-full border rounded-lg px-4 py-2">
                     </div>
                     <div class="md:col-span-2">
                         <label class="block text-sm font-bold text-blue-800 mb-1">Enlace Radio 106.1 FM</label>
                         <input type="url" id="cfg-radio" class="w-full border rounded-lg px-4 py-2">
                     </div>
+                    <div class="md:col-span-2 border-t pt-4">
+                        <h4 class="font-bold text-gray-800 mb-3">Redes Sociales</h4>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Facebook URL</label>
+                        <input type="url" id="cfg-fb" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">YouTube URL</label>
+                        <input type="url" id="cfg-yt" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Instagram URL</label>
+                        <input type="url" id="cfg-ig" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">TikTok URL</label>
+                        <input type="url" id="cfg-tk" class="w-full border rounded-lg px-4 py-2">
+                    </div>
                     <div class="md:col-span-2">
-                        <button type="submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow">Guardar Cambios</button>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">WhatsApp N° con Código País (ej: 50370000000)</label>
+                        <input type="text" id="cfg-wa" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div class="md:col-span-2 pt-2">
+                        <button type="submit" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-3 rounded-xl transition shadow w-full">Guardar Configuración Completa</button>
                     </div>
                 </form>
             </div>
@@ -753,7 +799,7 @@
             const data = snapshot.val();
             if (data) {
                 currentData = {
-                    config: data.config || defaultData.config,
+                    config: { ...defaultData.config, ...(data.config || {}) },
                     banners: Object.values(data.banners || defaultData.banners),
                     menuItems: Object.values(data.menuItems || defaultData.menuItems),
                     blogs: Object.values(data.blogs || defaultData.blogs),
@@ -1106,7 +1152,13 @@
         window.handleContactSubmit = (e) => {
             e.preventDefault();
             const name = document.getElementById('contact-name').value;
-            alert(`¡Gracias ${name}! Tu mensaje ha sido enviado.`);
+            const email = document.getElementById('contact-email').value;
+            const msg = document.getElementById('contact-msg').value;
+            const receiverEmail = currentData.config.receiverEmail || currentData.config.email || "contacto@taberbypass.org";
+
+            const mailtoUrl = `mailto:${receiverEmail}?subject=${encodeURIComponent(`Contacto Taber by Pass - ${name}`)}&body=${encodeURIComponent(`Nombre: ${name}\nCorreo: ${email}\n\nMensaje:\n${msg}`)}`;
+            window.location.href = mailtoUrl;
+            alert(`¡Gracias ${name}! Se abrirá tu cliente de correo para enviar el mensaje a ${receiverEmail}`);
         };
 
         function renderPublicSite() {
@@ -1115,10 +1167,37 @@
                 <button onclick="showSingleView('${item.link}')" class="text-gray-600 hover:text-primary transition font-medium">${item.title}</button>
             `).join('');
 
-            document.getElementById('nav-brand-title').innerText = data.config.brand;
-            document.getElementById('nav-brand-subtitle').innerText = data.config.subtitle;
-            document.getElementById('hero-title').innerText = data.config.heroTitle;
-            document.getElementById('hero-subtitle').innerText = data.config.heroSub;
+            // LOGO
+            const brandImg = document.getElementById('nav-brand-img');
+            const brandIcon = document.getElementById('nav-brand-icon');
+            if (data.config.logoUrl && data.config.logoUrl.trim() !== "") {
+                brandImg.src = data.config.logoUrl;
+                brandImg.classList.remove('hidden');
+                brandIcon.classList.add('hidden');
+            } else {
+                brandImg.classList.add('hidden');
+                brandIcon.classList.remove('hidden');
+            }
+
+            document.getElementById('nav-brand-title').innerText = data.config.brand || "Taber by Pass";
+            document.getElementById('nav-brand-subtitle').innerText = data.config.subtitle || "Una iglesia de Fe";
+            document.getElementById('hero-title').innerText = data.config.heroTitle || "Un lugar de esperanza y salvación";
+            document.getElementById('hero-subtitle').innerText = data.config.heroSub || "";
+
+            // FOOTER & INFORMACIÓN DE CONTACTO
+            document.getElementById('footer-address').innerHTML = `<i class="fa-solid fa-location-dot text-primary mr-2"></i> ${data.config.address || "Dirección Principal"}`;
+            document.getElementById('footer-phone').innerHTML = `<i class="fa-solid fa-phone text-primary mr-2"></i> ${data.config.phone || "+00 0000-0000"}`;
+            document.getElementById('footer-email').innerHTML = `<i class="fa-solid fa-envelope text-primary mr-2"></i> ${data.config.email || "contacto@taberbypass.org"}`;
+
+            // REDES SOCIALES HERO
+            const socialBox = document.getElementById('social-links-container');
+            let socialHTML = '';
+            if (data.config.fb) socialHTML += `<a href="${data.config.fb}" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition"><i class="fa-brands fa-facebook-f"></i></a>`;
+            if (data.config.yt) socialHTML += `<a href="${data.config.yt}" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition"><i class="fa-brands fa-youtube"></i></a>`;
+            if (data.config.ig) socialHTML += `<a href="${data.config.ig}" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition"><i class="fa-brands fa-instagram"></i></a>`;
+            if (data.config.tk) socialHTML += `<a href="${data.config.tk}" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition"><i class="fa-brands fa-tiktok"></i></a>`;
+            if (data.config.wa) socialHTML += `<a href="https://wa.me/${data.config.wa}" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition"><i class="fa-brands fa-whatsapp"></i></a>`;
+            socialBox.innerHTML = socialHTML;
 
             loadHlsStream(data.config.liveTv);
 
@@ -1164,8 +1243,18 @@
             const data = currentData;
             document.getElementById('cfg-brand').value = data.config.brand || "";
             document.getElementById('cfg-subtitle').value = data.config.subtitle || "";
+            document.getElementById('cfg-logo').value = data.config.logoUrl || "";
+            document.getElementById('cfg-phone').value = data.config.phone || "";
+            document.getElementById('cfg-email').value = data.config.email || "";
+            document.getElementById('cfg-receiver-email').value = data.config.receiverEmail || "";
+            document.getElementById('cfg-address').value = data.config.address || "";
             document.getElementById('cfg-livetv').value = data.config.liveTv || "";
             document.getElementById('cfg-radio').value = data.config.radioUrl || "";
+            document.getElementById('cfg-fb').value = data.config.fb || "";
+            document.getElementById('cfg-yt').value = data.config.yt || "";
+            document.getElementById('cfg-ig').value = data.config.ig || "";
+            document.getElementById('cfg-tk').value = data.config.tk || "";
+            document.getElementById('cfg-wa').value = data.config.wa || "";
 
             // Banners
             document.getElementById('admin-banners-list').innerHTML = (data.banners || []).map(b => `
@@ -1426,10 +1515,21 @@
             e.preventDefault();
             currentData.config.brand = document.getElementById('cfg-brand').value;
             currentData.config.subtitle = document.getElementById('cfg-subtitle').value;
+            currentData.config.logoUrl = document.getElementById('cfg-logo').value;
+            currentData.config.phone = document.getElementById('cfg-phone').value;
+            currentData.config.email = document.getElementById('cfg-email').value;
+            currentData.config.receiverEmail = document.getElementById('cfg-receiver-email').value;
+            currentData.config.address = document.getElementById('cfg-address').value;
             currentData.config.liveTv = document.getElementById('cfg-livetv').value;
             currentData.config.radioUrl = document.getElementById('cfg-radio').value;
+            currentData.config.fb = document.getElementById('cfg-fb').value;
+            currentData.config.yt = document.getElementById('cfg-yt').value;
+            currentData.config.ig = document.getElementById('cfg-ig').value;
+            currentData.config.tk = document.getElementById('cfg-tk').value;
+            currentData.config.wa = document.getElementById('cfg-wa').value;
+
             saveData(currentData);
-            alert('¡Configuración guardada!');
+            alert('¡Configuración general e información actualizada!');
         };
 
         window.saveBanner = (e) => {
