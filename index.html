@@ -25,6 +25,24 @@
             }
         }
     </script>
+    <style>
+        /* Transición de desvanecimiento para banners (505x103 px) */
+        .banner-slide {
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .banner-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            position: relative;
+        }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen overflow-x-hidden">
 
@@ -93,7 +111,7 @@
 
             <!-- SECCIÓN TABER TV EN VIVO -->
             <section id="en-vivo" class="py-16 bg-gray-900 text-white px-4 sm:px-6 lg:px-8">
-                <div class="max-w-5xl mx-auto">
+                <div class="max-w-5xl mx-auto flex flex-col items-center">
                     <div class="text-center mb-10" data-aos="fade-up">
                         <div class="inline-flex items-center space-x-2 bg-red-600/20 text-red-400 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-3 border border-red-500/30">
                             <span class="w-2.5 h-2.5 rounded-full bg-red-600 animate-ping"></span>
@@ -103,9 +121,23 @@
                         <p class="text-gray-400 mt-2">Disfruta de nuestros cultos y servicios transmitidos en tiempo real</p>
                     </div>
                     
-                    <div data-aos="zoom-in" data-aos-duration="900" class="bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800 hover:border-gray-700 transition duration-300">
+                    <div data-aos="zoom-in" data-aos-duration="900" class="w-full bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800 hover:border-gray-700 transition duration-300 mb-8">
                         <div class="aspect-video w-full bg-black relative flex items-center justify-center" id="live-container">
                             <video id="hls-player" controls class="w-full h-full object-contain" poster=""></video>
+                        </div>
+                    </div>
+
+                    <!-- BANNER INTERACTIVO DESVANECIENTE (505x103 PX) -->
+                    <div data-aos="fade-up" data-aos-delay="200" class="w-full flex flex-col items-center">
+                        <div class="relative w-full max-w-[505px] h-[103px] rounded-xl overflow-hidden shadow-lg border border-gray-800 bg-gray-950 group">
+                            <!-- Banner Container donde se renderizan los slides -->
+                            <div id="banner-slider-container" class="w-full h-full relative">
+                                <!-- Slides inyectados dinámicamente -->
+                            </div>
+                        </div>
+                        <!-- Puntos de Navegación del Banner -->
+                        <div id="banner-dots-container" class="flex items-center space-x-2 mt-3">
+                            <!-- Indicadores inyectados dinámicamente -->
                         </div>
                     </div>
                 </div>
@@ -250,7 +282,6 @@
                             <span>•</span>
                             <span id="blog-modal-date"><i class="fa-regular fa-calendar mr-1"></i> Fecha</span>
                         </div>
-                        <!-- BOTÓN COMPARTIR DENTRO DEL MODAL -->
                         <div id="blog-modal-share-container">
                             <!-- Inyectado dinámicamente -->
                         </div>
@@ -334,6 +365,7 @@
             <!-- TABS DE NAVEGACIÓN ADMIN -->
             <div class="flex border-b border-gray-300 space-x-6 overflow-x-auto">
                 <button onclick="switchTab('general')" id="tab-btn-general" class="pb-3 font-semibold text-primary border-b-2 border-primary transition whitespace-nowrap">Config y Redes</button>
+                <button onclick="switchTab('banners')" id="tab-btn-banners" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Banners TV (505x103)</button>
                 <button onclick="switchTab('menu')" id="tab-btn-menu" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Navegación y Menú</button>
                 <button onclick="switchTab('blog')" id="tab-btn-blog" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Artículos de Blog</button>
                 <button onclick="switchTab('videos')" id="tab-btn-videos" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Sermones (Video/Audio)</button>
@@ -417,6 +449,37 @@
                 </form>
             </div>
 
+            <!-- SECCIÓN NUEVA: ADMINISTRACIÓN DE BANNERS TABER TV (505x103) -->
+            <div id="tab-banners" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <h3 id="banner-form-title" class="text-xl font-bold text-gray-900">Agregar Banner Publicitario (Medida sugerida: 505x103 px)</h3>
+                    <button type="button" id="cancel-edit-banner" onclick="resetBannerForm()" class="text-sm text-gray-500 hover:text-gray-800 hidden">Cancelar Edición</button>
+                </div>
+                <form onsubmit="saveBanner(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end bg-gray-50 p-4 rounded-xl border">
+                    <input type="hidden" id="banner-edit-id">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Título del Banner / Anuncio</label>
+                        <input type="text" id="banner-title" placeholder="Ej. Campaña de Donación 2026" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">URL de la Imagen (505x103 px)</label>
+                        <input type="url" id="banner-img" placeholder="https://ejemplo.com/banner.jpg" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Enlace Web de Destino al hacer Clic (Opcional)</label>
+                        <input type="text" id="banner-link" placeholder="Ej. #contacto, #blog o https://pagina.com" class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" id="banner-submit-btn" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Guardar Banner</button>
+                    </div>
+                </form>
+
+                <h4 class="font-bold text-gray-800 pt-4">Banners Activos</h4>
+                <div id="admin-banners-list" class="space-y-3">
+                    <!-- Listado dinámico de Banners -->
+                </div>
+            </div>
+
             <!-- SECCIÓN ADMINISTRACIÓN DEL MENÚ DE NAVEGACIÓN Y CONTENIDO -->
             <div id="tab-menu" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
                 <div class="flex justify-between items-center border-b pb-3">
@@ -449,7 +512,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN NUEVA: ADMINISTRACIÓN DE ARTÍCULOS DE BLOG -->
+            <!-- SECCIÓN: ADMINISTRACIÓN DE ARTÍCULOS DE BLOG -->
             <div id="tab-blog" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
                 <div class="flex justify-between items-center border-b pb-3">
                     <h3 id="blog-form-title" class="text-xl font-bold text-gray-900">Publicar Nuevo Artículo de Blog</h3>
@@ -488,7 +551,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 2: VIDEOS / SERMONES (CON AUDIO MP3 O YOUTUBE) -->
+            <!-- SECCIÓN: VIDEOS / SERMONES (CON AUDIO MP3 O YOUTUBE) -->
             <div id="tab-videos" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
                 <div class="flex justify-between items-center border-b pb-3">
                     <h3 id="vid-form-title" class="text-xl font-bold text-gray-900">Agregar Nuevo Sermón / Mensaje</h3>
@@ -523,7 +586,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 3: ADMINISTRACIÓN DE ÁLBUMES DE FOTOS -->
+            <!-- SECCIÓN: ADMINISTRACIÓN DE ÁLBUMES DE FOTOS -->
             <div id="tab-galeria" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
                 <div class="flex justify-between items-center border-b pb-3">
                     <h3 id="album-form-title" class="text-xl font-bold text-gray-900">Crear / Editar Álbum Fotográfico</h3>
@@ -558,7 +621,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 4: HORARIOS CON ORDENAMIENTO -->
+            <!-- SECCIÓN: HORARIOS CON ORDENAMIENTO -->
             <div id="tab-horarios" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
                 <div class="flex justify-between items-center border-b pb-3">
                     <h3 id="sch-form-title" class="text-xl font-bold text-gray-900">Agregar Horario de Culto</h3>
@@ -626,8 +689,10 @@
             mirror: true
         });
 
-        // Instancia global de HLS
+        // Variables globales
         let hlsInstance = null;
+        let bannerTimer = null;
+        let currentBannerIndex = 0;
 
         // Mapeo de días de la semana para orden cronológico
         const daysMap = {
@@ -670,6 +735,20 @@
                 wa: "",
                 tk: ""
             },
+            banners: [
+                {
+                    id: "1",
+                    title: "Bienvenidos a Taber TV",
+                    img: "https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&q=80&w=505&h=103",
+                    link: "#en-vivo"
+                },
+                {
+                    id: "2",
+                    title: "Sintoniza Radio Bautista 106.1 FM",
+                    img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=505&h=103",
+                    link: "#radio"
+                }
+            ],
             menuItems: [
                 { id: "1", title: "Inicio", link: "#inicio", content: "" },
                 { id: "2", title: "Taber TV En Vivo", link: "#en-vivo", content: "" },
@@ -731,6 +810,7 @@
             if (data) {
                 currentData = {
                     config: data.config || defaultData.config,
+                    banners: data.banners || defaultData.banners,
                     menuItems: data.menuItems || defaultData.menuItems,
                     blogs: data.blogs || defaultData.blogs,
                     videos: data.videos || [],
@@ -789,6 +869,7 @@
 
         // CONTROL DE NAVEGACIÓN
         window.navigateToSection = (targetLink) => {
+            if (!targetLink || targetLink === "") return;
             const mainContainer = document.getElementById('main-sections-container');
             const customView = document.getElementById('custom-page-view');
 
@@ -858,6 +939,65 @@
             });
         };
 
+        // CONTROL DE BANNERS CON DESVANECIMIENTO (FADE)
+        function initBannersCarousel(banners) {
+            const container = document.getElementById('banner-slider-container');
+            const dotsContainer = document.getElementById('banner-dots-container');
+
+            if (!banners || banners.length === 0) {
+                container.innerHTML = `<div class="w-full h-full flex items-center justify-center text-xs text-gray-500">Sin Banners Configurados</div>`;
+                dotsContainer.innerHTML = '';
+                return;
+            }
+
+            if (bannerTimer) clearInterval(bannerTimer);
+
+            // Renderizar Slides
+            container.innerHTML = banners.map((b, idx) => `
+                <div id="banner-slide-${idx}" class="banner-slide ${idx === 0 ? 'active' : ''}">
+                    ${b.link && b.link.trim() !== '' ? `<a href="javascript:void(0)" onclick="navigateToSection('${b.link}')" class="block w-full h-full">` : ''}
+                        <img src="${b.img}" alt="${b.title}" class="w-full h-full object-cover rounded-xl hover:scale-105 transition duration-500">
+                    ${b.link && b.link.trim() !== '' ? `</a>` : ''}
+                </div>
+            `).join('');
+
+            // Renderizar Indicadores Puntos
+            dotsContainer.innerHTML = banners.map((_, idx) => `
+                <button onclick="setBannerSlide(${idx})" id="banner-dot-${idx}" class="w-2.5 h-2.5 rounded-full transition-all duration-300 ${idx === 0 ? 'bg-primary w-6' : 'bg-gray-600 hover:bg-gray-400'}"></button>
+            `).join('');
+
+            currentBannerIndex = 0;
+
+            if (banners.length > 1) {
+                bannerTimer = setInterval(() => {
+                    const nextIdx = (currentBannerIndex + 1) % banners.length;
+                    window.setBannerSlide(nextIdx);
+                }, 4000); // Cambia cada 4 segundos
+            }
+        }
+
+        window.setBannerSlide = (index) => {
+            const banners = currentData.banners || [];
+            if (!banners[index]) return;
+
+            const currentSlide = document.getElementById(`banner-slide-${currentBannerIndex}`);
+            const nextSlide = document.getElementById(`banner-slide-${index}`);
+            const currentDot = document.getElementById(`banner-dot-${currentBannerIndex}`);
+            const nextDot = document.getElementById(`banner-dot-${index}`);
+
+            if (currentSlide && nextSlide) {
+                currentSlide.classList.remove('active');
+                nextSlide.classList.add('active');
+            }
+
+            if (currentDot && nextDot) {
+                currentDot.className = "w-2.5 h-2.5 rounded-full transition-all duration-300 bg-gray-600 hover:bg-gray-400";
+                nextDot.className = "w-2.5 h-2.5 rounded-full transition-all duration-300 bg-primary w-6";
+            }
+
+            currentBannerIndex = index;
+        };
+
         // LECTOR DE ARTÍCULO DE BLOG Y BARRAS DE COMPARTIR
         window.openBlogModal = (blogId) => {
             const b = (currentData.blogs || []).find(item => item.id === blogId);
@@ -892,7 +1032,6 @@
             const b = (currentData.blogs || []).find(item => item.id === blogId);
             if (!b) return;
 
-            // URL del sitio con parámetro dinámico de artículo
             const pageUrl = window.location.origin + window.location.pathname + `?article=${blogId}`;
             const textMsg = `📖 Te invito a leer este artículo: "${b.title}" - Taber by Pass`;
 
@@ -907,7 +1046,7 @@
                 window.open(twUrl, '_blank');
             } else if (platform === 'copy') {
                 navigator.clipboard.writeText(pageUrl).then(() => {
-                    alert('¡Enlace de la noticia con miniatura copiado al portapapeles!');
+                    alert('¡Enlace de la noticia copiado al portapapeles!');
                 }).catch(() => {
                     alert('Enlace del artículo: ' + pageUrl);
                 });
@@ -1002,7 +1141,10 @@
 
             loadHlsStream(data.config.liveTv);
 
-            // Renderizar Sermones / Mensajes (Con opción de Video o Audio)
+            // Inicializar Carrusel de Banners
+            initBannersCarousel(data.banners || []);
+
+            // Renderizar Sermones / Mensajes
             const videosGrid = document.getElementById('videos-grid');
             videosGrid.innerHTML = data.videos.map((v, idx) => {
                 const ytEmbed = parseYtEmbed(v.ytId);
@@ -1050,7 +1192,7 @@
                 `;
             }).join('');
 
-            // Renderizar Entradas de Blog con Botón de Compartir Redes
+            // Renderizar Entradas de Blog
             const blogGrid = document.getElementById('blog-grid');
             blogGrid.innerHTML = (data.blogs || []).map((b, idx) => `
                 <div data-aos="fade-up" data-aos-delay="${idx * 150}" class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col hover:shadow-xl hover:-translate-y-1 transition duration-300">
@@ -1065,14 +1207,12 @@
                             <p class="text-gray-600 text-sm line-clamp-3 leading-relaxed">${b.content.replace(/<[^>]*>?/gm, '')}</p>
                         </div>
                         
-                        <!-- BARRA INFERIOR CON LECTURA Y COMPARTIR -->
                         <div class="pt-4 mt-4 border-t flex items-center justify-between">
                             <button onclick="openBlogModal('${b.id}')" class="text-xs font-bold text-primary hover:underline flex items-center space-x-1">
                                 <span>Leer Artículo</span>
                                 <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </button>
 
-                            <!-- BOTONES RÁPIDOS DE COMPARTIR -->
                             <div class="flex items-center space-x-1.5">
                                 <button onclick="shareArticle('${b.id}', 'wa')" title="Compartir en WhatsApp" class="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition shadow"><i class="fa-brands fa-whatsapp text-[11px]"></i></button>
                                 <button onclick="shareArticle('${b.id}', 'fb')" title="Compartir en Facebook" class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition shadow"><i class="fa-brands fa-facebook-f text-[11px]"></i></button>
@@ -1135,6 +1275,23 @@
             document.getElementById('cfg-ig').value = data.config.ig || "";
             document.getElementById('cfg-wa').value = data.config.wa || "";
             document.getElementById('cfg-tk').value = data.config.tk || "";
+
+            // Renderizar Banners Admin
+            document.getElementById('admin-banners-list').innerHTML = (data.banners || []).map(b => `
+                <div class="flex items-center justify-between bg-gray-50 p-4 rounded-xl border">
+                    <div class="flex items-center space-x-4">
+                        <img src="${b.img}" class="w-[120px] h-[30px] object-cover rounded border">
+                        <div>
+                            <h5 class="font-bold text-gray-900 text-sm">${b.title}</h5>
+                            <p class="text-xs text-gray-500">Enlace: ${b.link || 'Sin Enlace'}</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="editBanner('${b.id}')" class="text-blue-600 hover:text-blue-800 px-3 py-1 rounded-lg text-xs font-semibold bg-blue-50 transition">Editar</button>
+                        <button onclick="deleteBanner('${b.id}')" class="text-red-500 hover:text-red-700 px-3 py-1 rounded-lg text-xs font-semibold bg-red-50 transition">Eliminar</button>
+                    </div>
+                </div>
+            `).join('');
 
             // Renderizar Lista de Menú Admin
             document.getElementById('admin-menu-list').innerHTML = (data.menuItems || []).map(m => `
@@ -1246,7 +1403,7 @@
         };
 
         window.switchTab = (tabName) => {
-            ['general', 'menu', 'blog', 'videos', 'galeria', 'horarios'].forEach(t => {
+            ['general', 'banners', 'menu', 'blog', 'videos', 'galeria', 'horarios'].forEach(t => {
                 document.getElementById(`tab-${t}`).classList.add('hidden');
                 document.getElementById(`tab-btn-${t}`).classList.remove('text-primary', 'border-b-2', 'border-primary');
                 document.getElementById(`tab-btn-${t}`).classList.add('text-gray-500');
@@ -1277,6 +1434,60 @@
             };
             saveData(currentData);
             alert('¡Configuración guardada exitosamente en Firebase!');
+        };
+
+        // GESTIÓN DE BANNERS
+        window.saveBanner = (e) => {
+            e.preventDefault();
+            const editId = document.getElementById('banner-edit-id').value;
+            const title = document.getElementById('banner-title').value;
+            const img = document.getElementById('banner-img').value;
+            const link = document.getElementById('banner-link').value;
+
+            if (editId) {
+                const index = (currentData.banners || []).findIndex(b => b.id === editId);
+                if (index !== -1) {
+                    currentData.banners[index] = { id: editId, title, img, link };
+                }
+                alert('¡Banner actualizado!');
+            } else {
+                const newBanner = { id: Date.now().toString(), title, img, link };
+                if (!currentData.banners) currentData.banners = [];
+                currentData.banners.push(newBanner);
+                alert('¡Banner agregado!');
+            }
+            saveData(currentData);
+            window.resetBannerForm();
+        };
+
+        window.editBanner = (id) => {
+            const b = (currentData.banners || []).find(item => item.id === id);
+            if (b) {
+                document.getElementById('banner-edit-id').value = b.id;
+                document.getElementById('banner-title').value = b.title;
+                document.getElementById('banner-img').value = b.img;
+                document.getElementById('banner-link').value = b.link || '';
+                document.getElementById('banner-form-title').innerText = "Editar Banner Publicitario";
+                document.getElementById('banner-submit-btn').innerText = "Guardar Cambios";
+                document.getElementById('cancel-edit-banner').classList.remove('hidden');
+            }
+        };
+
+        window.resetBannerForm = () => {
+            document.getElementById('banner-edit-id').value = '';
+            document.getElementById('banner-title').value = '';
+            document.getElementById('banner-img').value = '';
+            document.getElementById('banner-link').value = '';
+            document.getElementById('banner-form-title').innerText = "Agregar Banner Publicitario (505x103 px)";
+            document.getElementById('banner-submit-btn').innerText = "Guardar Banner";
+            document.getElementById('cancel-edit-banner').classList.add('hidden');
+        };
+
+        window.deleteBanner = (id) => {
+            if (confirm('¿Deseas eliminar este banner?')) {
+                currentData.banners = (currentData.banners || []).filter(b => b.id !== id);
+                saveData(currentData);
+            }
         };
 
         // GESTIÓN DE MENÚ DE NAVEGACIÓN
