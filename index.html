@@ -6,11 +6,11 @@
     
     <!-- TÍTULO Y DESCRIPCIÓN POR DEFECTO -->
     <title id="page-title">Taber by Pass - Una iglesia de Fe</title>
-    <meta id="meta-desc" name="description" content="Bienvenidos a Taber by Pass. Una iglesia de Fe, esperanza y salvación. Sermones, Radio 106.1 FM y Taber TV en vivo.">
+    <meta id="meta-desc" name="description" content="Bienvenidos a Taber by Pass. Una iglesia de Fe, esperanza y salvación. Sermones, Radios En Vivo y Taber TV.">
 
     <!-- METADATOS OPEN GRAPH PARA VISTA PREVIA -->
     <meta id="og-title" property="og:title" content="Taber by Pass - Una iglesia de Fe">
-    <meta id="og-desc" property="og:description" content="Una iglesia de Fe, esperanza y salvación. Disfruta de nuestros sermones, radio y transmisión en vivo.">
+    <meta id="og-desc" property="og:description" content="Una iglesia de Fe, esperanza y salvación. Disfruta de nuestros sermones, radios y transmisión en vivo.">
     <meta id="og-image" property="og:image" content="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200">
     <meta id="og-image-secure" property="og:image:secure_url" content="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200">
     <meta property="og:image:type" content="image/jpeg">
@@ -23,7 +23,7 @@
     <!-- TWITTER CARDS -->
     <meta name="twitter:card" content="summary_large_image">
     <meta id="tw-title" name="twitter:title" content="Taber by Pass - Una iglesia de Fe">
-    <meta id="tw-desc" name="twitter:description" content="Una iglesia de Fe, esperanza y salvación. Sermones, Radio 106.1 FM y Taber TV en vivo.">
+    <meta id="tw-desc" name="twitter:description" content="Una iglesia de Fe, esperanza y salvación. Sermones, Radio 106.1 FM, Neuma Stereo y Taber TV en vivo.">
     <meta id="tw-image" name="twitter:image" content="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200">
 
     <!-- Tailwind CSS CDN -->
@@ -118,7 +118,7 @@
                         </button>
                         <button onclick="scrollToSection('#radio')" class="bg-white text-gray-900 hover:bg-gray-100 font-semibold px-8 py-3.5 rounded-xl shadow-lg hover:-translate-y-1 transition duration-300 flex items-center justify-center space-x-2">
                             <i class="fa-solid fa-radio text-primary"></i>
-                            <span>Escuchar Radio 106.1 FM</span>
+                            <span>Escuchar Radios Online</span>
                         </button>
                     </div>
 
@@ -204,32 +204,62 @@
                 </div>
             </section>
 
-            <!-- RADIO BAUTISTA 106.1 FM -->
+            <!-- EMISORAS DE RADIO (RADIO BAUTISTA & NEUMA STEREO) -->
             <section id="radio" class="py-16 bg-blue-950 text-white px-4 sm:px-6 lg:px-8">
-                <div class="max-w-4xl mx-auto bg-gradient-to-br from-blue-900 to-blue-950 p-8 sm:p-12 rounded-3xl shadow-xl border border-blue-800 flex flex-col md:flex-row items-center justify-between gap-8" data-aos="zoom-in">
-                    <div class="space-y-4 text-center md:text-left">
-                        <div class="inline-flex items-center space-x-2 bg-blue-800/60 text-blue-300 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-blue-700">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-10" data-aos="fade-up">
+                        <div class="inline-flex items-center space-x-2 bg-blue-800/60 text-blue-300 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-blue-700">
                             <i class="fa-solid fa-tower-broadcast text-blue-400"></i>
-                            <span>Señal Radial 24/7 En Vivo</span>
+                            <span>Transmisión 24/7 En Vivo</span>
                         </div>
-                        <h2 class="text-3xl font-extrabold tracking-tight">Radio Bautista 106.1 FM</h2>
-                        <p class="text-blue-200/80 text-sm sm:text-base max-w-md">Llevando la palabra de Dios y alabanzas edificantes a cada rincón de tu hogar.</p>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-2">Estaciones de Radio en Línea</h2>
+                        <p class="text-blue-200/80 text-sm sm:text-base mt-1">Alabanzas y predicas edificantes a través de nuestras señales radiales</p>
                     </div>
-                    <div class="flex flex-col items-center justify-center bg-blue-900/80 p-6 rounded-2xl border border-blue-700/50 min-w-[280px] w-full md:w-auto shadow-inner">
-                        <div class="w-16 h-16 rounded-full bg-blue-700 text-white flex items-center justify-center text-2xl mb-3 shadow-md animate-pulse">
-                            <i class="fa-solid fa-radio"></i>
-                        </div>
-                        <span class="font-bold text-lg mb-4 text-white">106.1 FM En Directo</span>
-                        
-                        <audio id="radio-audio-player" preload="none"></audio>
-                        <iframe id="radio-hidden-iframe" class="hidden w-0 h-0" allow="autoplay"></iframe>
 
-                        <button id="radio-toggle-btn" onclick="toggleRadioPlay()" class="w-full bg-white text-blue-900 hover:bg-blue-50 font-bold px-6 py-3.5 rounded-xl transition text-center shadow flex items-center justify-center space-x-2">
-                            <i id="radio-btn-icon" class="fa-solid fa-play text-primary"></i>
-                            <span id="radio-btn-text">Reproducir Radio</span>
-                        </button>
-                        
-                        <p id="radio-status-text" class="text-xs text-blue-300 mt-3 font-medium text-center">Presiona para iniciar reproducción</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- RADIO BAUTISTA 106.1 FM -->
+                        <div class="bg-gradient-to-br from-blue-900 to-blue-950 p-8 rounded-3xl shadow-xl border border-blue-800 flex flex-col justify-between" data-aos="zoom-in">
+                            <div class="space-y-4 mb-6">
+                                <div class="w-16 h-16 rounded-full bg-blue-700 text-white flex items-center justify-center text-2xl shadow-md animate-pulse">
+                                    <i class="fa-solid fa-radio"></i>
+                                </div>
+                                <h3 class="text-2xl font-extrabold tracking-tight">Radio Bautista 106.1 FM</h3>
+                                <p class="text-blue-200/80 text-sm">Llevando la palabra de Dios y música cristiana a cada rincón de tu hogar.</p>
+                            </div>
+
+                            <div class="bg-blue-900/80 p-5 rounded-2xl border border-blue-700/50 shadow-inner">
+                                <audio id="radio-audio-player-1" preload="none"></audio>
+                                <iframe id="radio-iframe-1" class="hidden w-0 h-0" allow="autoplay"></iframe>
+
+                                <button id="radio-btn-1" onclick="toggleRadio('1')" class="w-full bg-white text-blue-900 hover:bg-blue-50 font-bold px-6 py-3.5 rounded-xl transition text-center shadow flex items-center justify-center space-x-2">
+                                    <i id="radio-icon-1" class="fa-solid fa-play text-primary"></i>
+                                    <span id="radio-text-1">Escuchar 106.1 FM</span>
+                                </button>
+                                <p id="radio-status-1" class="text-xs text-blue-300 mt-3 font-medium text-center">Presiona para iniciar reproducción</p>
+                            </div>
+                        </div>
+
+                        <!-- NEUMA STEREO -->
+                        <div class="bg-gradient-to-br from-indigo-900 to-slate-900 p-8 rounded-3xl shadow-xl border border-indigo-800 flex flex-col justify-between" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="space-y-4 mb-6">
+                                <div class="w-16 h-16 rounded-full bg-indigo-700 text-white flex items-center justify-center text-2xl shadow-md animate-pulse">
+                                    <i class="fa-solid fa-broadcast-tower"></i>
+                                </div>
+                                <h3 class="text-2xl font-extrabold tracking-tight">Neuma Stereo</h3>
+                                <p class="text-indigo-200/80 text-sm">Una señal de bendición, alabanza continua y mensajes transformadores.</p>
+                            </div>
+
+                            <div class="bg-indigo-950/80 p-5 rounded-2xl border border-indigo-700/50 shadow-inner">
+                                <audio id="radio-audio-player-2" preload="none"></audio>
+                                <iframe id="radio-iframe-2" class="hidden w-0 h-0" allow="autoplay"></iframe>
+
+                                <button id="radio-btn-2" onclick="toggleRadio('2')" class="w-full bg-amber-400 text-gray-950 hover:bg-amber-300 font-bold px-6 py-3.5 rounded-xl transition text-center shadow flex items-center justify-center space-x-2">
+                                    <i id="radio-icon-2" class="fa-solid fa-play text-gray-950"></i>
+                                    <span id="radio-text-2">Escuchar Neuma Stereo</span>
+                                </button>
+                                <p id="radio-status-2" class="text-xs text-indigo-300 mt-3 font-medium text-center">Presiona para iniciar reproducción</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -441,9 +471,13 @@
                         <label class="block text-sm font-bold text-red-700 mb-1">Enlace IPTV / HLS Taber TV (.m3u8)</label>
                         <input type="url" id="cfg-livetv" class="w-full border rounded-lg px-4 py-2">
                     </div>
-                    <div class="md:col-span-2">
+                    <div>
                         <label class="block text-sm font-bold text-blue-800 mb-1">Enlace Radio 106.1 FM</label>
                         <input type="url" id="cfg-radio" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-indigo-800 mb-1">Enlace Neuma Stereo</label>
+                        <input type="url" id="cfg-radio2" class="w-full border rounded-lg px-4 py-2">
                     </div>
                     <div class="md:col-span-2 border-t pt-4">
                         <h4 class="font-bold text-gray-800 mb-3">Redes Sociales</h4>
@@ -757,6 +791,7 @@
                 logoUrl: "", brand: "Taber by Pass", subtitle: "Una iglesia de Fe",
                 liveTv: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
                 radioUrl: "https://radiobautista106uno.radiostream123.com/",
+                radioUrl2: "https://radioneumastereo.radio12345.com/",
                 heroTitle: "Un lugar de esperanza y salvación",
                 heroSub: "\"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos.\"",
                 phone: "+503 2222-3333", email: "contacto@taberbypass.org", receiverEmail: "contacto@taberbypass.org",
@@ -771,7 +806,7 @@
                 { id: "2", title: "Biblia RV1960", link: "#biblia" },
                 { id: "3", title: "Anuncios", link: "#banner-eventos" },
                 { id: "4", title: "Taber TV", link: "#en-vivo" },
-                { id: "5", title: "Radio 106.1 FM", link: "#radio" },
+                { id: "5", title: "Radios En Vivo", link: "#radio" },
                 { id: "6", title: "Sermones", link: "#transmision" },
                 { id: "7", title: "Blog Pastoral", link: "#blog" },
                 { id: "8", title: "Horarios", link: "#horarios" },
@@ -1131,33 +1166,47 @@
 
         window.closeBlogModal = () => document.getElementById('blog-modal').classList.add('hidden');
 
-        window.toggleRadioPlay = () => {
-            const player = document.getElementById('radio-audio-player');
-            const hiddenIframe = document.getElementById('radio-hidden-iframe');
-            const btnIcon = document.getElementById('radio-btn-icon');
-            const btnText = document.getElementById('radio-btn-text');
-            const statusText = document.getElementById('radio-status-text');
-            const rawUrl = currentData.config.radioUrl || "";
+        // REPRODUCTOR MULTI-EMISORA CONTROLADO
+        window.toggleRadio = (id) => {
+            const otherId = id === '1' ? '2' : '1';
+            const player = document.getElementById(`radio-audio-player-${id}`);
+            const otherPlayer = document.getElementById(`radio-audio-player-${otherId}`);
+            const iframe = document.getElementById(`radio-iframe-${id}`);
+            const icon = document.getElementById(`radio-icon-${id}`);
+            const text = document.getElementById(`radio-text-${id}`);
+            const status = document.getElementById(`radio-status-${id}`);
+            
+            const rawUrl = id === '1' 
+                ? (currentData.config.radioUrl || "https://radiobautista106uno.radiostream123.com/")
+                : (currentData.config.radioUrl2 || "https://radioneumastereo.radio12345.com/?fbclid=IwY2xjawUs5nNleHRuA2FlbQIxMABwZG9mBWJyaWQRMThiUGpGNERBcm9kb1Y4U01zcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeoluG4zzfR42pZJXuxCFtiRTla98BwxSyLSR50z2iInjqo0UA7rDky_M0Yvg_aem_wIUELHv9GCNAB2tmNcqtYw");
+
+            // Pausar la otra radio si está sonando
+            if (otherPlayer && !otherPlayer.paused) {
+                otherPlayer.pause();
+                document.getElementById(`radio-icon-${otherId}`).className = "fa-solid fa-play";
+                document.getElementById(`radio-text-${otherId}`).innerText = otherId === '1' ? "Escuchar 106.1 FM" : "Escuchar Neuma Stereo";
+                document.getElementById(`radio-status-${otherId}`).innerText = "Pausado";
+            }
 
             if (!player.paused) {
                 player.pause();
-                btnIcon.className = "fa-solid fa-play text-primary";
-                btnText.innerText = "Reproducir Radio";
-                statusText.innerText = "Pausado";
+                icon.className = "fa-solid fa-play";
+                text.innerText = id === '1' ? "Escuchar 106.1 FM" : "Escuchar Neuma Stereo";
+                status.innerText = "Pausado";
                 return;
             }
 
-            statusText.innerText = "Conectando...";
+            status.innerText = "Conectando señal...";
             player.src = rawUrl;
             player.play().then(() => {
-                btnIcon.className = "fa-solid fa-pause text-red-600";
-                btnText.innerText = "Pausar Radio";
-                statusText.innerText = "Sintonizando Radio Bautista 106.1 FM";
+                icon.className = "fa-solid fa-pause text-red-600";
+                text.innerText = "Pausar Radio";
+                status.innerText = id === '1' ? "Sintonizando 106.1 FM" : "Sintonizando Neuma Stereo";
             }).catch(() => {
-                hiddenIframe.src = rawUrl;
-                btnIcon.className = "fa-solid fa-pause text-red-600";
-                btnText.innerText = "Detener Radio";
-                statusText.innerText = "Reproduciendo en vivo";
+                iframe.src = rawUrl;
+                icon.className = "fa-solid fa-pause text-red-600";
+                text.innerText = "Detener Radio";
+                status.innerText = "Reproduciendo señal en vivo";
             });
         };
 
@@ -1264,6 +1313,7 @@
             document.getElementById('cfg-address').value = data.config.address || "";
             document.getElementById('cfg-livetv').value = data.config.liveTv || "";
             document.getElementById('cfg-radio').value = data.config.radioUrl || "";
+            document.getElementById('cfg-radio2').value = data.config.radioUrl2 || "";
             document.getElementById('cfg-fb').value = data.config.fb || "";
             document.getElementById('cfg-yt').value = data.config.yt || "";
             document.getElementById('cfg-ig').value = data.config.ig || "";
@@ -1536,6 +1586,7 @@
             currentData.config.address = document.getElementById('cfg-address').value;
             currentData.config.liveTv = document.getElementById('cfg-livetv').value;
             currentData.config.radioUrl = document.getElementById('cfg-radio').value;
+            currentData.config.radioUrl2 = document.getElementById('cfg-radio2').value;
             currentData.config.fb = document.getElementById('cfg-fb').value;
             currentData.config.yt = document.getElementById('cfg-yt').value;
             currentData.config.ig = document.getElementById('cfg-ig').value;
