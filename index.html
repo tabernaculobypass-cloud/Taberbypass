@@ -160,7 +160,7 @@
                 <div class="text-center mb-10">
                     <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Predicaciones</span>
                     <h2 class="text-3xl font-bold tracking-tight text-gray-900 mt-2">Sermones y Mensajes Recientes</h2>
-                    <p class="text-gray-500 mt-2">Escoge entre ver el video, escuchar el audio o descargarlo desde Archive.org</p>
+                    <p class="text-gray-500 mt-2">Escoge entre ver el video, escuchar el audio o descargarlo desde Jumpshare</p>
                 </div>
                 <div id="videos-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Dinámico -->
@@ -511,7 +511,7 @@
                 <div id="admin-blog-list" class="space-y-3"></div>
             </div>
 
-            <!-- TAB VIDEOS / SERMONES CON ENLACES DE ARCHIVE.ORG -->
+            <!-- TAB VIDEOS / SERMONES -->
             <div id="tab-videos" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
                 <div class="flex justify-between items-center border-b pb-3">
                     <h3 id="vid-form-title" class="text-xl font-bold text-gray-900">Agregar Nuevo Sermón / Mensaje</h3>
@@ -532,8 +532,8 @@
                         <input type="text" id="vid-url" required class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">URL Directa de Audio MP3 (Archive.org)</label>
-                        <input type="url" id="vid-audio-url" placeholder="https://archive.org/download/tu-audio/audio.mp3" class="w-full border rounded-lg px-3 py-2 bg-white">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">URL o Enlace de Jumpshare (Audio MP3)</label>
+                        <input type="url" id="vid-audio-url" placeholder="https://jumpshare.com/share/..." class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div class="md:col-span-2">
                         <button type="submit" id="vid-submit-btn" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Agregar Sermón</button>
@@ -650,6 +650,17 @@
             return 99;
         }
 
+        // CONVERTIDOR AUTOMÁTICO DE ENLACES JUMPSHARE A REPRODUCCIÓN / DESCARGA DIRECTA
+        function formatJumpshareUrl(url) {
+            if (!url) return '';
+            let trimmed = url.trim();
+            if (trimmed.includes('jumpshare.com/share/')) {
+                const code = trimmed.split('jumpshare.com/share/')[1].split('?')[0];
+                return `https://jumpshare.com/v/${code}`;
+            }
+            return trimmed;
+        }
+
         const defaultData = {
             config: {
                 logoUrl: "", brand: "Taber by Pass", subtitle: "Ministerio de Fe y Adoración",
@@ -678,7 +689,7 @@
                 }
             ],
             videos: [
-                { id: "1", title: "El Poder de la Oración Ferviente", author: "Pastor Principal", ytId: "dQw4w9WgXcQ", audioUrl: "https://ia800201.us.archive.org/22/items/test-mp3-archive/sample.mp3" },
+                { id: "1", title: "El Poder de la Oración Ferviente", author: "Pastor Principal", ytId: "dQw4w9WgXcQ", audioUrl: "https://jumpshare.com/v/VnJEN4b4912fnVEY0Trk" },
                 { id: "2", title: "Caminando en Integridad y Fe", author: "Co-Pastor", ytId: "dQw4w9WgXcQ", audioUrl: "" }
             ],
             albums: [
@@ -796,7 +807,7 @@
                     <div class="text-center mb-10">
                         <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Catálogo Completo</span>
                         <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2">Todos los Sermones y Predicaciones (${(currentData.videos || []).length})</h2>
-                        <p class="text-gray-500 mt-2">Explora la colección completa con reproductor de audio e integración con Archive.org</p>
+                        <p class="text-gray-500 mt-2">Explora la colección completa con reproductor de audio e integración con Jumpshare</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         ${renderSermonsHTML(currentData.videos)}
@@ -837,7 +848,7 @@
             setTimeout(() => { AOS.refresh(); }, 150);
         };
 
-        // RENDER DE SERMONES CON BOTONES DE COMPARTIR Y REPRODUCTOR CON ARCHIVE.ORG / DESCARGA
+        // RENDER DE SERMONES CON SOPORTE AUTOMÁTICO DE ENLACES JUMPSHARE
         function renderSermonsHTML(videoList) {
             if (!videoList || videoList.length === 0) {
                 return `<p class="text-center text-gray-500 col-span-full">No hay sermones disponibles en este momento.</p>`;
@@ -845,6 +856,8 @@
             return videoList.map((v, idx) => {
                 const ytEmbed = parseYtEmbed(v.ytId);
                 const hasAudio = v.audioUrl && v.audioUrl.trim() !== '';
+                const formattedAudioUrl = formatJumpshareUrl(v.audioUrl);
+
                 return `
                     <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col hover:shadow-xl transition duration-300">
                         <!-- SELECTOR DE MODO -->
@@ -865,23 +878,23 @@
                             <iframe class="w-full h-full" src="https://www.youtube.com/embed/${ytEmbed}" title="${v.title}" frameborder="0" allowfullscreen></iframe>
                         </div>
 
-                        <!-- VISTA SOLO AUDIO Y DESCARGA (ARCHIVE.ORG) -->
+                        <!-- VISTA SOLO AUDIO Y DESCARGA (JUMPSHARE / MP3) -->
                         <div id="sermon-audio-${v.id}" class="aspect-video w-full bg-gradient-to-br from-blue-950 to-slate-900 p-6 flex flex-col justify-center items-center text-center text-white hidden">
                             <div class="w-12 h-12 rounded-full bg-blue-800 text-white flex items-center justify-center text-lg mb-2 shadow animate-pulse">
                                 <i class="fa-solid fa-file-audio"></i>
                             </div>
-                            <p class="text-xs text-blue-200 mb-2 font-medium">Reproductor de Audio (Archive.org)</p>
+                            <p class="text-xs text-blue-200 mb-2 font-medium">Reproductor de Audio (Jumpshare)</p>
                             ${hasAudio ? `
                                 <audio controls class="w-full mt-1 mb-3">
-                                    <source src="${v.audioUrl}" type="audio/mpeg">
+                                    <source src="${formattedAudioUrl}" type="audio/mpeg">
                                     Tu navegador no soporta el reproductor de audio.
                                 </audio>
-                                <a href="${v.audioUrl}" download target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow flex items-center space-x-2">
+                                <a href="${formattedAudioUrl}" download target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow flex items-center space-x-2">
                                     <i class="fa-solid fa-download"></i>
-                                    <span>Descargar Audio MP3</span>
+                                    <span>Descargar / Escuchar Audio</span>
                                 </a>
                             ` : `
-                                <p class="text-xs text-amber-300 italic">No se ha asignado un enlace de audio (.mp3) de Archive.org para esta prédica.</p>
+                                <p class="text-xs text-amber-300 italic">No se ha asignado un enlace de audio (.mp3) de Jumpshare para esta prédica.</p>
                             `}
                         </div>
 
@@ -1461,7 +1474,8 @@
             const title = document.getElementById('vid-title').value;
             const author = document.getElementById('vid-author').value;
             const ytId = document.getElementById('vid-url').value;
-            const audioUrl = document.getElementById('vid-audio-url').value;
+            const rawAudio = document.getElementById('vid-audio-url').value;
+            const audioUrl = formatJumpshareUrl(rawAudio);
 
             if (editId) {
                 const index = currentData.videos.findIndex(v => v.id === editId);
