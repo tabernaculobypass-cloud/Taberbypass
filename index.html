@@ -60,7 +60,7 @@
         </div>
     </header>
 
-    <!-- BARRA DE NAVEGACIÓN Y RETORNO (APARECE CUANDO NO SE ESTÁ EN INICIO) -->
+    <!-- BARRA DE NAVEGACIÓN Y RETORNO -->
     <div id="back-to-home-bar" class="bg-primary/10 border-b border-primary/20 py-2.5 px-4 hidden sticky top-20 z-30 backdrop-blur-md">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <button onclick="showSingleView('inicio')" class="text-primary hover:text-secondary text-xs sm:text-sm font-bold flex items-center space-x-2 transition">
@@ -100,6 +100,39 @@
                     <!-- REDES SOCIALES DE LA IGLESIA -->
                     <div class="pt-4 border-t border-white/10 flex items-center justify-center space-x-4" id="social-links-container">
                         <!-- Redes cargadas dinámicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN CARRUSEL BANNER DE EVENTOS Y ANUNCIOS (CAMBIA CADA 5 SEGUNDOS) -->
+            <section id="banner-eventos" class="py-12 bg-gray-100 border-b border-gray-200 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-6">
+                        <span class="bg-amber-500/10 text-amber-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-amber-500/20">
+                            <i class="fa-solid fa-bullhorn mr-1"></i> Anuncios Especiales & Eventos
+                        </span>
+                    </div>
+
+                    <!-- CONTENEDOR CARRUSEL -->
+                    <div class="relative bg-gray-900 rounded-3xl overflow-hidden shadow-2xl border border-gray-800 min-h-[300px] sm:min-h-[420px] flex items-center justify-center group">
+                        
+                        <!-- SLIDES DINÁMICOS -->
+                        <div id="banner-slides-container" class="w-full h-full relative">
+                            <!-- Inyectado vía JS -->
+                        </div>
+
+                        <!-- BOTONES DE NAVEGACIÓN -->
+                        <button onclick="prevBannerSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-11 h-11 rounded-full flex items-center justify-center transition shadow-lg opacity-80 group-hover:opacity-100 z-20">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button onclick="nextBannerSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-11 h-11 rounded-full flex items-center justify-center transition shadow-lg opacity-80 group-hover:opacity-100 z-20">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <!-- PUNTOS INDICADORES -->
+                        <div id="banner-dots-container" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+                            <!-- Generado vía JS -->
+                        </div>
                     </div>
                 </div>
             </section>
@@ -155,12 +188,12 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN SERMONES (MUESTRA 4 EN INICIO) -->
+            <!-- SECCIÓN SERMONES -->
             <section id="transmision" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10">
                     <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Predicaciones</span>
                     <h2 class="text-3xl font-bold tracking-tight text-gray-900 mt-2">Sermones y Mensajes Recientes</h2>
-                    <p class="text-gray-500 mt-2">Escoge entre ver el video, escuchar el audio o descargarlo desde Jumpshare</p>
+                    <p class="text-gray-500 mt-2">Escoge entre ver el video o escuchar el audio de Jumpshare</p>
                 </div>
                 <div id="videos-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Dinámico -->
@@ -173,7 +206,7 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN BLOG (MUESTRA 4 EN INICIO) -->
+            <!-- SECCIÓN BLOG -->
             <section id="blog" class="py-16 bg-gray-100/70 border-y border-gray-200 px-4 sm:px-6 lg:px-8">
                 <div class="max-w-7xl mx-auto">
                     <div class="text-center mb-10">
@@ -218,11 +251,9 @@
             </section>
         </div>
 
-        <!-- CONTENEDOR DE VISTA DEDICADA COMPLETA -->
+        <!-- VISTA DEDICADA COMPLETA -->
         <div id="dedicated-view-container" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hidden">
-            <div id="dedicated-content">
-                <!-- Se inyecta la lista completa guardada -->
-            </div>
+            <div id="dedicated-content"></div>
         </div>
 
         <!-- PÁGINA PERSONALIZADA ADMIN -->
@@ -233,9 +264,7 @@
                     <span>Volver al Inicio</span>
                 </button>
                 <h2 id="custom-page-title" class="text-3xl sm:text-4xl font-extrabold text-gray-900 border-b pb-4">Título de la Sección</h2>
-                <div id="custom-page-content" class="text-gray-700 leading-relaxed text-base space-y-4">
-                    <!-- Contenido dinámico -->
-                </div>
+                <div id="custom-page-content" class="text-gray-700 leading-relaxed text-base space-y-4"></div>
             </div>
         </section>
 
@@ -358,6 +387,7 @@
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow space-y-8">
             <div class="flex border-b border-gray-300 space-x-6 overflow-x-auto">
                 <button onclick="switchTab('general')" id="tab-btn-general" class="pb-3 font-semibold text-primary border-b-2 border-primary transition whitespace-nowrap">Config y Redes</button>
+                <button onclick="switchTab('banners')" id="tab-btn-banners" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Banners y Anuncios</button>
                 <button onclick="switchTab('menu')" id="tab-btn-menu" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Navegación y Menú</button>
                 <button onclick="switchTab('blog')" id="tab-btn-blog" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Artículos de Blog</button>
                 <button onclick="switchTab('videos')" id="tab-btn-videos" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Sermones (Video/Audio)</button>
@@ -447,6 +477,42 @@
                 </form>
             </div>
 
+            <!-- TAB BANNERS Y ANUNCIOS -->
+            <div id="tab-banners" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <h3 id="banner-form-title" class="text-xl font-bold text-gray-900">Agregar Nuevo Banner de Anuncio</h3>
+                    <button type="button" id="cancel-edit-banner" onclick="resetBannerForm()" class="text-sm text-gray-500 hover:text-gray-800 hidden">Cancelar Edición</button>
+                </div>
+                <form onsubmit="saveBanner(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end bg-gray-50 p-4 rounded-xl border">
+                    <input type="hidden" id="banner-edit-id">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Título del Evento / Anuncio</label>
+                        <input type="text" id="banner-title" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Subtítulo / Etiqueta de Fecha</label>
+                        <input type="text" id="banner-subtitle" placeholder="Ej: Este Próximo Sábado 15 de Octubre" class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">URL de la Imagen Promocional</label>
+                        <input type="url" id="banner-img" required placeholder="https://..." class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Enlace del Botón (Opcional)</label>
+                        <input type="text" id="banner-link" placeholder="#contacto o URL externa" class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Texto del Botón</label>
+                        <input type="text" id="banner-btn-text" placeholder="Ej: Registrarse / Más Información" class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" id="banner-submit-btn" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Agregar Banner</button>
+                    </div>
+                </form>
+                <h4 class="font-bold text-gray-800 pt-4">Banners Activos</h4>
+                <div id="admin-banners-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
+
             <!-- TAB MENÚ -->
             <div id="tab-menu" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
                 <div class="flex justify-between items-center border-b pb-3">
@@ -532,7 +598,7 @@
                         <input type="text" id="vid-url" required class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">URL o Enlace de Jumpshare (Audio MP3)</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">URL o Enlace de Jumpshare / Audio MP3</label>
                         <input type="url" id="vid-audio-url" placeholder="https://jumpshare.com/share/..." class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div class="md:col-span-2">
@@ -634,6 +700,8 @@
         AOS.init({ duration: 800, once: false, mirror: true });
 
         let hlsInstance = null;
+        let bannerInterval = null;
+        let currentBannerIndex = 0;
 
         const daysMap = {
             'domingo': 1, 'lunes': 2, 'martes': 3,
@@ -650,15 +718,24 @@
             return 99;
         }
 
-        // CONVERTIDOR AUTOMÁTICO DE ENLACES JUMPSHARE A REPRODUCCIÓN / DESCARGA DIRECTA
-        function formatJumpshareUrl(url) {
-            if (!url) return '';
-            let trimmed = url.trim();
-            if (trimmed.includes('jumpshare.com/share/')) {
-                const code = trimmed.split('jumpshare.com/share/')[1].split('?')[0];
-                return `https://jumpshare.com/v/${code}`;
+        // CONVERTIDOR DE ENLACES JUMPSHARE A REPRODUCTOR EMBEBIDO
+        function getAudioEmbedData(rawUrl) {
+            if (!rawUrl || rawUrl.trim() === '') return { isJumpshare: false, url: '' };
+            let trimmed = rawUrl.trim();
+
+            if (trimmed.includes('jumpshare.com/share/') || trimmed.includes('jumpshare.com/v/')) {
+                let code = '';
+                if (trimmed.includes('/share/')) code = trimmed.split('/share/')[1].split('?')[0];
+                else if (trimmed.includes('/v/')) code = trimmed.split('/v/')[1].split('?')[0];
+
+                return {
+                    isJumpshare: true,
+                    embedUrl: `https://jumpshare.com/embed/${code}`,
+                    shareUrl: `https://jumpshare.com/v/${code}`
+                };
             }
-            return trimmed;
+
+            return { isJumpshare: false, url: trimmed };
         }
 
         const defaultData = {
@@ -672,14 +749,33 @@
                 address: "Avenida Principal #123, Ciudad Central",
                 fb: "https://facebook.com", yt: "https://youtube.com", ig: "https://instagram.com", wa: "", tk: ""
             },
+            banners: [
+                {
+                    id: "1",
+                    title: "Gran Congreso de Jóvenes 2026",
+                    subtitle: "Próximo Sábado 25 de Octubre - 4:00 PM",
+                    img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=1200",
+                    btnText: "Más Información",
+                    link: "#contacto"
+                },
+                {
+                    id: "2",
+                    title: "Culto Especial de Alabanza y Adoración",
+                    subtitle: "Domingo General - Sede Principal",
+                    img: "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=1200",
+                    btnText: "Ver Horarios",
+                    link: "#horarios"
+                }
+            ],
             menuItems: [
                 { id: "1", title: "Inicio", link: "#inicio", content: "" },
-                { id: "2", title: "Taber TV En Vivo", link: "#en-vivo", content: "" },
-                { id: "3", title: "Radio 106.1 FM", link: "#radio", content: "" },
-                { id: "4", title: "Sermones", link: "#transmision", content: "" },
-                { id: "5", title: "Blog Pastoral", link: "#blog", content: "" },
-                { id: "6", title: "Horarios", link: "#horarios", content: "" },
-                { id: "7", title: "Galería", link: "#galeria", content: "" }
+                { id: "2", title: "Anuncios", link: "#banner-eventos", content: "" },
+                { id: "3", title: "Taber TV En Vivo", link: "#en-vivo", content: "" },
+                { id: "4", title: "Radio 106.1 FM", link: "#radio", content: "" },
+                { id: "5", title: "Sermones", link: "#transmision", content: "" },
+                { id: "6", title: "Blog Pastoral", link: "#blog", content: "" },
+                { id: "7", title: "Horarios", link: "#horarios", content: "" },
+                { id: "8", title: "Galería", link: "#galeria", content: "" }
             ],
             blogs: [
                 {
@@ -689,7 +785,7 @@
                 }
             ],
             videos: [
-                { id: "1", title: "El Poder de la Oración Ferviente", author: "Pastor Principal", ytId: "dQw4w9WgXcQ", audioUrl: "https://jumpshare.com/v/VnJEN4b4912fnVEY0Trk" },
+                { id: "1", title: "El Poder de la Oración Ferviente", author: "Pastor Principal", ytId: "dQw4w9WgXcQ", audioUrl: "https://jumpshare.com/share/HeqwYV7vkbTjgPRcwjPs" },
                 { id: "2", title: "Caminando en Integridad y Fe", author: "Co-Pastor", ytId: "dQw4w9WgXcQ", audioUrl: "" }
             ],
             albums: [
@@ -709,6 +805,7 @@
             if (data) {
                 currentData = {
                     config: data.config || defaultData.config,
+                    banners: Object.values(data.banners || defaultData.banners),
                     menuItems: data.menuItems || defaultData.menuItems,
                     blogs: Object.values(data.blogs || defaultData.blogs),
                     videos: Object.values(data.videos || defaultData.videos),
@@ -720,6 +817,7 @@
             }
             renderPublicSite();
             renderAdminLists();
+            initBannerCarousel();
             setTimeout(() => { AOS.refresh(); }, 200);
         });
 
@@ -749,6 +847,82 @@
                 video.src = streamUrl;
             }
         }
+
+        // LÓGICA DEL CARRUSEL DE BANNERS (5 SEGUNDOS)
+        function initBannerCarousel() {
+            if (bannerInterval) clearInterval(bannerInterval);
+            const banners = currentData.banners || [];
+            if (banners.length === 0) return;
+
+            renderBannerSlide(currentBannerIndex);
+
+            bannerInterval = setInterval(() => {
+                currentBannerIndex = (currentBannerIndex + 1) % banners.length;
+                renderBannerSlide(currentBannerIndex);
+            }, 5000); // 5000ms = 5 Segundos
+        }
+
+        function renderBannerSlide(index) {
+            const banners = currentData.banners || [];
+            const container = document.getElementById('banner-slides-container');
+            const dotsContainer = document.getElementById('banner-dots-container');
+
+            if (banners.length === 0) {
+                container.innerHTML = `<p class="text-white text-center p-8">No hay anuncios o banners registrados.</p>`;
+                dotsContainer.innerHTML = '';
+                return;
+            }
+
+            const b = banners[index];
+            container.innerHTML = `
+                <div class="relative w-full h-full min-h-[300px] sm:min-h-[420px] flex items-center justify-center transition-all duration-700">
+                    <!-- IMAGEN DE FONDO -->
+                    <img src="${b.img}" alt="${b.title}" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30"></div>
+                    
+                    <!-- CONTENIDO SOBREPUESTO -->
+                    <div class="relative z-10 text-center text-white px-6 max-w-3xl space-y-3">
+                        ${b.subtitle ? `<span class="inline-block bg-amber-500 text-black text-xs font-black uppercase px-3 py-1 rounded-full shadow">${b.subtitle}</span>` : ''}
+                        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight drop-shadow-md">${b.title}</h2>
+                        ${b.btnText ? `
+                            <div class="pt-2">
+                                <a href="${b.link || '#contacto'}" class="inline-flex items-center space-x-2 bg-primary hover:bg-secondary text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:scale-105 transition duration-200">
+                                    <span>${b.btnText}</span>
+                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </a>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+
+            // Indicadores de puntos
+            dotsContainer.innerHTML = banners.map((_, i) => `
+                <button onclick="goToBannerSlide(${i})" class="w-3 h-3 rounded-full transition-all duration-300 ${i === index ? 'bg-amber-400 w-8' : 'bg-white/50 hover:bg-white'}"></button>
+            `).join('');
+        }
+
+        window.nextBannerSlide = () => {
+            const banners = currentData.banners || [];
+            if (banners.length === 0) return;
+            currentBannerIndex = (currentBannerIndex + 1) % banners.length;
+            renderBannerSlide(currentBannerIndex);
+            initBannerCarousel();
+        };
+
+        window.prevBannerSlide = () => {
+            const banners = currentData.banners || [];
+            if (banners.length === 0) return;
+            currentBannerIndex = (currentBannerIndex - 1 + banners.length) % banners.length;
+            renderBannerSlide(currentBannerIndex);
+            initBannerCarousel();
+        };
+
+        window.goToBannerSlide = (i) => {
+            currentBannerIndex = i;
+            renderBannerSlide(currentBannerIndex);
+            initBannerCarousel();
+        };
 
         window.scrollToSection = (targetHash) => {
             document.getElementById('main-sections-container').classList.remove('hidden');
@@ -782,7 +956,6 @@
 
             const menuItem = (currentData.menuItems || []).find(m => m.link === targetLink);
 
-            // Páginas personalizadas redactadas desde Admin
             if (menuItem && menuItem.content && menuItem.content.trim() !== "") {
                 mainContainer.classList.add('hidden');
                 dedicatedContainer.classList.add('hidden');
@@ -795,7 +968,6 @@
                 return;
             }
 
-            // VISTA DEDICADA DE SERMONES (TODOS LOS SUBIDOS)
             if (targetLink === '#transmision') {
                 mainContainer.classList.add('hidden');
                 customView.classList.add('hidden');
@@ -814,7 +986,6 @@
                     </div>
                 `;
             } else if (targetLink === '#blog') {
-                // VISTA DEDICADA DE BLOG (TODOS LOS ARTÍCULOS SUBIDOS)
                 mainContainer.classList.add('hidden');
                 customView.classList.add('hidden');
                 dedicatedContainer.classList.remove('hidden');
@@ -831,7 +1002,7 @@
                         ${renderBlogsHTML(currentData.blogs)}
                     </div>
                 `;
-            } else if (targetLink === '#en-vivo' || targetLink === '#radio' || targetLink === '#horarios' || targetLink === '#galeria') {
+            } else if (targetLink === '#en-vivo' || targetLink === '#radio' || targetLink === '#horarios' || targetLink === '#galeria' || targetLink === '#banner-eventos') {
                 mainContainer.classList.remove('hidden');
                 dedicatedContainer.classList.add('hidden');
                 customView.classList.add('hidden');
@@ -848,19 +1019,43 @@
             setTimeout(() => { AOS.refresh(); }, 150);
         };
 
-        // RENDER DE SERMONES CON SOPORTE AUTOMÁTICO DE ENLACES JUMPSHARE
+        // RENDER DE SERMONES CON SOPORTE JUMPSHARE
         function renderSermonsHTML(videoList) {
             if (!videoList || videoList.length === 0) {
                 return `<p class="text-center text-gray-500 col-span-full">No hay sermones disponibles en este momento.</p>`;
             }
             return videoList.map((v, idx) => {
                 const ytEmbed = parseYtEmbed(v.ytId);
+                const audioData = getAudioEmbedData(v.audioUrl);
                 const hasAudio = v.audioUrl && v.audioUrl.trim() !== '';
-                const formattedAudioUrl = formatJumpshareUrl(v.audioUrl);
+
+                let audioPlayerHTML = '';
+
+                if (!hasAudio) {
+                    audioPlayerHTML = `<p class="text-xs text-amber-300 italic">No se ha asignado un enlace de audio de Jumpshare para esta prédica.</p>`;
+                } else if (audioData.isJumpshare) {
+                    audioPlayerHTML = `
+                        <iframe src="${audioData.embedUrl}" class="w-full h-36 rounded-xl border border-blue-800 shadow" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        <a href="${audioData.shareUrl}" target="_blank" class="mt-3 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow flex items-center space-x-2">
+                            <i class="fa-solid fa-up-right-from-square"></i>
+                            <span>Abrir / Descargar en Jumpshare</span>
+                        </a>
+                    `;
+                } else {
+                    audioPlayerHTML = `
+                        <audio controls class="w-full mt-1 mb-3">
+                            <source src="${audioData.url}" type="audio/mpeg">
+                            Tu navegador no soporta el reproductor de audio.
+                        </audio>
+                        <a href="${audioData.url}" download target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow flex items-center space-x-2">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Descargar Audio MP3</span>
+                        </a>
+                    `;
+                }
 
                 return `
                     <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col hover:shadow-xl transition duration-300">
-                        <!-- SELECTOR DE MODO -->
                         <div class="p-3 bg-gray-50 border-b flex justify-between items-center text-xs">
                             <span class="font-bold text-gray-700">Formato:</span>
                             <div class="flex space-x-1">
@@ -873,39 +1068,20 @@
                             </div>
                         </div>
 
-                        <!-- VISTA VIDEO -->
                         <div id="sermon-video-${v.id}" class="aspect-video w-full bg-black">
                             <iframe class="w-full h-full" src="https://www.youtube.com/embed/${ytEmbed}" title="${v.title}" frameborder="0" allowfullscreen></iframe>
                         </div>
 
-                        <!-- VISTA SOLO AUDIO Y DESCARGA (JUMPSHARE / MP3) -->
-                        <div id="sermon-audio-${v.id}" class="aspect-video w-full bg-gradient-to-br from-blue-950 to-slate-900 p-6 flex flex-col justify-center items-center text-center text-white hidden">
-                            <div class="w-12 h-12 rounded-full bg-blue-800 text-white flex items-center justify-center text-lg mb-2 shadow animate-pulse">
-                                <i class="fa-solid fa-file-audio"></i>
-                            </div>
-                            <p class="text-xs text-blue-200 mb-2 font-medium">Reproductor de Audio (Jumpshare)</p>
-                            ${hasAudio ? `
-                                <audio controls class="w-full mt-1 mb-3">
-                                    <source src="${formattedAudioUrl}" type="audio/mpeg">
-                                    Tu navegador no soporta el reproductor de audio.
-                                </audio>
-                                <a href="${formattedAudioUrl}" download target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow flex items-center space-x-2">
-                                    <i class="fa-solid fa-download"></i>
-                                    <span>Descargar / Escuchar Audio</span>
-                                </a>
-                            ` : `
-                                <p class="text-xs text-amber-300 italic">No se ha asignado un enlace de audio (.mp3) de Jumpshare para esta prédica.</p>
-                            `}
+                        <div id="sermon-audio-${v.id}" class="aspect-video w-full bg-gradient-to-br from-blue-950 to-slate-900 p-4 flex flex-col justify-center items-center text-center text-white hidden">
+                            <p class="text-xs text-blue-200 mb-2 font-medium">Reproductor de Audio Pastoral</p>
+                            ${audioPlayerHTML}
                         </div>
 
-                        <!-- DETALLES Y BOTONES DE COMPARTIR -->
                         <div class="p-6 flex flex-col flex-grow justify-between">
                             <div>
                                 <span class="text-xs font-semibold text-primary uppercase tracking-wider mb-1 block">${v.author}</span>
                                 <h3 class="text-lg font-bold text-gray-900 mb-2">${v.title}</h3>
                             </div>
-                            
-                            <!-- COMPARTIR SERMÓN EN REDES SOCIALES -->
                             <div class="pt-4 mt-4 border-t flex items-center justify-between">
                                 <span class="text-xs font-bold text-gray-500">Compartir:</span>
                                 <div class="flex items-center space-x-1.5">
@@ -952,7 +1128,7 @@
             `).join('');
         }
 
-        // COMPARTIR SERMÓN / MENSAJE
+        // COMPARTIR SERMÓN
         window.shareSermon = (sermonId, platform) => {
             const v = (currentData.videos || []).find(item => item.id === sermonId);
             if (!v) return;
@@ -1065,7 +1241,7 @@
             }
         };
 
-        // MODO SERMÓN (VIDEO / AUDIO MP3)
+        // MODO SERMÓN
         window.switchSermonMode = (sermonId, mode) => {
             const videoBox = document.getElementById(`sermon-video-${sermonId}`);
             const audioBox = document.getElementById(`sermon-audio-${sermonId}`);
@@ -1225,6 +1401,24 @@
             document.getElementById('cfg-wa').value = data.config.wa || "";
             document.getElementById('cfg-tk').value = data.config.tk || "";
 
+            // LISTA ADMIN BANNERS
+            document.getElementById('admin-banners-list').innerHTML = (data.banners || []).map(b => `
+                <div class="bg-gray-50 p-4 rounded-xl border flex flex-col justify-between">
+                    <div class="flex space-x-4">
+                        <img src="${b.img}" class="w-24 h-24 object-cover rounded-lg border">
+                        <div class="overflow-hidden">
+                            <h5 class="font-bold text-gray-900 truncate">${b.title}</h5>
+                            <p class="text-xs text-amber-600 font-bold mt-1">${b.subtitle || 'Sin fecha'}</p>
+                            <p class="text-xs text-gray-500 line-clamp-1 mt-1">Botón: ${b.btnText || 'N/A'}</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2 mt-4 pt-3 border-t">
+                        <button onclick="editBanner('${b.id}')" class="flex-1 text-blue-600 text-xs font-semibold bg-blue-50 hover:bg-blue-100 py-2 rounded-lg transition">Editar</button>
+                        <button onclick="deleteBanner('${b.id}')" class="flex-1 text-red-500 text-xs font-semibold bg-red-50 hover:bg-red-100 py-2 rounded-lg transition">Eliminar</button>
+                    </div>
+                </div>
+            `).join('');
+
             document.getElementById('admin-menu-list').innerHTML = (data.menuItems || []).map(m => `
                 <div class="flex flex-col bg-gray-50 p-4 rounded-xl border space-y-2">
                     <div class="flex items-center justify-between">
@@ -1260,7 +1454,7 @@
                 <div class="flex items-center justify-between bg-gray-50 p-4 rounded-xl border">
                     <div>
                         <h5 class="font-bold text-gray-900">${v.title}</h5>
-                        <p class="text-xs text-gray-500">${v.author} | Video YT: ${v.ytId} | MP3: ${v.audioUrl ? 'Sí' : 'No'}</p>
+                        <p class="text-xs text-gray-500">${v.author} | Video YT: ${v.ytId} | Audio: ${v.audioUrl ? 'Asignado' : 'No'}</p>
                     </div>
                     <div class="flex space-x-2">
                         <button onclick="editVideo('${v.id}')" class="text-blue-600 hover:text-blue-800 px-3 py-1 rounded-lg text-sm font-semibold bg-blue-50 hover:bg-blue-100 transition">Editar</button>
@@ -1328,7 +1522,7 @@
         window.closeAdminPanel = () => document.getElementById('admin-panel').classList.add('hidden');
 
         window.switchTab = (tabName) => {
-            ['general', 'menu', 'blog', 'videos', 'galeria', 'horarios'].forEach(t => {
+            ['general', 'banners', 'menu', 'blog', 'videos', 'galeria', 'horarios'].forEach(t => {
                 document.getElementById(`tab-${t}`).classList.add('hidden');
                 document.getElementById(`tab-btn-${t}`).classList.remove('text-primary', 'border-b-2', 'border-primary');
                 document.getElementById(`tab-btn-${t}`).classList.add('text-gray-500');
@@ -1360,6 +1554,64 @@
             };
             saveData(currentData);
             alert('¡Configuración guardada exitosamente en Firebase!');
+        };
+
+        // ADMIN BANNERS
+        window.saveBanner = (e) => {
+            e.preventDefault();
+            const editId = document.getElementById('banner-edit-id').value;
+            const title = document.getElementById('banner-title').value;
+            const subtitle = document.getElementById('banner-subtitle').value;
+            const img = document.getElementById('banner-img').value;
+            const link = document.getElementById('banner-link').value;
+            const btnText = document.getElementById('banner-btn-text').value;
+
+            if (editId) {
+                const index = (currentData.banners || []).findIndex(b => b.id === editId);
+                if (index !== -1) currentData.banners[index] = { id: editId, title, subtitle, img, link, btnText };
+                alert('¡Banner actualizado!');
+            } else {
+                const newBanner = { id: Date.now().toString(), title, subtitle, img, link, btnText };
+                if (!currentData.banners) currentData.banners = [];
+                currentData.banners.unshift(newBanner);
+                alert('¡Nuevo banner agregado!');
+            }
+            saveData(currentData);
+            window.resetBannerForm();
+        };
+
+        window.editBanner = (id) => {
+            const b = (currentData.banners || []).find(item => item.id === id);
+            if (b) {
+                document.getElementById('banner-edit-id').value = b.id;
+                document.getElementById('banner-title').value = b.title;
+                document.getElementById('banner-subtitle').value = b.subtitle || '';
+                document.getElementById('banner-img').value = b.img;
+                document.getElementById('banner-link').value = b.link || '';
+                document.getElementById('banner-btn-text').value = b.btnText || '';
+                document.getElementById('banner-form-title').innerText = "Editar Banner";
+                document.getElementById('banner-submit-btn').innerText = "Guardar Cambios";
+                document.getElementById('cancel-edit-banner').classList.remove('hidden');
+            }
+        };
+
+        window.resetBannerForm = () => {
+            document.getElementById('banner-edit-id').value = '';
+            document.getElementById('banner-title').value = '';
+            document.getElementById('banner-subtitle').value = '';
+            document.getElementById('banner-img').value = '';
+            document.getElementById('banner-link').value = '';
+            document.getElementById('banner-btn-text').value = '';
+            document.getElementById('banner-form-title').innerText = "Agregar Nuevo Banner de Anuncio";
+            document.getElementById('banner-submit-btn').innerText = "Agregar Banner";
+            document.getElementById('cancel-edit-banner').classList.add('hidden');
+        };
+
+        window.deleteBanner = (id) => {
+            if (confirm('¿Estás seguro de eliminar este banner?')) {
+                currentData.banners = (currentData.banners || []).filter(b => b.id !== id);
+                saveData(currentData);
+            }
         };
 
         window.saveMenuItem = (e) => {
@@ -1474,8 +1726,7 @@
             const title = document.getElementById('vid-title').value;
             const author = document.getElementById('vid-author').value;
             const ytId = document.getElementById('vid-url').value;
-            const rawAudio = document.getElementById('vid-audio-url').value;
-            const audioUrl = formatJumpshareUrl(rawAudio);
+            const audioUrl = document.getElementById('vid-audio-url').value;
 
             if (editId) {
                 const index = currentData.videos.findIndex(v => v.id === editId);
