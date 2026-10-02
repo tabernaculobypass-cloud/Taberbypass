@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- TÍTULO Y DESCRIPCIÓN POR DEFECTO CORREGIDOS -->
+    <!-- TÍTULO Y DESCRIPCIÓN POR DEFECTO -->
     <title id="page-title">Taber by Pass - Una iglesia de Fe</title>
     <meta id="meta-desc" name="description" content="Bienvenidos a Taber by Pass. Una iglesia de Fe, esperanza y salvación. Sermones, Radio 106.1 FM y Taber TV en vivo.">
 
@@ -210,11 +210,11 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN SERMONES -->
+            <!-- SECCIÓN SERMONES INICIO -->
             <section id="transmision" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10">
                     <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Predicaciones</span>
-                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 mt-2">Sermones y Mensajes Recientes</h2>
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 mt-2">Sermones Recientes</h2>
                     <p class="text-gray-500 mt-2">Escoge entre ver el video o escuchar el audio de Jumpshare</p>
                 </div>
                 <div id="videos-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -222,7 +222,7 @@
                 </div>
                 <div id="videos-more-container" class="mt-10 text-center hidden">
                     <button onclick="showSingleView('#transmision')" class="bg-primary hover:bg-secondary text-white font-bold px-8 py-3.5 rounded-xl shadow-md hover:shadow-lg transition duration-200 inline-flex items-center space-x-2">
-                        <span>Ver más sermones y predicaciones</span>
+                        <span>Ver todos los sermones agrupados por pastor</span>
                         <i class="fa-solid fa-arrow-right text-xs"></i>
                     </button>
                 </div>
@@ -273,7 +273,7 @@
             </section>
         </div>
 
-        <!-- VISTA DEDICADA COMPLETA -->
+        <!-- VISTA DEDICADA COMPLETA (SERMONES AGRUPADOS POR PREDICADOR) -->
         <div id="dedicated-view-container" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hidden">
             <div id="dedicated-content"></div>
         </div>
@@ -321,7 +321,7 @@
         <p>&copy; 2026 Taber by Pass. Todos los derechos reservados. | Diseñado por Departamento Multimedia By Pass.</p>
     </footer>
 
-    <!-- MODAL LECTOR DE BLOG CON VISTA PREVIA PROFESIONAL -->
+    <!-- MODAL LECTOR DE BLOG -->
     <div id="blog-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden relative">
             <button onclick="closeBlogModal()" class="absolute top-4 right-4 bg-black/60 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-black transition z-10">
@@ -612,8 +612,8 @@
                         <input type="text" id="vid-title" required class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Predicador</label>
-                        <input type="text" id="vid-author" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Predicador / Pastor (Ej: Pastor Roger, David Barahona)</label>
+                        <input type="text" id="vid-author" required placeholder="Pastor Roger" class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">ID o URL de YouTube</label>
@@ -800,14 +800,14 @@
             ],
             blogs: [
                 {
-                    id: "1", title: "Perseverando en medio de las pruebas", author: "Pastor Principal", date: "1 de Octubre, 2026",
+                    id: "1", title: "Perseverando en medio de las pruebas", author: "Pastor Roger", date: "1 de Octubre, 2026",
                     img: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200",
                     content: "La palabra de Dios nos recuerda en Santiago 1:12 que bienaventurado es el varón que soporta la tentación..."
                 }
             ],
             videos: [
-                { id: "1", title: "El Poder de la Oración Ferviente", author: "Pastor Principal", ytId: "dQw4w9WgXcQ", audioUrl: "https://jumpshare.com/share/HeqwYV7vkbTjgPRcwjPs" },
-                { id: "2", title: "Caminando en Integridad y Fe", author: "Co-Pastor", ytId: "dQw4w9WgXcQ", audioUrl: "" }
+                { id: "1", title: "El Poder de la Oración Ferviente", author: "Pastor Roger", ytId: "dQw4w9WgXcQ", audioUrl: "https://jumpshare.com/share/HeqwYV7vkbTjgPRcwjPs" },
+                { id: "2", title: "Caminando en Integridad y Fe", author: "David Barahona", ytId: "dQw4w9WgXcQ", audioUrl: "" }
             ],
             albums: [
                 { id: "1", title: "Culto de Aniversario y Alabanza", desc: "Celebración especial...", cover: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800", photos: ["https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800"] }
@@ -820,7 +820,6 @@
 
         let currentData = defaultData;
 
-        // DETECTAR PARÁMETROS DE URL PARA ACTUALIZAR METADATOS DE MINIATURA Y FOTO
         function updateMetaTagsForArticle(articleId) {
             const blog = (currentData.blogs || []).find(b => b.id === articleId);
             if (!blog) return;
@@ -860,7 +859,6 @@
             renderAdminLists();
             initBannerCarousel();
 
-            // Verificar si hay parámetro de compartir artículo en la URL
             const urlParams = new URLSearchParams(window.location.search);
             const sharedArticle = urlParams.get('article');
             if (sharedArticle) {
@@ -1015,18 +1013,70 @@
                 mainContainer.classList.add('hidden');
                 customView.classList.add('hidden');
                 dedicatedContainer.classList.remove('hidden');
-                badge.innerText = "Sermones y Mensajes";
+                badge.innerText = "Sermones";
                 backBar.classList.remove('hidden');
 
+                // AGRUPACIÓN DE SERMONES POR PREDICADOR
+                const sermons = currentData.videos || [];
+                const groupedSermons = {};
+
+                sermons.forEach(v => {
+                    const author = v.author && v.author.trim() !== '' ? v.author.trim() : 'Otros Predicadores';
+                    if (!groupedSermons[author]) groupedSermons[author] = [];
+                    groupedSermons[author].push(v);
+                });
+
+                const authors = Object.keys(groupedSermons);
+
+                let navFilterHTML = '';
+                if (authors.length > 1) {
+                    navFilterHTML = `
+                        <div class="flex flex-wrap justify-center gap-2 mb-10 bg-white p-4 rounded-2xl shadow-sm border">
+                            <span class="text-xs font-bold text-gray-500 uppercase self-center mr-2">Ir a Pastor:</span>
+                            ${authors.map(a => `
+                                <a href="#pastor-${a.replace(/\s+/g, '-').toLowerCase()}" class="bg-blue-50 hover:bg-primary hover:text-white text-primary font-bold text-xs px-3.5 py-2 rounded-xl transition">
+                                    <i class="fa-solid fa-user-tie mr-1"></i> Sermones ${a}
+                                </a>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+
+                let sectionsHTML = '';
+                if (authors.length === 0) {
+                    sectionsHTML = `<p class="text-center text-gray-500 py-12">No hay sermones o predicaciones disponibles actualmente.</p>`;
+                } else {
+                    sectionsHTML = authors.map(authorName => {
+                        const anchorId = `pastor-${authorName.replace(/\s+/g, '-').toLowerCase()}`;
+                        const authorSermons = groupedSermons[authorName];
+
+                        return `
+                            <div id="${anchorId}" class="mb-14 scroll-mt-28">
+                                <div class="flex items-center space-x-3 mb-6 border-b border-gray-200 pb-3">
+                                    <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-bold text-lg">
+                                        <i class="fa-solid fa-user-tie"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-2xl font-extrabold text-gray-900">Sermones ${authorName}</h3>
+                                        <p class="text-xs text-gray-500 font-medium">${authorSermons.length} ${authorSermons.length === 1 ? 'predicación publicada' : 'predicaciones publicadas'}</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                    ${renderSermonsHTML(authorSermons)}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+
                 dedicatedContent.innerHTML = `
-                    <div class="text-center mb-10">
-                        <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Catálogo Completo</span>
-                        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2">Todos los Sermones y Predicaciones (${(currentData.videos || []).length})</h2>
-                        <p class="text-gray-500 mt-2">Explora la colección completa con reproductor de audio e integración con Jumpshare</p>
+                    <div class="text-center mb-8">
+                        <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Biblioteca Pastoral</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2">Sermones</h2>
+                        <p class="text-gray-500 mt-2 max-w-2xl mx-auto">Explora las predicaciones organizadas ordenadamente por cada pastor e invitado de nuestra iglesia</p>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        ${renderSermonsHTML(currentData.videos)}
-                    </div>
+                    ${navFilterHTML}
+                    ${sectionsHTML}
                 `;
             } else if (targetLink === '#blog') {
                 mainContainer.classList.add('hidden');
@@ -1064,7 +1114,7 @@
 
         function renderSermonsHTML(videoList) {
             if (!videoList || videoList.length === 0) {
-                return `<p class="text-center text-gray-500 col-span-full">No hay sermones disponibles en este momento.</p>`;
+                return `<p class="text-center text-gray-500 col-span-full">No hay sermones disponibles en esta sección.</p>`;
             }
             return videoList.map((v, idx) => {
                 const ytEmbed = parseYtEmbed(v.ytId);
@@ -1170,7 +1220,6 @@
             `).join('');
         }
 
-        // COMPARTIR BLOG CON VISTA PREVIA Y FORMATO OPTIMIZADO PARA WHATSAPP
         window.shareArticle = (blogId, platform) => {
             const b = (currentData.blogs || []).find(item => item.id === blogId);
             if (!b) return;
@@ -1178,7 +1227,6 @@
             const articleUrl = `${window.location.origin}${window.location.pathname}?article=${blogId}`;
             const cleanSnippet = b.content.replace(/<[^>]*>?/gm, '').substring(0, 120);
             
-            // Texto formateado con saltos de línea para forzar vista previa de imagen en WhatsApp
             const textMsg = `📖 *${b.title}*\n\n${cleanSnippet}...\n\nLee más en el enlace:\n${articleUrl}`;
 
             if (platform === 'wa') {
@@ -1491,7 +1539,7 @@
                 <div class="flex items-center justify-between bg-gray-50 p-4 rounded-xl border">
                     <div>
                         <h5 class="font-bold text-gray-900">${v.title}</h5>
-                        <p class="text-xs text-gray-500">${v.author} | Video YT: ${v.ytId} | Audio: ${v.audioUrl ? 'Asignado' : 'No'}</p>
+                        <p class="text-xs text-gray-500">Predicador: ${v.author} | Video YT: ${v.ytId} | Audio: ${v.audioUrl ? 'Asignado' : 'No'}</p>
                     </div>
                     <div class="flex space-x-2">
                         <button onclick="editVideo('${v.id}')" class="text-blue-600 hover:text-blue-800 px-3 py-1 rounded-lg text-sm font-semibold bg-blue-50 hover:bg-blue-100 transition">Editar</button>
