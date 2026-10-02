@@ -61,7 +61,7 @@
     </header>
 
     <!-- BARRA DE NAVEGACIÓN Y RETORNO (APARECE CUANDO NO SE ESTÁ EN INICIO) -->
-    <div id="back-to-home-bar" class="bg-primary/10 border-b border-primary/20 py-2.5 px-4 hidden">
+    <div id="back-to-home-bar" class="bg-primary/10 border-b border-primary/20 py-2.5 px-4 hidden sticky top-20 z-30 backdrop-blur-md">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <button onclick="showSingleView('inicio')" class="text-primary hover:text-secondary text-xs sm:text-sm font-bold flex items-center space-x-2 transition">
                 <i class="fa-solid fa-house"></i>
@@ -73,138 +73,160 @@
         </div>
     </div>
 
-    <!-- CONTENIDO PRINCIPAL DE VISTAS (SECCIONES INDEPENDIENTES) -->
+    <!-- CONTENIDO PRINCIPAL -->
     <main class="flex-grow">
 
-        <!-- HERO / INICIO SECTION -->
-        <section id="inicio" class="view-section relative bg-gradient-to-r from-gray-900 via-secondary to-primary text-white py-24 px-4 sm:px-6 lg:px-8 overflow-hidden shadow-inner">
-            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-            <div class="max-w-4xl mx-auto text-center relative z-10">
-                <span id="hero-badge" data-aos="fade-down" data-aos-duration="800" class="inline-block bg-white/10 text-blue-200 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-widest border border-white/20">Bienvenidos a Casa</span>
-                <h1 id="hero-title" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1000" class="text-4xl sm:text-6xl font-extrabold tracking-tight mt-4 mb-6 leading-tight">Un lugar de esperanza y salvación</h1>
-                <p id="hero-subtitle" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800" class="text-lg sm:text-xl text-gray-200 mb-8 max-w-2xl mx-auto font-light">"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos."</p>
-                
-                <div data-aos="fade-up" data-aos-delay="600" class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
-                    <button onclick="showSingleView('#en-vivo')" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-red-900/40 hover:-translate-y-1 transition duration-300 flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-tv"></i>
-                        <span>Ver Taber TV En Vivo</span>
-                    </button>
-                    <button onclick="showSingleView('#radio')" class="bg-white text-gray-900 hover:bg-gray-100 font-semibold px-8 py-3.5 rounded-xl shadow-lg hover:-translate-y-1 transition duration-300 flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-radio text-primary"></i>
-                        <span>Escuchar Radio 106.1 FM</span>
-                    </button>
-                </div>
+        <!-- BLOQUE DE INICIO (CONTIENE TV, RADIO, LOS PRIMEROS 4 SERMONES Y 4 BLOGS) -->
+        <div id="main-sections-container">
+            <!-- HERO / BANNER PRINCIPAL -->
+            <section id="inicio" class="relative bg-gradient-to-r from-gray-900 via-secondary to-primary text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden shadow-inner">
+                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div class="max-w-4xl mx-auto text-center relative z-10">
+                    <span id="hero-badge" data-aos="fade-down" data-aos-duration="800" class="inline-block bg-white/10 text-blue-200 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-widest border border-white/20">Bienvenidos a Casa</span>
+                    <h1 id="hero-title" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1000" class="text-4xl sm:text-6xl font-extrabold tracking-tight mt-4 mb-6 leading-tight">Un lugar de esperanza y salvación</h1>
+                    <p id="hero-subtitle" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800" class="text-lg sm:text-xl text-gray-200 mb-8 max-w-2xl mx-auto font-light">"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos."</p>
+                    
+                    <div data-aos="fade-up" data-aos-delay="600" class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+                        <button onclick="scrollToSection('#en-vivo')" class="bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-red-900/40 hover:-translate-y-1 transition duration-300 flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-tv"></i>
+                            <span>Ver Taber TV En Vivo</span>
+                        </button>
+                        <button onclick="scrollToSection('#radio')" class="bg-white text-gray-900 hover:bg-gray-100 font-semibold px-8 py-3.5 rounded-xl shadow-lg hover:-translate-y-1 transition duration-300 flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-radio text-primary"></i>
+                            <span>Escuchar Radio 106.1 FM</span>
+                        </button>
+                    </div>
 
-                <!-- REDES SOCIALES DE LA IGLESIA -->
-                <div data-aos="fade-up" data-aos-delay="800" class="pt-4 border-t border-white/10 flex items-center justify-center space-x-4" id="social-links-container">
-                    <!-- Redes cargadas dinámicamente -->
+                    <!-- REDES SOCIALES DE LA IGLESIA -->
+                    <div data-aos="fade-up" data-aos-delay="800" class="pt-4 border-t border-white/10 flex items-center justify-center space-x-4" id="social-links-container">
+                        <!-- Redes cargadas dinámicamente -->
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- SECCIÓN TABER TV EN VIVO -->
-        <section id="en-vivo" class="view-section py-16 bg-gray-900 text-white px-4 sm:px-6 lg:px-8 hidden">
-            <div class="max-w-5xl mx-auto">
+            <!-- SECCIÓN TABER TV EN VIVO -->
+            <section id="en-vivo" class="py-16 bg-gray-900 text-white px-4 sm:px-6 lg:px-8">
+                <div class="max-w-5xl mx-auto">
+                    <div class="text-center mb-10" data-aos="fade-up">
+                        <div class="inline-flex items-center space-x-2 bg-red-600/20 text-red-400 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-3 border border-red-500/30">
+                            <span class="w-2.5 h-2.5 rounded-full bg-red-600 animate-ping"></span>
+                            <span>Señal en Directo</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Taber TV En Vivo</h2>
+                        <p class="text-gray-400 mt-2">Disfruta de nuestros cultos y servicios transmitidos en tiempo real</p>
+                    </div>
+                    
+                    <div data-aos="zoom-in" data-aos-duration="900" class="bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800 hover:border-gray-700 transition duration-300">
+                        <div class="aspect-video w-full bg-black relative flex items-center justify-center" id="live-container">
+                            <video id="hls-player" controls class="w-full h-full object-contain" poster=""></video>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN RADIO BAUTISTA 106.1 FM -->
+            <section id="radio" class="py-16 bg-blue-950 text-white px-4 sm:px-6 lg:px-8">
+                <div data-aos="flip-up" data-aos-duration="1000" class="max-w-4xl mx-auto bg-gradient-to-br from-blue-900 to-blue-950 p-8 sm:p-12 rounded-3xl shadow-xl border border-blue-800 flex flex-col md:flex-row items-center justify-between gap-8 hover:shadow-2xl transition duration-300">
+                    <div class="space-y-4 text-center md:text-left">
+                        <div class="inline-flex items-center space-x-2 bg-blue-800/60 text-blue-300 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-blue-700">
+                            <i class="fa-solid fa-tower-broadcast text-blue-400"></i>
+                            <span>Señal Radial 24/7 En Vivo</span>
+                        </div>
+                        <h2 class="text-3xl font-extrabold tracking-tight">Radio Bautista 106.1 FM</h2>
+                        <p class="text-blue-200/80 text-sm sm:text-base max-w-md">Llevando la palabra de Dios y alabanzas edificantes a cada rincón de tu hogar a través de nuestra señal en directo.</p>
+                    </div>
+                    <div class="flex flex-col items-center justify-center bg-blue-900/80 p-6 rounded-2xl border border-blue-700/50 min-w-[280px] w-full md:w-auto shadow-inner">
+                        <div class="w-16 h-16 rounded-full bg-blue-700 text-white flex items-center justify-center text-2xl mb-3 shadow-md animate-pulse">
+                            <i class="fa-solid fa-radio"></i>
+                        </div>
+                        <span class="font-bold text-lg mb-4 text-white">106.1 FM En Directo</span>
+                        
+                        <audio id="radio-audio-player" preload="none"></audio>
+                        <iframe id="radio-hidden-iframe" class="hidden w-0 h-0" allow="autoplay"></iframe>
+
+                        <button id="radio-toggle-btn" onclick="toggleRadioPlay()" class="w-full bg-white text-blue-900 hover:bg-blue-50 font-bold px-6 py-3.5 rounded-xl transition text-center shadow-md hover:-translate-y-0.5 flex items-center justify-center space-x-2 duration-200">
+                            <i id="radio-btn-icon" class="fa-solid fa-play text-primary"></i>
+                            <span id="radio-btn-text">Reproducir Radio</span>
+                        </button>
+                        
+                        <p id="radio-status-text" class="text-xs text-blue-300 mt-3 font-medium text-center">Presiona para iniciar reproducción</p>
+                        <a id="radio-external-link" href="https://radiobautista106uno.radiostream123.com/" target="_blank" class="mt-2 text-xs text-blue-400 underline hover:text-white transition hidden">Abrir señal externa en otra pestaña</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN SERMONES (LÍMITE MÁXIMO DE 4 EN INICIO) -->
+            <section id="transmision" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10" data-aos="fade-up">
-                    <div class="inline-flex items-center space-x-2 bg-red-600/20 text-red-400 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-3 border border-red-500/30">
-                        <span class="w-2.5 h-2.5 rounded-full bg-red-600 animate-ping"></span>
-                        <span>Señal en Directo</span>
-                    </div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Taber TV En Vivo</h2>
-                    <p class="text-gray-400 mt-2">Disfruta de nuestros cultos y servicios transmitidos en tiempo real</p>
+                    <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Predicaciones</span>
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 mt-2">Sermones y Mensajes Recientes</h2>
+                    <p class="text-gray-500 mt-2">Escoge entre ver la predicación en video o escuchar solo el audio</p>
                 </div>
-                
-                <div data-aos="zoom-in" data-aos-duration="900" class="bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800 hover:border-gray-700 transition duration-300">
-                    <div class="aspect-video w-full bg-black relative flex items-center justify-center" id="live-container">
-                        <video id="hls-player" controls class="w-full h-full object-contain" poster=""></video>
-                    </div>
+                <div id="videos-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Máximo 4 sermones aquí -->
                 </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN RADIO BAUTISTA 106.1 FM -->
-        <section id="radio" class="view-section py-16 bg-blue-950 text-white px-4 sm:px-6 lg:px-8 hidden">
-            <div data-aos="flip-up" data-aos-duration="1000" class="max-w-4xl mx-auto bg-gradient-to-br from-blue-900 to-blue-950 p-8 sm:p-12 rounded-3xl shadow-xl border border-blue-800 flex flex-col md:flex-row items-center justify-between gap-8 hover:shadow-2xl transition duration-300">
-                <div class="space-y-4 text-center md:text-left">
-                    <div class="inline-flex items-center space-x-2 bg-blue-800/60 text-blue-300 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-blue-700">
-                        <i class="fa-solid fa-tower-broadcast text-blue-400"></i>
-                        <span>Señal Radial 24/7 En Vivo</span>
-                    </div>
-                    <h2 class="text-3xl font-extrabold tracking-tight">Radio Bautista 106.1 FM</h2>
-                    <p class="text-blue-200/80 text-sm sm:text-base max-w-md">Llevando la palabra de Dios y alabanzas edificantes a cada rincón de tu hogar a través de nuestra señal en directo.</p>
-                </div>
-                <div class="flex flex-col items-center justify-center bg-blue-900/80 p-6 rounded-2xl border border-blue-700/50 min-w-[280px] w-full md:w-auto shadow-inner">
-                    <div class="w-16 h-16 rounded-full bg-blue-700 text-white flex items-center justify-center text-2xl mb-3 shadow-md animate-pulse">
-                        <i class="fa-solid fa-radio"></i>
-                    </div>
-                    <span class="font-bold text-lg mb-4 text-white">106.1 FM En Directo</span>
-                    
-                    <audio id="radio-audio-player" preload="none"></audio>
-                    <iframe id="radio-hidden-iframe" class="hidden w-0 h-0" allow="autoplay"></iframe>
-
-                    <button id="radio-toggle-btn" onclick="toggleRadioPlay()" class="w-full bg-white text-blue-900 hover:bg-blue-50 font-bold px-6 py-3.5 rounded-xl transition text-center shadow-md hover:-translate-y-0.5 flex items-center justify-center space-x-2 duration-200">
-                        <i id="radio-btn-icon" class="fa-solid fa-play text-primary"></i>
-                        <span id="radio-btn-text">Reproducir Radio</span>
+                <div id="videos-more-container" class="mt-10 text-center hidden">
+                    <button onclick="showSingleView('#transmision')" class="bg-primary hover:bg-secondary text-white font-bold px-8 py-3.5 rounded-xl shadow-md hover:shadow-lg transition duration-200 inline-flex items-center space-x-2">
+                        <span>Ver más sermones y predicaciones</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
                     </button>
-                    
-                    <p id="radio-status-text" class="text-xs text-blue-300 mt-3 font-medium text-center">Presiona para iniciar reproducción</p>
-                    <a id="radio-external-link" href="https://radiobautista106uno.radiostream123.com/" target="_blank" class="mt-2 text-xs text-blue-400 underline hover:text-white transition hidden">Abrir señal externa en otra pestaña</a>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- SECCIÓN SERMONES / MENSAJES (VIDEO O AUDIO) -->
-        <section id="transmision" class="view-section py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hidden">
-            <div class="text-center mb-12" data-aos="fade-up">
-                <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Predicaciones</span>
-                <h2 class="text-3xl font-bold tracking-tight text-gray-900 mt-2">Sermones y Mensajes</h2>
-                <p class="text-gray-500 mt-2">Escoge entre ver la predicación en video o escuchar solo el audio</p>
-            </div>
-            <div id="videos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Se llena dinámicamente -->
-            </div>
-        </section>
+            <!-- SECCIÓN BLOG (LÍMITE MÁXIMO DE 4 EN INICIO) -->
+            <section id="blog" class="py-16 bg-gray-100/70 border-y border-gray-200 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-10" data-aos="fade-up">
+                        <span class="bg-blue-600/10 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Artículos y Noticias</span>
+                        <h2 class="text-3xl font-bold tracking-tight text-gray-900 mt-2">Blog Pastoral y Noticias</h2>
+                        <p class="text-gray-500 mt-2">Lecturas edificantes, reflexiones espirituales y noticias</p>
+                    </div>
+                    <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Máximo 4 publicaciones de blog -->
+                    </div>
+                    <div id="blog-more-container" class="mt-10 text-center hidden">
+                        <button onclick="showSingleView('#blog')" class="bg-primary hover:bg-secondary text-white font-bold px-8 py-3.5 rounded-xl shadow-md hover:shadow-lg transition duration-200 inline-flex items-center space-x-2">
+                            <span>Ver más publicaciones e historias</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
 
-        <!-- SECCIÓN DE BLOG CON NOTICIAS Y OPCIÓN DE COMPARTIR CON MINIATURA -->
-        <section id="blog" class="view-section py-16 bg-gray-100/70 border-y border-gray-200 px-4 sm:px-6 lg:px-8 hidden">
-            <div class="max-w-7xl mx-auto">
+            <!-- HORARIOS CRONOLÓGICAMENTE ORDENADOS -->
+            <section id="horarios" class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+                <div class="max-w-5xl mx-auto">
+                    <div class="text-center mb-12" data-aos="fade-up">
+                        <h2 class="text-3xl font-bold tracking-tight text-gray-900">Horarios de Servicios</h2>
+                        <p class="text-gray-500 mt-2">Organizados semanalmente de Domingo a Sábado para tu comodidad</p>
+                    </div>
+                    <div id="horarios-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Horarios ordenados dinámicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- GALERÍA DE ÁLBUMES DE FOTOS -->
+            <section id="galeria" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-gray-50">
                 <div class="text-center mb-12" data-aos="fade-up">
-                    <span class="bg-blue-600/10 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Artículos y Noticias</span>
-                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 mt-2">Blog Pastoral y Noticias</h2>
-                    <p class="text-gray-500 mt-2">Lecturas edificantes, reflexiones espirituales y opciones para compartir en redes sociales</p>
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Álbumes Fotográficos</h2>
+                    <p class="text-gray-500 mt-2">Haz clic en un álbum para explorar las fotografías y momentos compartidos</p>
                 </div>
-                <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Artículos dinámicos del blog -->
+                <div id="albums-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                    <!-- Álbumes dinámicos -->
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
-        <!-- HORARIOS CRONOLÓGICAMENTE ORDENADOS -->
-        <section id="horarios" class="view-section py-16 px-4 sm:px-6 lg:px-8 bg-white hidden">
-            <div class="max-w-5xl mx-auto">
-                <div class="text-center mb-12" data-aos="fade-up">
-                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Horarios de Servicios</h2>
-                    <p class="text-gray-500 mt-2">Organizados semanalmente de Domingo a Sábado para tu comodidad</p>
-                </div>
-                <div id="horarios-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Horarios ordenados dinámicamente -->
-                </div>
+        <!-- CONTENEDOR DE VISTA DEDICADA COMPLETA (CUANDO SE HACE CLIC EN EL MENÚ O EN "VER MÁS") -->
+        <div id="dedicated-view-container" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hidden">
+            <div id="dedicated-content">
+                <!-- Se inyecta dinámicamente el contenido completo seleccionado -->
             </div>
-        </section>
+        </div>
 
-        <!-- GALERÍA DE ÁLBUMES DE FOTOS -->
-        <section id="galeria" class="view-section py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-gray-50 hidden">
-            <div class="text-center mb-12" data-aos="fade-up">
-                <h2 class="text-3xl font-bold tracking-tight text-gray-900">Álbumes Fotográficos</h2>
-                <p class="text-gray-500 mt-2">Haz clic en un álbum para explorar las fotografías y momentos compartidos</p>
-            </div>
-            <div id="albums-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
-                <!-- Álbumes dinámicos -->
-            </div>
-        </section>
-
-        <!-- SECCIÓN DE PÁGINA PERSONALIZADA -->
-        <section id="custom-page-view" class="view-section py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 hidden">
+        <!-- SECCIÓN DE PÁGINA PERSONALIZADA REDACTADA DESDE ADMIN -->
+        <section id="custom-page-view" class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 hidden">
             <div data-aos="zoom-in" data-aos-duration="600" class="bg-white rounded-3xl shadow-lg border p-8 sm:p-12 space-y-6">
                 <button onclick="showSingleView('inicio')" class="text-primary hover:underline text-sm font-semibold flex items-center space-x-2">
                     <i class="fa-solid fa-arrow-left"></i>
@@ -217,7 +239,7 @@
             </div>
         </section>
 
-        <!-- CONTACTO / UBICACIÓN (SIEMPRE VISIBLE AL FINAL O INDEPENDIENTE) -->
+        <!-- CONTACTO / UBICACIÓN -->
         <section id="contacto" class="bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8">
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div data-aos="fade-right">
@@ -622,7 +644,7 @@
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
         import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        // Configuración de tu proyecto Firebase
+        // Configuración del proyecto Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyCHh51DPwEqoDnqubtLVFrSKQLuIyoVrEE",
             authDomain: "taberbypass-4ad11.firebaseapp.com",
@@ -634,63 +656,40 @@
             databaseURL: "https://taberbypass-4ad11-default-rtdb.firebaseio.com"
         };
 
-        // Inicializar Firebase y Analytics
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const db = getDatabase(app);
         const dbRef = ref(db, 'taber_data');
 
-        // Inicializar Librería AOS
-        AOS.init({
-            duration: 800,
-            once: false,
-            mirror: true
-        });
+        AOS.init({ duration: 800, once: false, mirror: true });
 
-        // Instancia global de HLS
         let hlsInstance = null;
 
-        // Mapeo de días de la semana para orden cronológico
         const daysMap = {
-            'domingo': 1,
-            'lunes': 2,
-            'martes': 3,
-            'miercoles': 4, 'miércoles': 4,
-            'jueves': 5,
-            'viernes': 6,
-            'sabado': 7, 'sábado': 7
+            'domingo': 1, 'lunes': 2, 'martes': 3,
+            'miercoles': 4, 'miércoles': 4, 'jueves': 5,
+            'viernes': 6, 'sabado': 7, 'sábado': 7
         };
 
         function getDayOrder(dayStr) {
             if (!dayStr) return 99;
             const lower = dayStr.toLowerCase();
             for (let day in daysMap) {
-                if (lower.includes(day)) {
-                    return daysMap[day];
-                }
+                if (lower.includes(day)) return daysMap[day];
             }
             return 99;
         }
 
-        // Datos por defecto
         const defaultData = {
             config: {
-                logoUrl: "",
-                brand: "Taber by Pass",
-                subtitle: "Ministerio de Fe y Adoración",
+                logoUrl: "", brand: "Taber by Pass", subtitle: "Ministerio de Fe y Adoración",
                 liveTv: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
                 radioUrl: "https://radiobautista106uno.radiostream123.com/",
                 heroTitle: "Un lugar de esperanza y salvación",
                 heroSub: "\"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos.\"",
-                phone: "+503 2222-3333",
-                email: "contacto@taberbypass.org",
-                receiverEmail: "contacto@taberbypass.org",
+                phone: "+503 2222-3333", email: "contacto@taberbypass.org", receiverEmail: "contacto@taberbypass.org",
                 address: "Avenida Principal #123, Ciudad Central",
-                fb: "https://facebook.com",
-                yt: "https://youtube.com",
-                ig: "https://instagram.com",
-                wa: "",
-                tk: ""
+                fb: "https://facebook.com", yt: "https://youtube.com", ig: "https://instagram.com", wa: "", tk: ""
             },
             menuItems: [
                 { id: "1", title: "Inicio", link: "#inicio", content: "" },
@@ -703,41 +702,17 @@
             ],
             blogs: [
                 {
-                    id: "1",
-                    title: "Perseverando en medio de las pruebas",
-                    author: "Pastor Principal",
-                    date: "1 de Octubre, 2026",
+                    id: "1", title: "Perseverando en medio de las pruebas", author: "Pastor Principal", date: "1 de Octubre, 2026",
                     img: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=800",
-                    content: "La palabra de Dios nos recuerda en Santiago 1:12 que bienaventurado es el varón que soporta la tentación y la prueba, porque cuando haya resistido, recibirá la corona de vida. Animamos a toda nuestra congregación a mantenerse firme en la oración."
+                    content: "La palabra de Dios nos recuerda en Santiago 1:12 que bienaventurado es el varón que soporta la tentación..."
                 }
             ],
             videos: [
-                { 
-                    id: "1", 
-                    title: "El Poder de la Oración Ferviente", 
-                    author: "Pastor Principal", 
-                    ytId: "dQw4w9WgXcQ",
-                    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-                },
-                { 
-                    id: "2", 
-                    title: "Caminando en Integridad y Fe", 
-                    author: "Co-Pastor", 
-                    ytId: "dQw4w9WgXcQ",
-                    audioUrl: ""
-                }
+                { id: "1", title: "El Poder de la Oración Ferviente", author: "Pastor Principal", ytId: "dQw4w9WgXcQ", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+                { id: "2", title: "Caminando en Integridad y Fe", author: "Co-Pastor", ytId: "dQw4w9WgXcQ", audioUrl: "" }
             ],
             albums: [
-                {
-                    id: "1",
-                    title: "Culto de Aniversario y Alabanza",
-                    desc: "Celebración especial con nuestra congregación en agradecimiento a Dios.",
-                    cover: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800",
-                    photos: [
-                        "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800",
-                        "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800"
-                    ]
-                }
+                { id: "1", title: "Culto de Aniversario y Alabanza", desc: "Celebración especial...", cover: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800", photos: ["https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800"] }
             ],
             schedules: [
                 { id: "1", day: "Domingo de Adoración", time: "9:00 AM", desc: "Culto General y Escuela Dominical" },
@@ -747,7 +722,6 @@
 
         let currentData = defaultData;
 
-        // Escuchar cambios en tiempo real desde Firebase
         onValue(dbRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
@@ -768,40 +742,25 @@
         });
 
         function saveData(data) {
-            set(dbRef, data).then(() => {
-                console.log("Datos sincronizados exitosamente con Firebase.");
-            }).catch((err) => {
-                console.error("Error al guardar en Firebase: ", err);
-            });
+            set(dbRef, data).catch((err) => console.error("Error al guardar en Firebase: ", err));
         }
 
         function parseYtEmbed(urlOrId) {
             if (!urlOrId) return "dQw4w9WgXcQ";
             let ytEmbed = urlOrId.trim();
-            if (ytEmbed.includes('v=')) {
-                ytEmbed = ytEmbed.split('v=')[1].split('&')[0];
-            } else if (ytEmbed.includes('youtu.be/')) {
-                ytEmbed = ytEmbed.split('youtu.be/')[1].split('?')[0];
-            }
+            if (ytEmbed.includes('v=')) ytEmbed = ytEmbed.split('v=')[1].split('&')[0];
+            else if (ytEmbed.includes('youtu.be/')) ytEmbed = ytEmbed.split('youtu.be/')[1].split('?')[0];
             return ytEmbed;
         }
 
         function loadHlsStream(m3u8Url) {
             const video = document.getElementById('hls-player');
             if (!m3u8Url || m3u8Url.trim() === '') return;
-
             const streamUrl = m3u8Url.trim();
-
-            if (hlsInstance) {
-                hlsInstance.destroy();
-                hlsInstance = null;
-            }
+            if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
 
             if (Hls.isSupported()) {
-                hlsInstance = new Hls({
-                    enableWorker: true,
-                    lowLatencyMode: true
-                });
+                hlsInstance = new Hls({ enableWorker: true, lowLatencyMode: true });
                 hlsInstance.loadSource(streamUrl);
                 hlsInstance.attachMedia(video);
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
@@ -809,57 +768,177 @@
             }
         }
 
-        // LÓGICA DE NAVEGACIÓN LIMPIA (SEGUNDA OPCIÓN: NAVEGACIÓN INDEPENDIENTE SIN SATURAR)
-        window.showSingleView = (targetLink) => {
-            // Ocultar absolutamente todas las secciones con la clase view-section
-            document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
+        // DESPLAZAMIENTO SUAVE PARA BOTONES DE INICIO (#en-vivo, #radio)
+        window.scrollToSection = (targetHash) => {
+            document.getElementById('main-sections-container').classList.remove('hidden');
+            document.getElementById('dedicated-view-container').classList.add('hidden');
+            document.getElementById('custom-page-view').classList.add('hidden');
+            document.getElementById('back-to-home-bar').classList.add('hidden');
 
+            const el = document.querySelector(targetHash);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        };
+
+        // NAVEGACIÓN COMPLETA INDEPENDIENTE CUANDO SE SELECCIONA UN MENÚ O VER MÁS
+        window.showSingleView = (targetLink) => {
+            const mainContainer = document.getElementById('main-sections-container');
+            const dedicatedContainer = document.getElementById('dedicated-view-container');
+            const dedicatedContent = document.getElementById('dedicated-content');
+            const customView = document.getElementById('custom-page-view');
             const backBar = document.getElementById('back-to-home-bar');
             const badge = document.getElementById('current-view-badge');
 
-            // Caso 1: Inicio o reset
+            // Caso Inicio
             if (targetLink === 'inicio' || targetLink === '#inicio') {
-                document.getElementById('inicio').classList.remove('hidden');
+                mainContainer.classList.remove('hidden');
+                dedicatedContainer.classList.add('hidden');
+                customView.classList.add('hidden');
                 backBar.classList.add('hidden');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                setTimeout(() => { AOS.refresh(); }, 100);
+                setTimeout(() => { AOS.refresh(); }, 150);
                 return;
             }
 
-            // Buscar si es una página personalizada redactada desde Admin
             const menuItem = (currentData.menuItems || []).find(m => m.link === targetLink);
 
+            // Páginas personalizadas desde Admin
             if (menuItem && menuItem.content && menuItem.content.trim() !== "") {
-                const customView = document.getElementById('custom-page-view');
+                mainContainer.classList.add('hidden');
+                dedicatedContainer.classList.add('hidden');
+                customView.classList.remove('hidden');
                 document.getElementById('custom-page-title').innerText = menuItem.title;
                 document.getElementById('custom-page-content').innerHTML = menuItem.content;
-                customView.classList.remove('hidden');
-                
                 badge.innerText = menuItem.title;
                 backBar.classList.remove('hidden');
-            } else if (targetLink.startsWith('#')) {
-                // Si es un ID interno (#en-vivo, #radio, #transmision, etc.)
-                const targetId = targetLink.substring(1);
-                const targetEl = document.getElementById(targetId);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
 
-                if (targetEl) {
-                    targetEl.classList.remove('hidden');
-                    badge.innerText = menuItem ? menuItem.title : targetId.toUpperCase();
-                    backBar.classList.remove('hidden');
-                } else {
-                    document.getElementById('inicio').classList.remove('hidden');
-                    backBar.classList.add('hidden');
-                }
-            } else {
-                // Si es un enlace web externo completo (ej. https://...)
-                window.open(targetLink, '_blank');
-                document.getElementById('inicio').classList.remove('hidden');
+            // Vistas dedicadas de secciones
+            if (targetLink === '#transmision') {
+                mainContainer.classList.add('hidden');
+                customView.classList.add('hidden');
+                dedicatedContainer.classList.remove('hidden');
+                badge.innerText = "Sermones y Mensajes";
+                backBar.classList.remove('hidden');
+
+                dedicatedContent.innerHTML = `
+                    <div class="text-center mb-10">
+                        <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Catálogo Completo</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2">Todos nuestros Sermones y Predicaciones</h2>
+                        <p class="text-gray-500 mt-2">Explora la colección completa de sermones en video y audio</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        ${renderSermonsHTML(currentData.videos)}
+                    </div>
+                `;
+            } else if (targetLink === '#blog') {
+                mainContainer.classList.add('hidden');
+                customView.classList.add('hidden');
+                dedicatedContainer.classList.remove('hidden');
+                badge.innerText = "Blog Pastoral y Noticias";
+                backBar.classList.remove('hidden');
+
+                dedicatedContent.innerHTML = `
+                    <div class="text-center mb-10">
+                        <span class="bg-blue-600/10 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Catálogo Completo</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2">Todos los Artículos y Noticias</h2>
+                        <p class="text-gray-500 mt-2">Lecturas edificantes y reflexiones espirituales publicadas por nuestros pastores</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        ${renderBlogsHTML(currentData.blogs)}
+                    </div>
+                `;
+            } else if (targetLink === '#en-vivo' || targetLink === '#radio' || targetLink === '#horarios' || targetLink === '#galeria') {
+                // Ir a la portada y desplazarse a la sección elegida
+                mainContainer.classList.remove('hidden');
+                dedicatedContainer.classList.add('hidden');
+                customView.classList.add('hidden');
                 backBar.classList.add('hidden');
+                const el = document.querySelector(targetLink);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                return;
+            } else {
+                window.open(targetLink, '_blank');
+                return;
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => { AOS.refresh(); }, 150);
         };
+
+        // PLANTILLAS HTML PARA SERMONES
+        function renderSermonsHTML(videoList) {
+            if (!videoList || videoList.length === 0) {
+                return `<p class="text-center text-gray-500 col-span-full">No hay sermones disponibles en este momento.</p>`;
+            }
+            return videoList.map((v, idx) => {
+                const ytEmbed = parseYtEmbed(v.ytId);
+                const hasAudio = v.audioUrl && v.audioUrl.trim() !== '';
+                return `
+                    <div data-aos="fade-up" data-aos-delay="${idx * 100}" class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col hover:shadow-xl transition duration-300">
+                        <div class="p-3 bg-gray-50 border-b flex justify-between items-center text-xs">
+                            <span class="font-bold text-gray-700">Modo:</span>
+                            <div class="flex space-x-1">
+                                <button id="btn-mode-video-${v.id}" onclick="switchSermonMode('${v.id}', 'video')" class="px-3 py-1 bg-primary text-white font-bold rounded-md transition shadow">
+                                    <i class="fa-solid fa-video mr-1"></i> Video
+                                </button>
+                                <button id="btn-mode-audio-${v.id}" onclick="switchSermonMode('${v.id}', 'audio')" class="px-3 py-1 bg-gray-100 text-gray-600 font-semibold rounded-md hover:bg-gray-200 transition">
+                                    <i class="fa-solid fa-headphones mr-1"></i> Audio
+                                </button>
+                            </div>
+                        </div>
+                        <div id="sermon-video-${v.id}" class="aspect-video w-full bg-black">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/${ytEmbed}" title="${v.title}" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div id="sermon-audio-${v.id}" class="aspect-video w-full bg-blue-950 p-6 flex flex-col justify-center items-center text-center text-white hidden">
+                            <div class="w-12 h-12 rounded-full bg-blue-800 text-white flex items-center justify-center text-lg mb-2 shadow animate-pulse">
+                                <i class="fa-solid fa-file-audio"></i>
+                            </div>
+                            <p class="text-xs text-blue-200 mb-2 font-medium">Audio del Sermón</p>
+                            ${hasAudio ? `<audio controls class="w-full mt-1"><source src="${v.audioUrl}" type="audio/mpeg"></audio>` : `<p class="text-xs text-yellow-300 italic">Audio disponible en YouTube.</p>`}
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="text-xs font-semibold text-primary uppercase tracking-wider mb-1">${v.author}</span>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">${v.title}</h3>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // PLANTILLAS HTML PARA BLOG
+        function renderBlogsHTML(blogList) {
+            if (!blogList || blogList.length === 0) {
+                return `<p class="text-center text-gray-500 col-span-full">No hay artículos publicados actualmente.</p>`;
+            }
+            return blogList.map((b, idx) => `
+                <div data-aos="fade-up" data-aos-delay="${idx * 100}" class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col hover:shadow-xl hover:-translate-y-1 transition duration-300">
+                    <div onclick="openBlogModal('${b.id}')" class="aspect-video w-full overflow-hidden bg-gray-100 relative cursor-pointer">
+                        <img src="${b.img}" alt="${b.title}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 bg-blue-900/80 text-white text-[11px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">${b.date}</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between">
+                        <div onclick="openBlogModal('${b.id}')" class="cursor-pointer">
+                            <span class="text-xs font-semibold text-primary uppercase tracking-wider mb-1 block">${b.author}</span>
+                            <h3 class="text-xl font-bold text-gray-900 hover:text-primary transition mb-3 leading-snug">${b.title}</h3>
+                            <p class="text-gray-600 text-sm line-clamp-3 leading-relaxed">${b.content.replace(/<[^>]*>?/gm, '')}</p>
+                        </div>
+                        <div class="pt-4 mt-4 border-t flex items-center justify-between">
+                            <button onclick="openBlogModal('${b.id}')" class="text-xs font-bold text-primary hover:underline flex items-center space-x-1">
+                                <span>Leer Artículo</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                            <div class="flex items-center space-x-1.5">
+                                <button onclick="shareArticle('${b.id}', 'wa')" title="WhatsApp" class="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition shadow"><i class="fa-brands fa-whatsapp text-[11px]"></i></button>
+                                <button onclick="shareArticle('${b.id}', 'fb')" title="Facebook" class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition shadow"><i class="fa-brands fa-facebook-f text-[11px]"></i></button>
+                                <button onclick="shareArticle('${b.id}', 'copy')" title="Copiar Link" class="w-7 h-7 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-gray-300 transition shadow"><i class="fa-solid fa-share-nodes text-[11px]"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
 
         // REPRODUCTOR DE RADIO
         window.toggleRadioPlay = () => {
@@ -869,7 +948,6 @@
             const btnText = document.getElementById('radio-btn-text');
             const statusText = document.getElementById('radio-status-text');
             const externalLink = document.getElementById('radio-external-link');
-
             const rawUrl = currentData.config.radioUrl || "";
 
             if (hiddenIframe.src && hiddenIframe.src !== "" && hiddenIframe.src !== window.location.href) {
@@ -889,7 +967,6 @@
             }
 
             statusText.innerText = "Conectando con Radio Bautista...";
-
             player.src = rawUrl;
             player.play().then(() => {
                 btnIcon.className = "fa-solid fa-pause text-red-600";
@@ -906,27 +983,24 @@
             });
         };
 
-        // ENVÍO DE FORMULARIO DE CONTACTO
+        // CONTACTO
         window.handleContactSubmit = (e) => {
             e.preventDefault();
             const name = document.getElementById('contact-name').value;
             const userEmail = document.getElementById('contact-email').value;
             const message = document.getElementById('contact-msg').value;
-
             const destEmail = currentData.config.receiverEmail || currentData.config.email || "contacto@taberbypass.org";
 
             const mailtoUrl = `mailto:${encodeURIComponent(destEmail)}?subject=${encodeURIComponent('Nuevo Mensaje Web de ' + name)}&body=${encodeURIComponent('Nombre: ' + name + '\nCorreo: ' + userEmail + '\n\nMensaje:\n' + message)}`;
-
             window.location.href = mailtoUrl;
 
-            alert(`¡Gracias ${name}! Tu mensaje ha sido preparado. Se abrirá tu aplicación de correo para enviar la petición a: ${destEmail}`);
-            
+            alert(`¡Gracias ${name}! Tu mensaje ha sido preparado. Se abrirá tu aplicación de correo para enviarlo a: ${destEmail}`);
             document.getElementById('contact-name').value = '';
             document.getElementById('contact-email').value = '';
             document.getElementById('contact-msg').value = '';
         };
 
-        // LECTOR DE ARTÍCULO DE BLOG Y BARRAS DE COMPARTIR
+        // MODAL BLOG
         window.openBlogModal = (blogId) => {
             const b = (currentData.blogs || []).find(item => item.id === blogId);
             if (!b) return;
@@ -942,19 +1016,15 @@
                     <span class="text-xs font-bold text-gray-500 hidden sm:inline">Compartir:</span>
                     <button onclick="shareArticle('${b.id}', 'wa')" class="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition shadow"><i class="fa-brands fa-whatsapp text-xs"></i></button>
                     <button onclick="shareArticle('${b.id}', 'fb')" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition shadow"><i class="fa-brands fa-facebook-f text-xs"></i></button>
-                    <button onclick="shareArticle('${b.id}', 'tw')" class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition shadow"><i class="fa-brands fa-x-twitter text-xs"></i></button>
                     <button onclick="shareArticle('${b.id}', 'copy')" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-gray-300 transition shadow"><i class="fa-solid fa-link text-xs"></i></button>
                 </div>
             `;
-
             document.getElementById('blog-modal').classList.remove('hidden');
         };
 
-        window.closeBlogModal = () => {
-            document.getElementById('blog-modal').classList.add('hidden');
-        };
+        window.closeBlogModal = () => document.getElementById('blog-modal').classList.add('hidden');
 
-        // FUNCIÓN GLOBAL DE COMPARTIR CON MINIATURA DE FOTOGRAFÍA
+        // COMPARTIR
         window.shareArticle = (blogId, platform) => {
             const b = (currentData.blogs || []).find(item => item.id === blogId);
             if (!b) return;
@@ -962,25 +1032,14 @@
             const pageUrl = window.location.origin + window.location.pathname + `?article=${blogId}`;
             const textMsg = `📖 Te invito a leer este artículo: "${b.title}" - Taber by Pass`;
 
-            if (platform === 'wa') {
-                const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(textMsg + ' ' + pageUrl)}`;
-                window.open(waUrl, '_blank');
-            } else if (platform === 'fb') {
-                const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
-                window.open(fbUrl, '_blank');
-            } else if (platform === 'tw') {
-                const twUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textMsg)}&url=${encodeURIComponent(pageUrl)}`;
-                window.open(twUrl, '_blank');
-            } else if (platform === 'copy') {
-                navigator.clipboard.writeText(pageUrl).then(() => {
-                    alert('¡Enlace de la noticia copiado al portapapeles!');
-                }).catch(() => {
-                    alert('Enlace del artículo: ' + pageUrl);
-                });
+            if (platform === 'wa') window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textMsg + ' ' + pageUrl)}`, '_blank');
+            else if (platform === 'fb') window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`, '_blank');
+            else if (platform === 'copy') {
+                navigator.clipboard.writeText(pageUrl).then(() => alert('¡Enlace copiado al portapapeles!')).catch(() => alert('Enlace: ' + pageUrl));
             }
         };
 
-        // CAMBIAR ENTRE MODO VIDEO / AUDIO EN SERMONES
+        // MODO SERMÓN (VIDEO/AUDIO)
         window.switchSermonMode = (sermonId, mode) => {
             const videoBox = document.getElementById(`sermon-video-${sermonId}`);
             const audioBox = document.getElementById(`sermon-audio-${sermonId}`);
@@ -1000,38 +1059,34 @@
             }
         };
 
-        // APERTURA DE MÓDULO ÁLBUM
+        // MODAL ÁLBUM
         window.openAlbumModal = (albumId) => {
             const album = currentData.albums.find(a => a.id === albumId);
             if (!album) return;
 
             document.getElementById('modal-album-title').innerText = album.title;
             document.getElementById('modal-album-desc').innerText = album.desc;
-
-            const photosContainer = document.getElementById('modal-album-photos');
-            photosContainer.innerHTML = album.photos.map(pUrl => `
+            document.getElementById('modal-album-photos').innerHTML = album.photos.map(pUrl => `
                 <div class="rounded-xl overflow-hidden shadow border bg-black/5 aspect-square hover:scale-105 transition duration-300">
                     <img src="${pUrl}" class="w-full h-full object-cover">
                 </div>
             `).join('');
-
             document.getElementById('album-view-modal').classList.remove('hidden');
         };
 
-        window.closeAlbumModal = () => {
-            document.getElementById('album-view-modal').classList.add('hidden');
-        };
+        window.closeAlbumModal = () => document.getElementById('album-view-modal').classList.add('hidden');
 
+        // RENDERIZAR SITIO PÚBLICO
         function renderPublicSite() {
             const data = currentData;
 
-            // Renderizar Enlaces de Menú llamando a showSingleView
+            // Enlaces del menú
             const navContainer = document.getElementById('dynamic-nav-links');
             navContainer.innerHTML = (data.menuItems || []).map(item => `
                 <button onclick="showSingleView('${item.link}')" class="text-gray-600 hover:text-primary transition font-medium hover:-translate-y-0.5 transform duration-150">${item.title}</button>
             `).join('');
 
-            // Renderizar Redes Sociales
+            // Redes sociales
             const socialContainer = document.getElementById('social-links-container');
             let socialHTML = '';
             if (data.config.fb) socialHTML += `<a href="${data.config.fb}" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition hover:scale-110 duration-200"><i class="fa-brands fa-facebook-f"></i></a>`;
@@ -1041,6 +1096,7 @@
             if (data.config.tk) socialHTML += `<a href="${data.config.tk}" target="_blank" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition hover:scale-110 duration-200"><i class="fa-brands fa-tiktok"></i></a>`;
             socialContainer.innerHTML = socialHTML;
 
+            // Marca / Logo
             const iconEl = document.getElementById('nav-brand-icon');
             const imgEl = document.getElementById('nav-brand-img');
             const logoContainer = document.getElementById('nav-brand-logo-container');
@@ -1068,89 +1124,36 @@
 
             loadHlsStream(data.config.liveTv);
 
-            // Renderizar Sermones / Mensajes
+            // RENDERIZAR MÁXIMO 4 SERMONES EN LA PORTADA
             const videosGrid = document.getElementById('videos-grid');
-            videosGrid.innerHTML = data.videos.map((v, idx) => {
-                const ytEmbed = parseYtEmbed(v.ytId);
-                const hasAudio = v.audioUrl && v.audioUrl.trim() !== '';
-                return `
-                    <div data-aos="fade-up" data-aos-delay="${idx * 150}" class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col hover:shadow-xl transition duration-300">
-                        <div class="p-3 bg-gray-50 border-b flex justify-between items-center text-xs">
-                            <span class="font-bold text-gray-700">Modo de Reproducción:</span>
-                            <div class="flex space-x-1">
-                                <button id="btn-mode-video-${v.id}" onclick="switchSermonMode('${v.id}', 'video')" class="px-3 py-1 bg-primary text-white font-bold rounded-md transition shadow">
-                                    <i class="fa-solid fa-video mr-1"></i> Video
-                                </button>
-                                <button id="btn-mode-audio-${v.id}" onclick="switchSermonMode('${v.id}', 'audio')" class="px-3 py-1 bg-gray-100 text-gray-600 font-semibold rounded-md hover:bg-gray-200 transition">
-                                    <i class="fa-solid fa-headphones mr-1"></i> Solo Audio
-                                </button>
-                            </div>
-                        </div>
+            const videoList = data.videos || [];
+            const limitedVideos = videoList.slice(0, 4);
+            videosGrid.innerHTML = renderSermonsHTML(limitedVideos);
 
-                        <!-- VISTA VIDEO -->
-                        <div id="sermon-video-${v.id}" class="aspect-video w-full bg-black">
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/${ytEmbed}" title="${v.title}" frameborder="0" allowfullscreen></iframe>
-                        </div>
+            const videosMoreContainer = document.getElementById('videos-more-container');
+            if (videoList.length > 4) {
+                videosMoreContainer.classList.remove('hidden');
+            } else {
+                videosMoreContainer.classList.add('hidden');
+            }
 
-                        <!-- VISTA SOLO AUDIO -->
-                        <div id="sermon-audio-${v.id}" class="aspect-video w-full bg-blue-950 p-6 flex flex-col justify-center items-center text-center text-white hidden">
-                            <div class="w-14 h-14 rounded-full bg-blue-800 text-white flex items-center justify-center text-xl mb-3 shadow animate-pulse">
-                                <i class="fa-solid fa-file-audio"></i>
-                            </div>
-                            <p class="text-xs text-blue-200 mb-2 font-medium">Señal de Audio del Sermón</p>
-                            ${hasAudio ? `
-                                <audio controls class="w-full mt-1">
-                                    <source src="${v.audioUrl}" type="audio/mpeg">
-                                    Tu navegador no soporta el reproductor de audio.
-                                </audio>
-                            ` : `
-                                <p class="text-xs text-yellow-300 italic">El formato solo audio se encuentra disponible en YouTube directamente.</p>
-                            `}
-                        </div>
-
-                        <div class="p-6 flex flex-col flex-grow">
-                            <span class="text-xs font-semibold text-primary uppercase tracking-wider mb-1">${v.author}</span>
-                            <h3 class="text-lg font-bold text-gray-900 mb-2">${v.title}</h3>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            // Renderizar Entradas de Blog
+            // RENDERIZAR MÁXIMO 4 BLOGS EN LA PORTADA
             const blogGrid = document.getElementById('blog-grid');
-            blogGrid.innerHTML = (data.blogs || []).map((b, idx) => `
-                <div data-aos="fade-up" data-aos-delay="${idx * 150}" class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col hover:shadow-xl hover:-translate-y-1 transition duration-300">
-                    <div onclick="openBlogModal('${b.id}')" class="aspect-video w-full overflow-hidden bg-gray-100 relative cursor-pointer">
-                        <img src="${b.img}" alt="${b.title}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-                        <span class="absolute top-3 left-3 bg-blue-900/80 text-white text-[11px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">${b.date}</span>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow justify-between">
-                        <div onclick="openBlogModal('${b.id}')" class="cursor-pointer">
-                            <span class="text-xs font-semibold text-primary uppercase tracking-wider mb-1 block">${b.author}</span>
-                            <h3 class="text-xl font-bold text-gray-900 hover:text-primary transition mb-3 leading-snug">${b.title}</h3>
-                            <p class="text-gray-600 text-sm line-clamp-3 leading-relaxed">${b.content.replace(/<[^>]*>?/gm, '')}</p>
-                        </div>
-                        
-                        <div class="pt-4 mt-4 border-t flex items-center justify-between">
-                            <button onclick="openBlogModal('${b.id}')" class="text-xs font-bold text-primary hover:underline flex items-center space-x-1">
-                                <span>Leer Artículo</span>
-                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                            </button>
+            const blogList = data.blogs || [];
+            const limitedBlogs = blogList.slice(0, 4);
+            blogGrid.innerHTML = renderBlogsHTML(limitedBlogs);
 
-                            <div class="flex items-center space-x-1.5">
-                                <button onclick="shareArticle('${b.id}', 'wa')" title="Compartir en WhatsApp" class="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition shadow"><i class="fa-brands fa-whatsapp text-[11px]"></i></button>
-                                <button onclick="shareArticle('${b.id}', 'fb')" title="Compartir en Facebook" class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition shadow"><i class="fa-brands fa-facebook-f text-[11px]"></i></button>
-                                <button onclick="shareArticle('${b.id}', 'copy')" title="Copiar Enlace" class="w-7 h-7 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-gray-300 transition shadow"><i class="fa-solid fa-share-nodes text-[11px]"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
+            const blogMoreContainer = document.getElementById('blog-more-container');
+            if (blogList.length > 4) {
+                blogMoreContainer.classList.remove('hidden');
+            } else {
+                blogMoreContainer.classList.add('hidden');
+            }
 
-            // Renderizar Álbumes de Galería
+            // Renderizar Álbumes
             const albumsGrid = document.getElementById('albums-grid');
             albumsGrid.innerHTML = (data.albums || []).map((album, idx) => `
-                <div data-aos="fade-up" data-aos-delay="${idx * 150}" onclick="openAlbumModal('${album.id}')" class="group bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col">
+                <div data-aos="fade-up" data-aos-delay="${idx * 100}" onclick="openAlbumModal('${album.id}')" class="group bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col">
                     <div class="relative aspect-video overflow-hidden bg-gray-100">
                         <img src="${album.cover}" alt="${album.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <div class="absolute top-3 right-3 bg-black/60 text-white text-xs px-2.5 py-1 rounded-full backdrop-blur-sm flex items-center space-x-1">
@@ -1169,7 +1172,7 @@
             const sortedSchedules = [...data.schedules].sort((a, b) => getDayOrder(a.day) - getDayOrder(b.day));
             const horariosGrid = document.getElementById('horarios-grid');
             horariosGrid.innerHTML = sortedSchedules.map((s, idx) => `
-                <div data-aos="zoom-in" data-aos-delay="${idx * 150}" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 text-center hover:shadow-lg hover:-translate-y-1 transition duration-300">
+                <div data-aos="zoom-in" data-aos-delay="${idx * 100}" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 text-center hover:shadow-lg hover:-translate-y-1 transition duration-300">
                     <div class="bg-primary/10 text-primary w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 text-xl">
                         <i class="fa-solid fa-clock"></i>
                     </div>
@@ -1180,6 +1183,7 @@
             `).join('');
         }
 
+        // RENDER ADMIN LISTS
         function renderAdminLists() {
             const data = currentData;
 
@@ -1201,7 +1205,7 @@
             document.getElementById('cfg-wa').value = data.config.wa || "";
             document.getElementById('cfg-tk').value = data.config.tk || "";
 
-            // Renderizar Lista de Menú Admin
+            // Menú Admin
             document.getElementById('admin-menu-list').innerHTML = (data.menuItems || []).map(m => `
                 <div class="flex flex-col bg-gray-50 p-4 rounded-xl border space-y-2">
                     <div class="flex items-center justify-between">
@@ -1217,7 +1221,7 @@
                 </div>
             `).join('');
 
-            // Renderizar Lista de Blog Admin
+            // Blog Admin
             document.getElementById('admin-blog-list').innerHTML = (data.blogs || []).map(b => `
                 <div class="flex items-center justify-between bg-gray-50 p-4 rounded-xl border">
                     <div class="flex items-center space-x-3">
@@ -1234,12 +1238,12 @@
                 </div>
             `).join('');
 
-            // Renderizar Sermones Admin
+            // Sermones Admin
             document.getElementById('admin-videos-list').innerHTML = data.videos.map(v => `
                 <div class="flex items-center justify-between bg-gray-50 p-4 rounded-xl border">
                     <div>
                         <h5 class="font-bold text-gray-900">${v.title}</h5>
-                        <p class="text-xs text-gray-500">${v.author} | Video: ${v.ytId} ${v.audioUrl ? ' | Audio MP3 disponible' : ''}</p>
+                        <p class="text-xs text-gray-500">${v.author} | Video: ${v.ytId} ${v.audioUrl ? ' | Audio MP3' : ''}</p>
                     </div>
                     <div class="flex space-x-2">
                         <button onclick="editVideo('${v.id}')" class="text-blue-600 hover:text-blue-800 px-3 py-1 rounded-lg text-sm font-semibold bg-blue-50 hover:bg-blue-100 transition">Editar</button>
@@ -1248,6 +1252,7 @@
                 </div>
             `).join('');
 
+            // Álbumes Admin
             document.getElementById('admin-albums-list').innerHTML = (data.albums || []).map(a => `
                 <div class="bg-gray-50 p-4 rounded-xl border flex flex-col justify-between">
                     <div class="flex space-x-4">
@@ -1259,12 +1264,13 @@
                         </div>
                     </div>
                     <div class="flex space-x-2 mt-4 pt-3 border-t">
-                        <button onclick="editAlbum('${a.id}')" class="flex-1 text-blue-600 text-xs font-semibold bg-blue-50 hover:bg-blue-100 py-2 rounded-lg transition">Editar Álbum</button>
+                        <button onclick="editAlbum('${a.id}')" class="flex-1 text-blue-600 text-xs font-semibold bg-blue-50 hover:bg-blue-100 py-2 rounded-lg transition">Editar</button>
                         <button onclick="deleteAlbum('${a.id}')" class="flex-1 text-red-500 text-xs font-semibold bg-red-50 hover:bg-red-100 py-2 rounded-lg transition">Eliminar</button>
                     </div>
                 </div>
             `).join('');
 
+            // Horarios Admin
             const sortedSchedules = [...data.schedules].sort((a, b) => getDayOrder(a.day) - getDayOrder(b.day));
             document.getElementById('admin-schedules-list').innerHTML = sortedSchedules.map(s => `
                 <div class="flex items-center justify-between bg-gray-50 p-4 rounded-xl border">
@@ -1280,7 +1286,7 @@
             `).join('');
         }
 
-        // Exportar funciones globales
+        // FUNCIONES ADMIN & LOGIN
         window.openLoginModal = () => {
             document.getElementById('login-modal').classList.remove('hidden');
             document.getElementById('login-user').value = '';
@@ -1288,9 +1294,7 @@
             document.getElementById('login-error').classList.add('hidden');
         };
 
-        window.closeLoginModal = () => {
-            document.getElementById('login-modal').classList.add('hidden');
-        };
+        window.closeLoginModal = () => document.getElementById('login-modal').classList.add('hidden');
 
         window.handleLogin = (e) => {
             e.preventDefault();
@@ -1306,9 +1310,7 @@
             }
         };
 
-        window.closeAdminPanel = () => {
-            document.getElementById('admin-panel').classList.add('hidden');
-        };
+        window.closeAdminPanel = () => document.getElementById('admin-panel').classList.add('hidden');
 
         window.switchTab = (tabName) => {
             ['general', 'menu', 'blog', 'videos', 'galeria', 'horarios'].forEach(t => {
@@ -1345,7 +1347,7 @@
             alert('¡Configuración guardada exitosamente en Firebase!');
         };
 
-        // GESTIÓN DE MENÚ DE NAVEGACIÓN
+        // GESTIÓN MENÚ ADMIN
         window.saveMenuItem = (e) => {
             e.preventDefault();
             const editId = document.getElementById('menu-edit-id').value;
@@ -1355,9 +1357,7 @@
 
             if (editId) {
                 const index = (currentData.menuItems || []).findIndex(m => m.id === editId);
-                if (index !== -1) {
-                    currentData.menuItems[index] = { id: editId, title, link, content };
-                }
+                if (index !== -1) currentData.menuItems[index] = { id: editId, title, link, content };
             } else {
                 const newItem = { id: Date.now().toString(), title, link, content };
                 if (!currentData.menuItems) currentData.menuItems = [];
@@ -1397,7 +1397,7 @@
             }
         };
 
-        // GESTIÓN DE BLOG
+        // GESTIÓN BLOG ADMIN
         window.saveBlog = (e) => {
             e.preventDefault();
             const editId = document.getElementById('blog-edit-id').value;
@@ -1409,9 +1409,7 @@
 
             if (editId) {
                 const index = (currentData.blogs || []).findIndex(b => b.id === editId);
-                if (index !== -1) {
-                    currentData.blogs[index] = { id: editId, title, author, date, img, content };
-                }
+                if (index !== -1) currentData.blogs[index] = { id: editId, title, author, date, img, content };
                 alert('¡Artículo de blog actualizado!');
             } else {
                 const newBlog = { id: Date.now().toString(), title, author, date, img, content };
@@ -1457,7 +1455,7 @@
             }
         };
 
-        // GESTIÓN DE SERMONES
+        // GESTIÓN SERMONES ADMIN
         window.saveVideo = (e) => {
             e.preventDefault();
             const editId = document.getElementById('vid-edit-id').value;
@@ -1468,9 +1466,7 @@
 
             if (editId) {
                 const index = currentData.videos.findIndex(v => v.id === editId);
-                if (index !== -1) {
-                    currentData.videos[index] = { id: editId, title, author, ytId, audioUrl };
-                }
+                if (index !== -1) currentData.videos[index] = { id: editId, title, author, ytId, audioUrl };
                 alert('¡Sermón actualizado en Firebase!');
             } else {
                 const newVideo = { id: Date.now().toString(), title, author, ytId, audioUrl };
@@ -1513,6 +1509,7 @@
             }
         };
 
+        // GESTIÓN ÁLBUMES ADMIN
         window.saveAlbum = (e) => {
             e.preventDefault();
             const editId = document.getElementById('album-edit-id').value;
@@ -1520,14 +1517,11 @@
             const cover = document.getElementById('album-cover').value;
             const desc = document.getElementById('album-desc').value;
             const photosRaw = document.getElementById('album-photos').value;
-
             const photos = photosRaw.split('\n').map(url => url.trim()).filter(url => url !== '');
 
             if (editId) {
                 const index = (currentData.albums || []).findIndex(a => a.id === editId);
-                if (index !== -1) {
-                    currentData.albums[index] = { id: editId, title, cover, desc, photos };
-                }
+                if (index !== -1) currentData.albums[index] = { id: editId, title, cover, desc, photos };
                 alert('¡Álbum actualizado en Firebase!');
             } else {
                 const newAlbum = { id: Date.now().toString(), title, cover, desc, photos };
@@ -1571,6 +1565,7 @@
             }
         };
 
+        // GESTIÓN HORARIOS ADMIN
         window.saveSchedule = (e) => {
             e.preventDefault();
             const editId = document.getElementById('sch-edit-id').value;
@@ -1580,9 +1575,7 @@
 
             if (editId) {
                 const index = currentData.schedules.findIndex(s => s.id === editId);
-                if (index !== -1) {
-                    currentData.schedules[index] = { id: editId, day, time, desc };
-                }
+                if (index !== -1) currentData.schedules[index] = { id: editId, day, time, desc };
                 alert('¡Horario actualizado en Firebase!');
             } else {
                 const newSch = { id: Date.now().toString(), day, time, desc };
