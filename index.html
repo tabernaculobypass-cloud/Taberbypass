@@ -218,11 +218,14 @@
                 </div>
                 <div data-aos="fade-left">
                     <h3 class="text-2xl font-bold mb-4">Envíanos un mensaje</h3>
-                    <form onsubmit="event.preventDefault(); alert('¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.');" class="space-y-4">
-                        <input type="text" placeholder="Tu Nombre" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition">
-                        <input type="email" placeholder="Correo Electrónico" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition">
-                        <textarea placeholder="Tu Petición o Mensaje" rows="3" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition"></textarea>
-                        <button type="submit" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-3 rounded-lg transition hover:shadow-lg w-full duration-200">Enviar Mensaje</button>
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <input type="text" id="contact-name" placeholder="Tu Nombre" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition">
+                        <input type="email" id="contact-email" placeholder="Correo Electrónico" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition">
+                        <textarea id="contact-msg" placeholder="Tu Petición o Mensaje" rows="3" required class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition"></textarea>
+                        <button type="submit" class="bg-primary hover:bg-secondary text-white font-semibold px-6 py-3 rounded-lg transition hover:shadow-lg w-full duration-200 flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-paper-plane text-sm"></i>
+                            <span>Enviar Mensaje</span>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -399,13 +402,22 @@
                         <input type="url" id="cfg-tk" placeholder="https://tiktok.com/@tuperfil" class="w-full border rounded-lg px-3 py-2 text-sm">
                     </div>
 
+                    <!-- DATOS DE CONTACTO Y CORREO DESTINO -->
+                    <div class="md:col-span-2 border-t pt-4">
+                        <h4 class="font-bold text-gray-800 mb-3"><i class="fa-solid fa-envelope-open-text text-primary mr-1"></i> Información de Contacto y Recepción de Mensajes</h4>
+                    </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono de Contacto</label>
                         <input type="text" id="cfg-phone" class="w-full border rounded-lg px-4 py-2">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Correo Público (Footer)</label>
                         <input type="email" id="cfg-email" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div class="md:col-span-2 bg-amber-50/80 p-4 rounded-xl border border-amber-200">
+                        <label class="block text-sm font-bold text-amber-900 mb-1"><i class="fa-solid fa-inbox mr-1"></i> Correo Destino para Mensajes del Formulario de Contacto</label>
+                        <input type="email" id="cfg-receiver-email" placeholder="administracion@taberbypass.org" required class="w-full border rounded-lg px-4 py-2 bg-white">
+                        <p class="text-xs text-amber-700 mt-1">A esta dirección de correo se canalizarán los mensajes enviados por los hermanos a través del formulario de la web.</p>
                     </div>
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Dirección Física</label>
@@ -663,6 +675,7 @@
                 heroSub: "\"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos.\"",
                 phone: "+503 2222-3333",
                 email: "contacto@taberbypass.org",
+                receiverEmail: "contacto@taberbypass.org",
                 address: "Avenida Principal #123, Ciudad Central",
                 fb: "https://facebook.com",
                 yt: "https://youtube.com",
@@ -858,6 +871,26 @@
             });
         };
 
+        // ENVÍO DE FORMULARIO DE CONTACTO
+        window.handleContactSubmit = (e) => {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const userEmail = document.getElementById('contact-email').value;
+            const message = document.getElementById('contact-msg').value;
+
+            const destEmail = currentData.config.receiverEmail || currentData.config.email || "contacto@taberbypass.org";
+
+            const mailtoUrl = `mailto:${encodeURIComponent(destEmail)}?subject=${encodeURIComponent('Nuevo Mensaje Web de ' + name)}&body=${encodeURIComponent('Nombre: ' + name + '\nCorreo: ' + userEmail + '\n\nMensaje:\n' + message)}`;
+
+            window.location.href = mailtoUrl;
+
+            alert(`¡Gracias ${name}! Tu mensaje ha sido preparado. Se abrirá tu aplicación de correo para enviar la petición a: ${destEmail}`);
+            
+            document.getElementById('contact-name').value = '';
+            document.getElementById('contact-email').value = '';
+            document.getElementById('contact-msg').value = '';
+        };
+
         // LECTOR DE ARTÍCULO DE BLOG Y BARRAS DE COMPARTIR
         window.openBlogModal = (blogId) => {
             const b = (currentData.blogs || []).find(item => item.id === blogId);
@@ -892,7 +925,6 @@
             const b = (currentData.blogs || []).find(item => item.id === blogId);
             if (!b) return;
 
-            // URL del sitio con parámetro dinámico de artículo
             const pageUrl = window.location.origin + window.location.pathname + `?article=${blogId}`;
             const textMsg = `📖 Te invito a leer este artículo: "${b.title}" - Taber by Pass`;
 
@@ -1002,7 +1034,7 @@
 
             loadHlsStream(data.config.liveTv);
 
-            // Renderizar Sermones / Mensajes (Con opción de Video o Audio)
+            // Renderizar Sermones / Mensajes
             const videosGrid = document.getElementById('videos-grid');
             videosGrid.innerHTML = data.videos.map((v, idx) => {
                 const ytEmbed = parseYtEmbed(v.ytId);
@@ -1050,7 +1082,7 @@
                 `;
             }).join('');
 
-            // Renderizar Entradas de Blog con Botón de Compartir Redes
+            // Renderizar Entradas de Blog
             const blogGrid = document.getElementById('blog-grid');
             blogGrid.innerHTML = (data.blogs || []).map((b, idx) => `
                 <div data-aos="fade-up" data-aos-delay="${idx * 150}" class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col hover:shadow-xl hover:-translate-y-1 transition duration-300">
@@ -1065,14 +1097,12 @@
                             <p class="text-gray-600 text-sm line-clamp-3 leading-relaxed">${b.content.replace(/<[^>]*>?/gm, '')}</p>
                         </div>
                         
-                        <!-- BARRA INFERIOR CON LECTURA Y COMPARTIR -->
                         <div class="pt-4 mt-4 border-t flex items-center justify-between">
                             <button onclick="openBlogModal('${b.id}')" class="text-xs font-bold text-primary hover:underline flex items-center space-x-1">
                                 <span>Leer Artículo</span>
                                 <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </button>
 
-                            <!-- BOTONES RÁPIDOS DE COMPARTIR -->
                             <div class="flex items-center space-x-1.5">
                                 <button onclick="shareArticle('${b.id}', 'wa')" title="Compartir en WhatsApp" class="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition shadow"><i class="fa-brands fa-whatsapp text-[11px]"></i></button>
                                 <button onclick="shareArticle('${b.id}', 'fb')" title="Compartir en Facebook" class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition shadow"><i class="fa-brands fa-facebook-f text-[11px]"></i></button>
@@ -1128,6 +1158,7 @@
             document.getElementById('cfg-hero-sub').value = data.config.heroSub;
             document.getElementById('cfg-phone').value = data.config.phone;
             document.getElementById('cfg-email').value = data.config.email;
+            document.getElementById('cfg-receiver-email').value = data.config.receiverEmail || data.config.email || "";
             document.getElementById('cfg-address').value = data.config.address;
 
             document.getElementById('cfg-fb').value = data.config.fb || "";
@@ -1268,6 +1299,7 @@
                 heroSub: document.getElementById('cfg-hero-sub').value,
                 phone: document.getElementById('cfg-phone').value,
                 email: document.getElementById('cfg-email').value,
+                receiverEmail: document.getElementById('cfg-receiver-email').value,
                 address: document.getElementById('cfg-address').value,
                 fb: document.getElementById('cfg-fb').value,
                 yt: document.getElementById('cfg-yt').value,
