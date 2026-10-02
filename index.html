@@ -126,7 +126,7 @@
                 </div>
             </section>
 
-            <!-- TARJETA VERSÍCULO DEL DÍA -->
+            <!-- TARJETA VERSÍCULO DEL DÍA CON BOTONES DE COMPARTIR -->
             <section id="versiculo-dia-section" class="py-12 bg-gradient-to-b from-blue-900 to-indigo-950 text-white px-4 sm:px-6 lg:px-8 border-b">
                 <div class="max-w-4xl mx-auto text-center space-y-6">
                     <div class="inline-flex items-center space-x-2 bg-amber-500/20 text-amber-300 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-amber-500/30">
@@ -141,14 +141,26 @@
                         <span class="text-xs text-gray-400 block mt-2">Taber by Pass - Una iglesia de Fe</span>
                     </div>
 
-                    <div class="flex flex-wrap justify-center gap-4 pt-2">
-                        <button onclick="downloadVerseImage()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold px-6 py-3 rounded-xl shadow-lg transition flex items-center space-x-2 text-sm">
+                    <div class="flex flex-wrap justify-center items-center gap-3 pt-2">
+                        <button onclick="downloadVerseImage()" class="bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold px-5 py-2.5 rounded-xl shadow transition flex items-center space-x-2 text-sm">
                             <i class="fa-solid fa-image"></i>
-                            <span>Descargar Imagen del Versículo</span>
+                            <span>Descargar Imagen</span>
                         </button>
-                        <button onclick="showSingleView('#biblia')" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl shadow transition flex items-center space-x-2 text-sm border border-white/20">
+                        <button onclick="shareVerse('wa')" class="bg-green-600 hover:bg-green-700 text-white font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center space-x-2 text-sm">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </button>
+                        <button onclick="shareVerse('fb')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center space-x-2 text-sm">
+                            <i class="fa-brands fa-facebook-f"></i>
+                            <span>Facebook</span>
+                        </button>
+                        <button onclick="shareVerse('copy')" class="bg-gray-700 hover:bg-gray-800 text-white font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center space-x-2 text-sm">
+                            <i class="fa-solid fa-link"></i>
+                            <span>Copiar Link</span>
+                        </button>
+                        <button onclick="showSingleView('#biblia')" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-2.5 rounded-xl shadow transition flex items-center space-x-2 text-sm border border-white/20">
                             <i class="fa-solid fa-book-open"></i>
-                            <span>Abrir Biblia Reina Valera 1960</span>
+                            <span>Abrir Biblia</span>
                         </button>
                     </div>
                 </div>
@@ -316,16 +328,20 @@
         <p>&copy; 2026 Taber by Pass. Todos los derechos reservados. | Diseñado por Departamento Multimedia By Pass.</p>
     </footer>
 
-    <!-- MODAL LECTOR DE BLOG -->
+    <!-- MODAL LECTOR DE BLOG CON COMPARTIR -->
     <div id="blog-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden relative">
-            <button onclick="closeBlogModal()" class="absolute top-4 right-4 bg-black/60 text-white w-10 h-10 rounded-full flex items-center justify-center"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <button onclick="closeBlogModal()" class="absolute top-4 right-4 bg-black/60 text-white w-10 h-10 rounded-full flex items-center justify-center z-10"><i class="fa-solid fa-xmark text-lg"></i></button>
             <div class="overflow-y-auto">
                 <img id="blog-modal-img" src="" class="w-full h-72 object-cover">
                 <div class="p-8 space-y-4">
-                    <div class="flex items-center justify-between text-xs text-gray-500 border-b pb-3">
-                        <span id="blog-modal-author" class="text-primary font-bold"></span>
-                        <span id="blog-modal-date"></span>
+                    <div class="flex flex-wrap items-center justify-between text-xs text-gray-500 border-b pb-3 gap-2">
+                        <div>
+                            <span id="blog-modal-author" class="text-primary font-bold"></span>
+                            <span class="mx-1">•</span>
+                            <span id="blog-modal-date"></span>
+                        </div>
+                        <div id="blog-modal-share-container" class="flex items-center space-x-2"></div>
                     </div>
                     <h2 id="blog-modal-title" class="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight"></h2>
                     <div id="blog-modal-content" class="text-gray-700 leading-relaxed space-y-4"></div>
@@ -586,7 +602,7 @@
     <!-- AOS JS CDN -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <!-- MÓDULO PRINCIPAL DE JAVASCRIPT CON FIREBASE -->
+    <!-- MÓDULO PRINCIPAL DE JAVASCRIPT CON FIREBASE Y COMPARTIR -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -637,6 +653,58 @@
                 link.href = image;
                 link.click();
             });
+        };
+
+        // FUNCIONES DE COMPARTIR CONTENIDO
+        window.shareVerse = (platform) => {
+            const verseText = document.getElementById('daily-verse-text').innerText;
+            const verseRef = document.getElementById('daily-verse-ref').innerText;
+            const pageUrl = window.location.href;
+            const message = `📖 *Versículo del Día*\n\n${verseText}\n\n— *${verseRef}*\n\nLee más en: ${pageUrl}`;
+
+            if (platform === 'wa') {
+                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank');
+            } else if (platform === 'fb') {
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`, '_blank');
+            } else if (platform === 'copy') {
+                navigator.clipboard.writeText(`${verseText} - ${verseRef}\n${pageUrl}`).then(() => {
+                    alert('¡Versículo y enlace copiados al portapapeles!');
+                });
+            }
+        };
+
+        window.shareSermon = (id, platform) => {
+            const sermon = (currentData.videos || []).find(v => v.id === id);
+            if (!sermon) return;
+            const sermonUrl = `${window.location.origin}${window.location.pathname}?sermon=${id}`;
+            const message = `🎥 Te invito a ver/escuchar el sermón: "*${sermon.title}*" por ${sermon.author}\n\n${sermonUrl}`;
+
+            if (platform === 'wa') {
+                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank');
+            } else if (platform === 'fb') {
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(sermonUrl)}`, '_blank');
+            } else if (platform === 'copy') {
+                navigator.clipboard.writeText(sermonUrl).then(() => {
+                    alert('¡Enlace del sermón copiado al portapapeles!');
+                });
+            }
+        };
+
+        window.shareArticle = (id, platform) => {
+            const blog = (currentData.blogs || []).find(b => b.id === id);
+            if (!blog) return;
+            const articleUrl = `${window.location.origin}${window.location.pathname}?article=${id}`;
+            const message = `📖 *${blog.title}*\n\nLee el artículo completo aquí:\n${articleUrl}`;
+
+            if (platform === 'wa') {
+                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank');
+            } else if (platform === 'fb') {
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl)}`, '_blank');
+            } else if (platform === 'copy') {
+                navigator.clipboard.writeText(articleUrl).then(() => {
+                    alert('¡Enlace del artículo copiado al portapapeles!');
+                });
+            }
         };
 
         const defaultData = {
@@ -946,14 +1014,22 @@
         function renderSermonsHTML(videoList) {
             if (!videoList || videoList.length === 0) return `<p class="text-gray-500">No hay sermones registrados.</p>`;
             return videoList.map(v => `
-                <div class="bg-white rounded-2xl shadow border overflow-hidden flex flex-col">
-                    <div class="aspect-video w-full bg-black">
-                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/${parseYtEmbed(v.ytId)}" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <div class="p-4 flex flex-col flex-grow justify-between">
-                        <div>
+                <div class="bg-white rounded-2xl shadow border overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <div class="aspect-video w-full bg-black">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/${parseYtEmbed(v.ytId)}" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-4">
                             <span class="text-xs font-bold text-primary uppercase">${v.author}</span>
                             <h4 class="font-bold text-gray-900 mt-1">${v.title}</h4>
+                        </div>
+                    </div>
+                    <div class="px-4 pb-4 border-t pt-3 flex items-center justify-between">
+                        <span class="text-xs font-bold text-gray-500">Compartir:</span>
+                        <div class="flex items-center space-x-1">
+                            <button onclick="shareSermon('${v.id}', 'wa')" title="WhatsApp" class="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition"><i class="fa-brands fa-whatsapp text-[11px]"></i></button>
+                            <button onclick="shareSermon('${v.id}', 'fb')" title="Facebook" class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition"><i class="fa-brands fa-facebook-f text-[11px]"></i></button>
+                            <button onclick="shareSermon('${v.id}', 'copy')" title="Copiar Link" class="w-7 h-7 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-gray-300 transition"><i class="fa-solid fa-link text-[11px]"></i></button>
                         </div>
                     </div>
                 </div>
@@ -963,12 +1039,22 @@
         function renderBlogsHTML(blogList) {
             if (!blogList || blogList.length === 0) return `<p class="text-gray-500">No hay publicaciones.</p>`;
             return blogList.map(b => `
-                <div onclick="openBlogModal('${b.id}')" class="bg-white rounded-2xl shadow border overflow-hidden cursor-pointer hover:shadow-lg transition">
-                    <img src="${b.img}" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-primary uppercase">${b.author} | ${b.date}</span>
-                        <h3 class="text-xl font-bold text-gray-900 mt-2">${b.title}</h3>
-                        <p class="text-gray-600 text-sm mt-2 line-clamp-3">${b.content}</p>
+                <div class="bg-white rounded-2xl shadow border overflow-hidden flex flex-col justify-between hover:shadow-lg transition">
+                    <div onclick="openBlogModal('${b.id}')" class="cursor-pointer">
+                        <img src="${b.img}" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-primary uppercase">${b.author} | ${b.date}</span>
+                            <h3 class="text-xl font-bold text-gray-900 mt-2">${b.title}</h3>
+                            <p class="text-gray-600 text-sm mt-2 line-clamp-3">${b.content}</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-4 border-t pt-3 flex items-center justify-between">
+                        <button onclick="openBlogModal('${b.id}')" class="text-xs font-bold text-primary hover:underline">Leer más →</button>
+                        <div class="flex items-center space-x-1">
+                            <button onclick="shareArticle('${b.id}', 'wa')" title="WhatsApp" class="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition"><i class="fa-brands fa-whatsapp text-[11px]"></i></button>
+                            <button onclick="shareArticle('${b.id}', 'fb')" title="Facebook" class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition"><i class="fa-brands fa-facebook-f text-[11px]"></i></button>
+                            <button onclick="shareArticle('${b.id}', 'copy')" title="Copiar Link" class="w-7 h-7 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-gray-300 transition"><i class="fa-solid fa-link text-[11px]"></i></button>
+                        </div>
                     </div>
                 </div>
             `).join('');
@@ -982,6 +1068,13 @@
             document.getElementById('blog-modal-date').innerText = b.date;
             document.getElementById('blog-modal-img').src = b.img;
             document.getElementById('blog-modal-content').innerText = b.content;
+
+            document.getElementById('blog-modal-share-container').innerHTML = `
+                <button onclick="shareArticle('${b.id}', 'wa')" class="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition"><i class="fa-brands fa-whatsapp text-xs"></i></button>
+                <button onclick="shareArticle('${b.id}', 'fb')" class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition"><i class="fa-brands fa-facebook-f text-xs"></i></button>
+                <button onclick="shareArticle('${b.id}', 'copy')" class="w-7 h-7 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-gray-300 transition"><i class="fa-solid fa-link text-xs"></i></button>
+            `;
+
             document.getElementById('blog-modal').classList.remove('hidden');
         };
 
@@ -1020,7 +1113,6 @@
         window.handleContactSubmit = (e) => {
             e.preventDefault();
             const name = document.getElementById('contact-name').value;
-            const destEmail = currentData.config.receiverEmail || "contacto@taberbypass.org";
             alert(`¡Gracias ${name}! Tu mensaje ha sido enviado.`);
         };
 
