@@ -154,13 +154,13 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN DE BLOG CON NOTICIAS / ARTÍCULOS -->
+            <!-- SECCIÓN DE BLOG CON NOTICIAS Y OPCIÓN DE COMPARTIR CON MINIATURA -->
             <section id="blog" class="py-16 bg-gray-100/70 border-y border-gray-200 px-4 sm:px-6 lg:px-8">
                 <div class="max-w-7xl mx-auto">
                     <div class="text-center mb-12" data-aos="fade-up">
                         <span class="bg-blue-600/10 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Artículos y Noticias</span>
                         <h2 class="text-3xl font-bold tracking-tight text-gray-900 mt-2">Blog Pastoral y Noticias</h2>
-                        <p class="text-gray-500 mt-2">Lecturas edificantes, reflexiones espirituales y anuncios de nuestra congregación</p>
+                        <p class="text-gray-500 mt-2">Lecturas edificantes, reflexiones espirituales y opciones para compartir en redes sociales</p>
                     </div>
                     <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <!-- Artículos dinámicos del blog -->
@@ -235,7 +235,7 @@
         <p>&copy; 2026 Taber by Pass. Todos los derechos reservados. | Diseñado por Departamento Multimedia By Pass.</p>
     </footer>
 
-    <!-- MODAL LECTOR DE ARTÍCULO DE BLOG -->
+    <!-- MODAL LECTOR DE ARTÍCULO DE BLOG Y OPCIÓN COMPARTIR -->
     <div id="blog-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden relative">
             <button onclick="closeBlogModal()" class="absolute top-4 right-4 bg-black/60 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-black transition z-10">
@@ -244,13 +244,19 @@
             <div class="overflow-y-auto">
                 <img id="blog-modal-img" src="" class="w-full h-72 object-cover">
                 <div class="p-8 space-y-4">
-                    <div class="flex items-center space-x-3 text-xs text-gray-500 font-semibold uppercase">
-                        <span id="blog-modal-author" class="text-primary"><i class="fa-solid fa-user mr-1"></i> Autor</span>
-                        <span>•</span>
-                        <span id="blog-modal-date"><i class="fa-regular fa-calendar mr-1"></i> Fecha</span>
+                    <div class="flex items-center justify-between text-xs text-gray-500 font-semibold border-b pb-3">
+                        <div class="flex items-center space-x-3 uppercase">
+                            <span id="blog-modal-author" class="text-primary"><i class="fa-solid fa-user mr-1"></i> Autor</span>
+                            <span>•</span>
+                            <span id="blog-modal-date"><i class="fa-regular fa-calendar mr-1"></i> Fecha</span>
+                        </div>
+                        <!-- BOTÓN COMPARTIR DENTRO DEL MODAL -->
+                        <div id="blog-modal-share-container">
+                            <!-- Inyectado dinámicamente -->
+                        </div>
                     </div>
                     <h2 id="blog-modal-title" class="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight">Título del Artículo</h2>
-                    <div id="blog-modal-content" class="text-gray-700 leading-relaxed space-y-4 pt-4 border-t text-base">
+                    <div id="blog-modal-content" class="text-gray-700 leading-relaxed space-y-4 text-base">
                         <!-- Contenido completo -->
                     </div>
                 </div>
@@ -464,7 +470,7 @@
                         <input type="text" id="blog-date" placeholder="Ej. 1 de Octubre, 2026" required class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">URL de la Foto Destacada</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">URL de la Foto Destacada (Miniatura para compartir)</label>
                         <input type="url" id="blog-img" placeholder="https://ejemplo.com/foto-blog.jpg" required class="w-full border rounded-lg px-3 py-2 bg-white">
                     </div>
                     <div class="md:col-span-2">
@@ -852,7 +858,7 @@
             });
         };
 
-        // LECTOR DE ARTÍCULO DE BLOG
+        // LECTOR DE ARTÍCULO DE BLOG Y BARRAS DE COMPARTIR
         window.openBlogModal = (blogId) => {
             const b = (currentData.blogs || []).find(item => item.id === blogId);
             if (!b) return;
@@ -863,11 +869,49 @@
             document.getElementById('blog-modal-img').src = b.img;
             document.getElementById('blog-modal-content').innerHTML = b.content;
 
+            // Inyectar botones de compartir dentro del modal
+            document.getElementById('blog-modal-share-container').innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <span class="text-xs font-bold text-gray-500 hidden sm:inline">Compartir:</span>
+                    <button onclick="shareArticle('${b.id}', 'wa')" class="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition shadow"><i class="fa-brands fa-whatsapp text-xs"></i></button>
+                    <button onclick="shareArticle('${b.id}', 'fb')" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition shadow"><i class="fa-brands fa-facebook-f text-xs"></i></button>
+                    <button onclick="shareArticle('${b.id}', 'tw')" class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition shadow"><i class="fa-brands fa-x-twitter text-xs"></i></button>
+                    <button onclick="shareArticle('${b.id}', 'copy')" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-gray-300 transition shadow"><i class="fa-solid fa-link text-xs"></i></button>
+                </div>
+            `;
+
             document.getElementById('blog-modal').classList.remove('hidden');
         };
 
         window.closeBlogModal = () => {
             document.getElementById('blog-modal').classList.add('hidden');
+        };
+
+        // FUNCIÓN GLOBAL DE COMPARTIR CON MINIATURA DE FOTOGRAFÍA
+        window.shareArticle = (blogId, platform) => {
+            const b = (currentData.blogs || []).find(item => item.id === blogId);
+            if (!b) return;
+
+            // URL del sitio con parámetro dinámico de artículo
+            const pageUrl = window.location.origin + window.location.pathname + `?article=${blogId}`;
+            const textMsg = `📖 Te invito a leer este artículo: "${b.title}" - Taber by Pass`;
+
+            if (platform === 'wa') {
+                const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(textMsg + ' ' + pageUrl)}`;
+                window.open(waUrl, '_blank');
+            } else if (platform === 'fb') {
+                const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
+                window.open(fbUrl, '_blank');
+            } else if (platform === 'tw') {
+                const twUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textMsg)}&url=${encodeURIComponent(pageUrl)}`;
+                window.open(twUrl, '_blank');
+            } else if (platform === 'copy') {
+                navigator.clipboard.writeText(pageUrl).then(() => {
+                    alert('¡Enlace de la noticia con miniatura copiado al portapapeles!');
+                }).catch(() => {
+                    alert('Enlace del artículo: ' + pageUrl);
+                });
+            }
         };
 
         // CAMBIAR ENTRE MODO VIDEO / AUDIO EN SERMONES
@@ -1006,23 +1050,34 @@
                 `;
             }).join('');
 
-            // Renderizar Entradas de Blog
+            // Renderizar Entradas de Blog con Botón de Compartir Redes
             const blogGrid = document.getElementById('blog-grid');
             blogGrid.innerHTML = (data.blogs || []).map((b, idx) => `
-                <div data-aos="fade-up" data-aos-delay="${idx * 150}" onclick="openBlogModal('${b.id}')" class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col cursor-pointer hover:shadow-xl hover:-translate-y-1 transition duration-300">
-                    <div class="aspect-video w-full overflow-hidden bg-gray-100 relative">
+                <div data-aos="fade-up" data-aos-delay="${idx * 150}" class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col hover:shadow-xl hover:-translate-y-1 transition duration-300">
+                    <div onclick="openBlogModal('${b.id}')" class="aspect-video w-full overflow-hidden bg-gray-100 relative cursor-pointer">
                         <img src="${b.img}" alt="${b.title}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
                         <span class="absolute top-3 left-3 bg-blue-900/80 text-white text-[11px] font-bold px-2.5 py-1 rounded-full backdrop-blur-sm">${b.date}</span>
                     </div>
                     <div class="p-6 flex flex-col flex-grow justify-between">
-                        <div>
+                        <div onclick="openBlogModal('${b.id}')" class="cursor-pointer">
                             <span class="text-xs font-semibold text-primary uppercase tracking-wider mb-1 block">${b.author}</span>
                             <h3 class="text-xl font-bold text-gray-900 hover:text-primary transition mb-3 leading-snug">${b.title}</h3>
                             <p class="text-gray-600 text-sm line-clamp-3 leading-relaxed">${b.content.replace(/<[^>]*>?/gm, '')}</p>
                         </div>
-                        <div class="pt-4 mt-4 border-t flex items-center justify-between text-xs font-bold text-primary">
-                            <span>Leer Artículo Completo</span>
-                            <i class="fa-solid fa-arrow-right"></i>
+                        
+                        <!-- BARRA INFERIOR CON LECTURA Y COMPARTIR -->
+                        <div class="pt-4 mt-4 border-t flex items-center justify-between">
+                            <button onclick="openBlogModal('${b.id}')" class="text-xs font-bold text-primary hover:underline flex items-center space-x-1">
+                                <span>Leer Artículo</span>
+                                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+
+                            <!-- BOTONES RÁPIDOS DE COMPARTIR -->
+                            <div class="flex items-center space-x-1.5">
+                                <button onclick="shareArticle('${b.id}', 'wa')" title="Compartir en WhatsApp" class="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center hover:bg-green-600 transition shadow"><i class="fa-brands fa-whatsapp text-[11px]"></i></button>
+                                <button onclick="shareArticle('${b.id}', 'fb')" title="Compartir en Facebook" class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition shadow"><i class="fa-brands fa-facebook-f text-[11px]"></i></button>
+                                <button onclick="shareArticle('${b.id}', 'copy')" title="Copiar Enlace" class="w-7 h-7 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-gray-300 transition shadow"><i class="fa-solid fa-share-nodes text-[11px]"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
