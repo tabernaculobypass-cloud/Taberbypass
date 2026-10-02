@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- TÍTULO Y DESCRIPCIÓN POR DEFECTO -->
-    <title id="page-title">Taber by Pass - Ministerio de Fe y Adoración</title>
-    <meta id="meta-desc" name="description" content="Bienvenidos a Taber by Pass. Un lugar de esperanza y salvación. Sermones, Radio 106.1 FM y Taber TV en vivo.">
+    <!-- TÍTULO Y DESCRIPCIÓN POR DEFECTO CORREGIDOS -->
+    <title id="page-title">Taber by Pass - Una iglesia de Fe</title>
+    <meta id="meta-desc" name="description" content="Bienvenidos a Taber by Pass. Una iglesia de Fe, esperanza y salvación. Sermones, Radio 106.1 FM y Taber TV en vivo.">
 
     <!-- METADATOS OPEN GRAPH PARA VISTA PREVIA EN WHATSAPP, FACEBOOK, TELEGRAM Y TWITTER -->
-    <meta id="og-title" property="og:title" content="Taber by Pass - Ministerio de Fe y Adoración">
-    <meta id="og-desc" property="og:description" content="Un lugar de esperanza y salvación. Disfruta de nuestros sermones, radio y transmisión en vivo.">
+    <meta id="og-title" property="og:title" content="Taber by Pass - Una iglesia de Fe">
+    <meta id="og-desc" property="og:description" content="Una iglesia de Fe, esperanza y salvación. Disfruta de nuestros sermones, radio y transmisión en vivo.">
     <meta id="og-image" property="og:image" content="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200">
     <meta id="og-image-secure" property="og:image:secure_url" content="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta id="og-url" property="og:url" content="">
-    <meta property="og:type" content="article">
+    <meta property="og:type" content="website">
     <meta property="og:site_name" content="Taber by Pass">
 
     <!-- TWITTER CARDS -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta id="tw-title" name="twitter:title" content="Taber by Pass - Ministerio de Fe y Adoración">
-    <meta id="tw-desc" name="twitter:description" content="Un lugar de esperanza y salvación. Sermones, Radio 106.1 FM y Taber TV en vivo.">
+    <meta id="tw-title" name="twitter:title" content="Taber by Pass - Una iglesia de Fe">
+    <meta id="tw-desc" name="twitter:description" content="Una iglesia de Fe, esperanza y salvación. Sermones, Radio 106.1 FM y Taber TV en vivo.">
     <meta id="tw-image" name="twitter:image" content="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200">
 
     <!-- Tailwind CSS CDN -->
@@ -62,7 +62,7 @@
                     </div>
                     <div>
                         <span id="nav-brand-title" class="text-xl font-bold tracking-tight text-gray-900 block group-hover:text-primary transition">Taber by Pass</span>
-                        <span id="nav-brand-subtitle" class="text-xs text-gray-500 block uppercase font-medium">Ministerio de Fe y Adoración</span>
+                        <span id="nav-brand-subtitle" class="text-xs text-gray-500 block uppercase font-medium">Una iglesia de Fe</span>
                     </div>
                 </div>
 
@@ -761,7 +761,7 @@
 
         const defaultData = {
             config: {
-                logoUrl: "", brand: "Taber by Pass", subtitle: "Ministerio de Fe y Adoración",
+                logoUrl: "", brand: "Taber by Pass", subtitle: "Una iglesia de Fe",
                 liveTv: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
                 radioUrl: "https://radiobautista106uno.radiostream123.com/",
                 heroTitle: "Un lugar de esperanza y salvación",
@@ -820,21 +820,21 @@
 
         let currentData = defaultData;
 
-        // DETECTAR PARÁMETROS DE URL PARA ACTUALIZAR METADATOS DE MINIATURA SI SE COMPARTE UN ARTÍCULO
+        // DETECTAR PARÁMETROS DE URL PARA ACTUALIZAR METADATOS DE MINIATURA Y FOTO
         function updateMetaTagsForArticle(articleId) {
             const blog = (currentData.blogs || []).find(b => b.id === articleId);
             if (!blog) return;
 
-            document.getElementById('page-title').innerText = `${blog.title} - Taber by Pass`;
+            document.getElementById('page-title').innerText = `${blog.title} - Taber by Pass - Una iglesia de Fe`;
             document.getElementById('meta-desc').setAttribute('content', blog.content.replace(/<[^>]*>?/gm, '').substring(0, 160));
             
-            document.getElementById('og-title').setAttribute('content', blog.title);
+            document.getElementById('og-title').setAttribute('content', `${blog.title} - Taber by Pass`);
             document.getElementById('og-desc').setAttribute('content', blog.content.replace(/<[^>]*>?/gm, '').substring(0, 160));
             document.getElementById('og-image').setAttribute('content', blog.img);
             document.getElementById('og-image-secure').setAttribute('content', blog.img);
             document.getElementById('og-url').setAttribute('content', window.location.href);
 
-            document.getElementById('tw-title').setAttribute('content', blog.title);
+            document.getElementById('tw-title').setAttribute('content', `${blog.title} - Taber by Pass`);
             document.getElementById('tw-desc').setAttribute('content', blog.content.replace(/<[^>]*>?/gm, '').substring(0, 160));
             document.getElementById('tw-image').setAttribute('content', blog.img);
         }
@@ -1170,16 +1170,19 @@
             `).join('');
         }
 
-        // COMPARTIR BLOG CON VISTA PREVIA PROFESIONAL Y MINIATURA
+        // COMPARTIR BLOG CON VISTA PREVIA Y FORMATO OPTIMIZADO PARA WHATSAPP
         window.shareArticle = (blogId, platform) => {
             const b = (currentData.blogs || []).find(item => item.id === blogId);
             if (!b) return;
 
             const articleUrl = `${window.location.origin}${window.location.pathname}?article=${blogId}`;
-            const textMsg = `📖 *${b.title}*\n${b.content.replace(/<[^>]*>?/gm, '').substring(0, 100)}...\n\nLee el artículo completo aquí:`;
+            const cleanSnippet = b.content.replace(/<[^>]*>?/gm, '').substring(0, 120);
+            
+            // Texto formateado con saltos de línea para forzar vista previa de imagen en WhatsApp
+            const textMsg = `📖 *${b.title}*\n\n${cleanSnippet}...\n\nLee más en el enlace:\n${articleUrl}`;
 
             if (platform === 'wa') {
-                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textMsg + '\n' + articleUrl)}`, '_blank');
+                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textMsg)}`, '_blank');
             } else if (platform === 'fb') {
                 window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl)}`, '_blank');
             } else if (platform === 'copy') {
