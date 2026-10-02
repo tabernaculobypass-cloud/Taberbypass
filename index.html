@@ -8,7 +8,7 @@
     <title id="page-title">Taber by Pass - Una iglesia de Fe</title>
     <meta id="meta-desc" name="description" content="Bienvenidos a Taber by Pass. Una iglesia de Fe, esperanza y salvación. Sermones, Radio 106.1 FM y Taber TV en vivo.">
 
-    <!-- METADATOS OPEN GRAPH -->
+    <!-- METADATOS OPEN GRAPH PARA VISTA PREVIA EN WHATSAPP, FACEBOOK, TELEGRAM Y TWITTER -->
     <meta id="og-title" property="og:title" content="Taber by Pass - Una iglesia de Fe">
     <meta id="og-desc" property="og:description" content="Una iglesia de Fe, esperanza y salvación. Disfruta de nuestros sermones, radio y transmisión en vivo.">
     <meta id="og-image" property="og:image" content="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200">
@@ -30,11 +30,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- AOS Library CSS (Animate On Scroll) -->
+    <!-- AOS Library CSS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <!-- HLS.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <!-- HTML2CANVAS PARA GENERACIÓN AUTOMÁTICA DE IMAGEN DEL VERSÍCULO -->
+    <!-- HTML2CANVAS PARA DESCARGAR IMAGEN DEL VERSÍCULO DEL DÍA -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
@@ -71,7 +71,7 @@
 
                 <!-- DESKTOP NAV DINÁMICO -->
                 <nav id="dynamic-nav-links" class="hidden md:flex items-center space-x-6 font-medium text-sm lg:text-base">
-                    <!-- Generado por JS -->
+                    <!-- Enlaces generados automáticamente -->
                 </nav>
 
                 <!-- ADMIN BUTTON -->
@@ -101,8 +101,9 @@
     <!-- CONTENIDO PRINCIPAL -->
     <main class="flex-grow">
 
+        <!-- VISTAS PRINCIPALES -->
         <div id="main-sections-container">
-            <!-- HERO / BANNER PRINCIPAL -->
+            <!-- HERO PRINCIPAL -->
             <section id="inicio" class="relative bg-gradient-to-r from-gray-900 via-secondary to-primary text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden shadow-inner">
                 <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
                 <div class="max-w-4xl mx-auto text-center relative z-10">
@@ -125,7 +126,7 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN VERSÍCULO DEL DÍA DESTACADO -->
+            <!-- TARJETA VERSÍCULO DEL DÍA -->
             <section id="versiculo-dia-section" class="py-12 bg-gradient-to-b from-blue-900 to-indigo-950 text-white px-4 sm:px-6 lg:px-8 border-b">
                 <div class="max-w-4xl mx-auto text-center space-y-6">
                     <div class="inline-flex items-center space-x-2 bg-amber-500/20 text-amber-300 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-amber-500/30">
@@ -133,7 +134,6 @@
                         <span>Versículo del Día</span>
                     </div>
 
-                    <!-- TARJETA GENERABLE DEL VERSÍCULO DEL DÍA -->
                     <div id="verse-card-printable" class="bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-900 p-8 sm:p-12 rounded-3xl shadow-2xl border border-blue-800/80 text-center relative overflow-hidden">
                         <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl text-white font-serif pointer-events-none">“</div>
                         <p id="daily-verse-text" class="text-xl sm:text-2xl md:text-3xl font-serif italic text-blue-50 leading-relaxed mb-6">"Lámpara es a mis pies tu palabra, y lumbrera a mi camino."</p>
@@ -154,7 +154,7 @@
                 </div>
             </section>
 
-            <!-- CARRUSEL BANNERS -->
+            <!-- CARRUSEL DE BANNERS -->
             <section id="banner-eventos" class="py-12 bg-gray-100 border-b border-gray-200 px-4 sm:px-6 lg:px-8">
                 <div class="max-w-7xl mx-auto">
                     <div class="text-center mb-6">
@@ -162,10 +162,11 @@
                             <i class="fa-solid fa-bullhorn mr-1"></i> Anuncios Especiales & Eventos
                         </span>
                     </div>
+
                     <div class="relative bg-gray-900 rounded-3xl overflow-hidden shadow-2xl border border-gray-800 min-h-[300px] sm:min-h-[420px] flex items-center justify-center group">
                         <div id="banner-slides-container" class="w-full h-full relative"></div>
-                        <button onclick="prevBannerSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-11 h-11 rounded-full flex items-center justify-center transition shadow-lg z-20"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button onclick="nextBannerSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-11 h-11 rounded-full flex items-center justify-center transition shadow-lg z-20"><i class="fa-solid fa-chevron-right"></i></button>
+                        <button onclick="prevBannerSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-11 h-11 rounded-full flex items-center justify-center transition shadow-lg opacity-80 group-hover:opacity-100 z-20"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button onclick="nextBannerSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white w-11 h-11 rounded-full flex items-center justify-center transition shadow-lg opacity-80 group-hover:opacity-100 z-20"><i class="fa-solid fa-chevron-right"></i></button>
                         <div id="banner-dots-container" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20"></div>
                     </div>
                 </div>
@@ -185,13 +186,13 @@
                     
                     <div class="bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
                         <div class="aspect-video w-full bg-black relative flex items-center justify-center" id="live-container">
-                            <video id="hls-player" controls class="w-full h-full object-contain"></video>
+                            <video id="hls-player" controls class="w-full h-full object-contain" poster=""></video>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- RADIO BAUTISTA -->
+            <!-- RADIO BAUTISTA 106.1 FM -->
             <section id="radio" class="py-16 bg-blue-950 text-white px-4 sm:px-6 lg:px-8">
                 <div class="max-w-4xl mx-auto bg-gradient-to-br from-blue-900 to-blue-950 p-8 sm:p-12 rounded-3xl shadow-xl border border-blue-800 flex flex-col md:flex-row items-center justify-between gap-8">
                     <div class="space-y-4 text-center md:text-left">
@@ -207,12 +208,15 @@
                             <i class="fa-solid fa-radio"></i>
                         </div>
                         <span class="font-bold text-lg mb-4 text-white">106.1 FM En Directo</span>
+                        
                         <audio id="radio-audio-player" preload="none"></audio>
                         <iframe id="radio-hidden-iframe" class="hidden w-0 h-0" allow="autoplay"></iframe>
-                        <button id="radio-toggle-btn" onclick="toggleRadioPlay()" class="w-full bg-white text-blue-900 hover:bg-blue-50 font-bold px-6 py-3.5 rounded-xl transition shadow flex items-center justify-center space-x-2">
+
+                        <button id="radio-toggle-btn" onclick="toggleRadioPlay()" class="w-full bg-white text-blue-900 hover:bg-blue-50 font-bold px-6 py-3.5 rounded-xl transition text-center shadow flex items-center justify-center space-x-2">
                             <i id="radio-btn-icon" class="fa-solid fa-play text-primary"></i>
                             <span id="radio-btn-text">Reproducir Radio</span>
                         </button>
+                        
                         <p id="radio-status-text" class="text-xs text-blue-300 mt-3 font-medium text-center">Presiona para iniciar reproducción</p>
                     </div>
                 </div>
@@ -223,6 +227,7 @@
                 <div class="text-center mb-10">
                     <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Predicaciones</span>
                     <h2 class="text-3xl font-bold tracking-tight text-gray-900 mt-2">Sermones Recientes</h2>
+                    <p class="text-gray-500 mt-2">Escoge entre ver el video o escuchar el audio de Jumpshare</p>
                 </div>
                 <div id="videos-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
                 <div id="videos-more-container" class="mt-10 text-center hidden">
@@ -239,6 +244,7 @@
                     <div class="text-center mb-10">
                         <span class="bg-blue-600/10 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Artículos</span>
                         <h2 class="text-3xl font-bold tracking-tight text-gray-900 mt-2">Blog Pastoral y Noticias</h2>
+                        <p class="text-gray-500 mt-2">Lecturas edificantes y reflexiones espirituales</p>
                     </div>
                     <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
                 </div>
@@ -249,6 +255,7 @@
                 <div class="max-w-5xl mx-auto">
                     <div class="text-center mb-12">
                         <h2 class="text-3xl font-bold tracking-tight text-gray-900">Horarios de Servicios</h2>
+                        <p class="text-gray-500 mt-2">Organizados semanalmente de Domingo a Sábado para tu comodidad</p>
                     </div>
                     <div id="horarios-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
                 </div>
@@ -258,15 +265,28 @@
             <section id="galeria" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-gray-50">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-bold tracking-tight text-gray-900">Álbumes Fotográficos</h2>
+                    <p class="text-gray-500 mt-2">Momentos especiales compartidos en comunidad</p>
                 </div>
                 <div id="albums-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"></div>
             </section>
         </div>
 
-        <!-- VISTA DEDICADA COMPLETA -->
+        <!-- VISTA DEDICADA COMPLETA (BIBLIA Y SERMONES AGRUPADOS) -->
         <div id="dedicated-view-container" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 hidden">
             <div id="dedicated-content"></div>
         </div>
+
+        <!-- PÁGINA PERSONALIZADA ADMIN -->
+        <section id="custom-page-view" class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 hidden">
+            <div class="bg-white rounded-3xl shadow-lg border p-8 sm:p-12 space-y-6">
+                <button onclick="showSingleView('inicio')" class="text-primary hover:underline text-sm font-semibold flex items-center space-x-2">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Volver al Inicio</span>
+                </button>
+                <h2 id="custom-page-title" class="text-3xl sm:text-4xl font-extrabold text-gray-900 border-b pb-4">Título</h2>
+                <div id="custom-page-content" class="text-gray-700 leading-relaxed text-base space-y-4"></div>
+            </div>
+        </section>
 
         <!-- CONTACTO -->
         <section id="contacto" class="bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8">
@@ -314,10 +334,261 @@
         </div>
     </div>
 
-    <!-- MÓDULO PRINCIPAL FIREBASE Y LÓGICA -->
+    <!-- MODAL ÁLBUM -->
+    <div id="album-view-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[90vh] flex flex-col shadow-2xl relative overflow-hidden">
+            <div class="p-6 border-b flex justify-between items-center bg-gray-50">
+                <div>
+                    <h3 id="modal-album-title" class="text-2xl font-bold text-gray-900">Título del Álbum</h3>
+                    <p id="modal-album-desc" class="text-sm text-gray-600 mt-1">Descripción</p>
+                </div>
+                <button onclick="closeAlbumModal()" class="text-gray-400 hover:text-gray-700 p-2 text-2xl transition"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="modal-album-photos" class="p-6 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+        </div>
+    </div>
+
+    <!-- MODAL LOGIN ADMIN -->
+    <div id="login-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-8 shadow-2xl relative">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <div class="text-center mb-6">
+                <div class="bg-primary/10 text-primary w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 text-xl"><i class="fa-solid fa-lock"></i></div>
+                <h3 class="text-2xl font-bold text-gray-900">Acceso Administrativo</h3>
+                <p class="text-sm text-gray-500 mt-1">Ingresa tus credenciales para administrar el sitio</p>
+            </div>
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Usuario</label>
+                    <input type="text" id="login-user" required class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                    <input type="password" id="login-pass" required class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-primary focus:outline-none">
+                </div>
+                <div id="login-error" class="text-red-500 text-sm hidden">Usuario o contraseña incorrectos.</div>
+                <button type="submit" class="w-full bg-primary hover:bg-secondary text-white font-semibold py-3 rounded-lg transition shadow">Ingresar al Panel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PANEL ADMIN -->
+    <div id="admin-panel" class="fixed inset-0 z-50 bg-gray-100 hidden flex flex-col overflow-y-auto">
+        <header class="bg-gray-900 text-white shadow sticky top-0 z-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-gauge-high text-primary text-xl"></i>
+                    <span class="font-bold text-lg">Panel de Control - Taber by Pass</span>
+                </div>
+                <button onclick="closeAdminPanel()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-2">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Salir</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow space-y-8">
+            <div class="flex border-b border-gray-300 space-x-6 overflow-x-auto">
+                <button onclick="switchTab('general')" id="tab-btn-general" class="pb-3 font-semibold text-primary border-b-2 border-primary transition whitespace-nowrap">Config y Redes</button>
+                <button onclick="switchTab('banners')" id="tab-btn-banners" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Banners</button>
+                <button onclick="switchTab('menu')" id="tab-btn-menu" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Menú</button>
+                <button onclick="switchTab('blog')" id="tab-btn-blog" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Blog</button>
+                <button onclick="switchTab('videos')" id="tab-btn-videos" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Sermones</button>
+                <button onclick="switchTab('galeria')" id="tab-btn-galeria" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Galería</button>
+                <button onclick="switchTab('horarios')" id="tab-btn-horarios" class="pb-3 font-semibold text-gray-500 hover:text-gray-800 transition whitespace-nowrap">Horarios</button>
+            </div>
+
+            <!-- TAB GENERAL -->
+            <div id="tab-general" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6">
+                <h3 class="text-xl font-bold text-gray-900 border-b pb-3">Configuración General</h3>
+                <form onsubmit="saveGeneralConfig(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nombre del Ministerio</label>
+                        <input type="text" id="cfg-brand" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Slogan / Subtítulo</label>
+                        <input type="text" id="cfg-subtitle" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-bold text-red-700 mb-1">Enlace IPTV / HLS (.m3u8)</label>
+                        <input type="url" id="cfg-livetv" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-bold text-blue-800 mb-1">Enlace Radio 106.1 FM</label>
+                        <input type="url" id="cfg-radio" class="w-full border rounded-lg px-4 py-2">
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- TAB BANNERS -->
+            <div id="tab-banners" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
+                <h3 class="text-xl font-bold text-gray-900">Agregar Banner</h3>
+                <form onsubmit="saveBanner(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-xl border">
+                    <input type="hidden" id="banner-edit-id">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Título</label>
+                        <input type="text" id="banner-title" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Subtítulo</label>
+                        <input type="text" id="banner-subtitle" class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">URL Imagen</label>
+                        <input type="url" id="banner-img" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Guardar Banner</button>
+                    </div>
+                </form>
+                <div id="admin-banners-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
+
+            <!-- TAB MENU -->
+            <div id="tab-menu" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
+                <h3 class="text-xl font-bold text-gray-900">Agregar Enlace al Menú</h3>
+                <form onsubmit="saveMenuItem(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-xl border">
+                    <input type="hidden" id="menu-edit-id">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Título</label>
+                        <input type="text" id="menu-title" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Enlace / Destino (#Sección)</label>
+                        <input type="text" id="menu-link" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Guardar Enlace</button>
+                    </div>
+                </form>
+                <div id="admin-menu-list" class="space-y-3"></div>
+            </div>
+
+            <!-- TAB BLOG -->
+            <div id="tab-blog" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
+                <h3 class="text-xl font-bold text-gray-900">Publicar Artículo de Blog</h3>
+                <form onsubmit="saveBlog(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-xl border">
+                    <input type="hidden" id="blog-edit-id">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Título</label>
+                        <input type="text" id="blog-title" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Autor</label>
+                        <input type="text" id="blog-author" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Fecha</label>
+                        <input type="text" id="blog-date" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">URL Foto</label>
+                        <input type="url" id="blog-img" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Contenido</label>
+                        <textarea id="blog-content" rows="4" required class="w-full border rounded-lg px-3 py-2 bg-white text-sm"></textarea>
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Publicar Artículo</button>
+                    </div>
+                </form>
+                <div id="admin-blog-list" class="space-y-3"></div>
+            </div>
+
+            <!-- TAB VIDEOS / SERMONES -->
+            <div id="tab-videos" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
+                <h3 class="text-xl font-bold text-gray-900">Agregar Sermón</h3>
+                <form onsubmit="saveVideo(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-xl border">
+                    <input type="hidden" id="vid-edit-id">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Título</label>
+                        <input type="text" id="vid-title" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Predicador / Pastor</label>
+                        <input type="text" id="vid-author" required placeholder="Pastor Roger / David Barahona" class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">URL o ID de YouTube</label>
+                        <input type="text" id="vid-url" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Audio Jumpshare (Opcional)</label>
+                        <input type="url" id="vid-audio-url" class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Guardar Sermón</button>
+                    </div>
+                </form>
+                <div id="admin-videos-list" class="space-y-3"></div>
+            </div>
+
+            <!-- TAB GALERÍA -->
+            <div id="tab-galeria" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
+                <h3 class="text-xl font-bold text-gray-900">Álbumes Fotográficos</h3>
+                <form onsubmit="saveAlbum(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-xl border">
+                    <input type="hidden" id="album-edit-id">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Título</label>
+                        <input type="text" id="album-title" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">URL Portada</label>
+                        <input type="url" id="album-cover" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+                        <input type="text" id="album-desc" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">URLs de Fotos (Una por línea)</label>
+                        <textarea id="album-photos" rows="3" required class="w-full border rounded-lg px-3 py-2 bg-white text-xs font-mono"></textarea>
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Guardar Álbum</button>
+                    </div>
+                </form>
+                <div id="admin-albums-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
+
+            <!-- TAB HORARIOS -->
+            <div id="tab-horarios" class="admin-tab bg-white rounded-2xl shadow-sm p-6 sm:p-8 space-y-6 hidden">
+                <h3 class="text-xl font-bold text-gray-900">Horarios de Culto</h3>
+                <form onsubmit="saveSchedule(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-gray-50 p-4 rounded-xl border">
+                    <input type="hidden" id="sch-edit-id">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Día</label>
+                        <input type="text" id="sch-day" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Hora</label>
+                        <input type="text" id="sch-time" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+                        <input type="text" id="sch-desc" required class="w-full border rounded-lg px-3 py-2 bg-white">
+                    </div>
+                    <div class="md:col-span-3">
+                        <button type="submit" class="bg-primary text-white font-semibold px-6 py-2.5 rounded-lg transition shadow w-full">Guardar Horario</button>
+                    </div>
+                </form>
+                <div id="admin-schedules-list" class="space-y-3"></div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- AOS JS CDN -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- MÓDULO PRINCIPAL DE JAVASCRIPT CON FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
         import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         const firebaseConfig = {
@@ -327,12 +598,10 @@
             storageBucket: "taberbypass-4ad11.firebasestorage.app",
             messagingSenderId: "761058213173",
             appId: "1:761058213173:web:33bedddfd121effeeee07c",
-            measurementId: "G-5Z7XMJ31T9",
             databaseURL: "https://taberbypass-4ad11-default-rtdb.firebaseio.com"
         };
 
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
         const db = getDatabase(app);
         const dbRef = ref(db, 'taber_data');
 
@@ -342,7 +611,6 @@
         let bannerInterval = null;
         let currentBannerIndex = 0;
 
-        // COLECCIÓN DE VERSÍCULOS DIARIOS
         const dailyVersesList = [
             { text: "Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.", ref: "Juan 3:16" },
             { text: "Todo lo puedo en Cristo que me fortalece.", ref: "Filipenses 4:13" },
@@ -382,18 +650,34 @@
                 address: "Avenida Principal #123, Ciudad Central",
                 fb: "https://facebook.com", yt: "https://youtube.com", ig: "https://instagram.com", wa: "", tk: ""
             },
-            banners: [],
+            banners: [
+                { id: "1", title: "Congreso de Jóvenes 2026", subtitle: "Próximo Sábado - 4:00 PM", img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=1200", btnText: "Más Info", link: "#contacto" }
+            ],
             menuItems: [
                 { id: "1", title: "Inicio", link: "#inicio" },
                 { id: "2", title: "Biblia RV1960", link: "#biblia" },
-                { id: "3", title: "Taber TV", link: "#en-vivo" },
-                { id: "4", title: "Radio 106.1 FM", link: "#radio" },
-                { id: "5", title: "Sermones", link: "#transmision" },
-                { id: "6", title: "Blog Pastoral", link: "#blog" },
-                { id: "7", title: "Horarios", link: "#horarios" },
-                { id: "8", title: "Galería", link: "#galeria" }
+                { id: "3", title: "Anuncios", link: "#banner-eventos" },
+                { id: "4", title: "Taber TV", link: "#en-vivo" },
+                { id: "5", title: "Radio 106.1 FM", link: "#radio" },
+                { id: "6", title: "Sermones", link: "#transmision" },
+                { id: "7", title: "Blog Pastoral", link: "#blog" },
+                { id: "8", title: "Horarios", link: "#horarios" },
+                { id: "9", title: "Galería", link: "#galeria" }
             ],
-            blogs: [], videos: [], albums: [], schedules: []
+            blogs: [
+                { id: "1", title: "Perseverando en la prueba", author: "Pastor Roger", date: "1 Oct, 2026", img: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200", content: "La palabra de Dios nos recuerda en Santiago 1:12..." }
+            ],
+            videos: [
+                { id: "1", title: "El Poder de la Oración", author: "Pastor Roger", ytId: "dQw4w9WgXcQ", audioUrl: "" },
+                { id: "2", title: "Caminando en Integridad", author: "David Barahona", ytId: "dQw4w9WgXcQ", audioUrl: "" }
+            ],
+            albums: [
+                { id: "1", title: "Culto Especial de Aniversario", desc: "Momentos inolvidables", cover: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800", photos: ["https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800"] }
+            ],
+            schedules: [
+                { id: "1", day: "Domingo de Adoración", time: "9:00 AM", desc: "Culto General" },
+                { id: "2", day: "Miércoles Bíblico", time: "7:00 PM", desc: "Estudio de la Palabra" }
+            ]
         };
 
         let currentData = defaultData;
@@ -410,21 +694,129 @@
                     albums: Object.values(data.albums || defaultData.albums),
                     schedules: Object.values(data.schedules || defaultData.schedules)
                 };
+            } else {
+                saveData(defaultData);
             }
+
             renderPublicSite();
+            renderAdminLists();
+            initBannerCarousel();
             loadDailyVerse();
         });
+
+        function saveData(data) {
+            set(dbRef, data).catch((err) => console.error("Error al guardar en Firebase: ", err));
+        }
+
+        function parseYtEmbed(urlOrId) {
+            if (!urlOrId) return "dQw4w9WgXcQ";
+            let ytEmbed = urlOrId.trim();
+            if (ytEmbed.includes('v=')) ytEmbed = ytEmbed.split('v=')[1].split('&')[0];
+            else if (ytEmbed.includes('youtu.be/')) ytEmbed = ytEmbed.split('youtu.be/')[1].split('?')[0];
+            return ytEmbed;
+        }
+
+        function loadHlsStream(m3u8Url) {
+            const video = document.getElementById('hls-player');
+            if (!m3u8Url || m3u8Url.trim() === '') return;
+            const streamUrl = m3u8Url.trim();
+            if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
+
+            if (Hls.isSupported()) {
+                hlsInstance = new Hls({ enableWorker: true, lowLatencyMode: true });
+                hlsInstance.loadSource(streamUrl);
+                hlsInstance.attachMedia(video);
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = streamUrl;
+            }
+        }
+
+        function initBannerCarousel() {
+            if (bannerInterval) clearInterval(bannerInterval);
+            const banners = currentData.banners || [];
+            if (banners.length === 0) return;
+
+            renderBannerSlide(currentBannerIndex);
+
+            bannerInterval = setInterval(() => {
+                currentBannerIndex = (currentBannerIndex + 1) % banners.length;
+                renderBannerSlide(currentBannerIndex);
+            }, 5000);
+        }
+
+        function renderBannerSlide(index) {
+            const banners = currentData.banners || [];
+            const container = document.getElementById('banner-slides-container');
+            const dotsContainer = document.getElementById('banner-dots-container');
+
+            if (banners.length === 0) {
+                container.innerHTML = `<p class="text-white text-center p-8">No hay banners registrados.</p>`;
+                dotsContainer.innerHTML = '';
+                return;
+            }
+
+            const b = banners[index];
+            container.innerHTML = `
+                <div class="relative w-full h-full min-h-[300px] sm:min-h-[420px] flex items-center justify-center transition-all duration-700">
+                    <img src="${b.img}" alt="${b.title}" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30"></div>
+                    <div class="relative z-10 text-center text-white px-6 max-w-3xl space-y-3">
+                        ${b.subtitle ? `<span class="inline-block bg-amber-500 text-black text-xs font-black uppercase px-3 py-1 rounded-full shadow">${b.subtitle}</span>` : ''}
+                        <h2 class="text-2xl sm:text-4xl font-extrabold drop-shadow">${b.title}</h2>
+                        ${b.btnText ? `<a href="${b.link || '#contacto'}" class="inline-block bg-primary text-white font-bold px-6 py-3 rounded-xl shadow hover:scale-105 transition mt-2">${b.btnText}</a>` : ''}
+                    </div>
+                </div>
+            `;
+
+            dotsContainer.innerHTML = banners.map((_, i) => `
+                <button onclick="goToBannerSlide(${i})" class="w-3 h-3 rounded-full transition-all duration-300 ${i === index ? 'bg-amber-400 w-8' : 'bg-white/50 hover:bg-white'}"></button>
+            `).join('');
+        }
+
+        window.nextBannerSlide = () => {
+            const banners = currentData.banners || [];
+            if (banners.length === 0) return;
+            currentBannerIndex = (currentBannerIndex + 1) % banners.length;
+            renderBannerSlide(currentBannerIndex);
+            initBannerCarousel();
+        };
+
+        window.prevBannerSlide = () => {
+            const banners = currentData.banners || [];
+            if (banners.length === 0) return;
+            currentBannerIndex = (currentBannerIndex - 1 + banners.length) % banners.length;
+            renderBannerSlide(currentBannerIndex);
+            initBannerCarousel();
+        };
+
+        window.goToBannerSlide = (i) => {
+            currentBannerIndex = i;
+            renderBannerSlide(currentBannerIndex);
+            initBannerCarousel();
+        };
+
+        window.scrollToSection = (targetHash) => {
+            document.getElementById('main-sections-container').classList.remove('hidden');
+            document.getElementById('dedicated-view-container').classList.add('hidden');
+            document.getElementById('custom-page-view').classList.add('hidden');
+            document.getElementById('back-to-home-bar').classList.add('hidden');
+
+            const el = document.querySelector(targetHash);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        };
 
         window.showSingleView = (targetLink) => {
             const mainContainer = document.getElementById('main-sections-container');
             const dedicatedContainer = document.getElementById('dedicated-view-container');
             const dedicatedContent = document.getElementById('dedicated-content');
+            const customView = document.getElementById('custom-page-view');
             const backBar = document.getElementById('back-to-home-bar');
             const badge = document.getElementById('current-view-badge');
 
             if (targetLink === 'inicio' || targetLink === '#inicio') {
                 mainContainer.classList.remove('hidden');
                 dedicatedContainer.classList.add('hidden');
+                customView.classList.add('hidden');
                 backBar.classList.add('hidden');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 return;
@@ -432,15 +824,16 @@
 
             if (targetLink === '#biblia') {
                 mainContainer.classList.add('hidden');
+                customView.classList.add('hidden');
                 dedicatedContainer.classList.remove('hidden');
-                badge.innerText = "Santa Biblia RVR1960";
+                badge.innerText = "Santa Biblia RV1960";
                 backBar.classList.remove('hidden');
 
                 dedicatedContent.innerHTML = `
                     <div class="text-center mb-8">
                         <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Lectura Bíblica</span>
                         <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2">Santa Biblia - Reina Valera 1960</h2>
-                        <p class="text-gray-500 mt-2">Lee y medita en la Palabra de Dios todos los días</p>
+                        <p class="text-gray-500 mt-2">Lee y medita en la Palabra de Dios</p>
                     </div>
 
                     <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-gray-200 max-w-4xl mx-auto space-y-6">
@@ -470,25 +863,59 @@
                             </div>
                         </div>
 
-                        <div id="bible-verses-container" class="border-t pt-6 text-gray-800 leading-relaxed font-serif text-lg space-y-3 max-h-[60vh] overflow-y-auto pr-2">
-                            <p class="text-center text-gray-500 italic">Cargando pasaje bíblico...</p>
-                        </div>
+                        <div id="bible-verses-container" class="border-t pt-6 text-gray-800 leading-relaxed font-serif text-lg space-y-3 max-h-[60vh] overflow-y-auto pr-2"></div>
                     </div>
                 `;
                 fetchBibleChapter();
             } else if (targetLink === '#transmision') {
                 mainContainer.classList.add('hidden');
+                customView.classList.add('hidden');
                 dedicatedContainer.classList.remove('hidden');
                 badge.innerText = "Sermones";
                 backBar.classList.remove('hidden');
-                dedicatedContent.innerHTML = `<h2 class="text-2xl font-bold text-center">Catálogo Completo de Sermones</h2>`;
+
+                const sermons = currentData.videos || [];
+                const groupedSermons = {};
+
+                sermons.forEach(v => {
+                    const author = v.author && v.author.trim() !== '' ? v.author.trim() : 'Otros Predicadores';
+                    if (!groupedSermons[author]) groupedSermons[author] = [];
+                    groupedSermons[author].push(v);
+                });
+
+                const authors = Object.keys(groupedSermons);
+                let sectionsHTML = authors.map(authorName => {
+                    const authorSermons = groupedSermons[authorName];
+                    return `
+                        <div class="mb-12">
+                            <h3 class="text-2xl font-extrabold text-gray-900 border-b pb-2 mb-6 flex items-center space-x-2">
+                                <i class="fa-solid fa-user-tie text-primary"></i>
+                                <span>Sermones ${authorName}</span>
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                ${renderSermonsHTML(authorSermons)}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                dedicatedContent.innerHTML = `
+                    <div class="text-center mb-8">
+                        <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Biblioteca Pastoral</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2">Sermones</h2>
+                        <p class="text-gray-500 mt-2">Mensajes organizados por pastor</p>
+                    </div>
+                    ${sectionsHTML}
+                `;
             } else {
                 mainContainer.classList.remove('hidden');
                 dedicatedContainer.classList.add('hidden');
+                customView.classList.add('hidden');
                 backBar.classList.add('hidden');
                 const el = document.querySelector(targetLink);
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
             }
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         };
 
@@ -497,7 +924,6 @@
             const chapter = document.getElementById('bible-chapter-input').value || 1;
             const container = document.getElementById('bible-verses-container');
 
-            // Muestra ejemplo formateado de Salmos 23 u otro libro seleccionado
             if (book === 'PSA' && chapter == 23) {
                 container.innerHTML = `
                     <h3 class="text-xl font-bold text-primary font-sans mb-4">Salmos 23 - Jehová es mi pastor</h3>
@@ -510,11 +936,92 @@
                 `;
             } else {
                 container.innerHTML = `
-                    <h3 class="text-xl font-bold text-primary font-sans mb-4">Lectura Bíblica (${book} ${chapter})</h3>
-                    <p><sup class="text-xs font-bold text-primary">1</sup> Porque la palabra de Dios es viva y eficaz, y más cortante que toda espada de dos filos; y penetra hasta partir el alma y el espíritu, las coyunturas y los tuétanos, y discierne los pensamientos y las intenciones del corazón.</p>
+                    <h3 class="text-xl font-bold text-primary font-sans mb-4">Lectura Bíblica (${book} Cap. ${chapter})</h3>
+                    <p><sup class="text-xs font-bold text-primary">1</sup> Porque la palabra de Dios es viva y eficaz, y más cortante que toda espada de dos filos; y penetra hasta partir el alma y el espíritu.</p>
                     <p><sup class="text-xs font-bold text-primary">2</sup> Toda la Escritura es inspirada por Dios, y útil para enseñar, para redargüir, para corregir, para instruir en justicia.</p>
                 `;
             }
+        };
+
+        function renderSermonsHTML(videoList) {
+            if (!videoList || videoList.length === 0) return `<p class="text-gray-500">No hay sermones registrados.</p>`;
+            return videoList.map(v => `
+                <div class="bg-white rounded-2xl shadow border overflow-hidden flex flex-col">
+                    <div class="aspect-video w-full bg-black">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/${parseYtEmbed(v.ytId)}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4 flex flex-col flex-grow justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-primary uppercase">${v.author}</span>
+                            <h4 class="font-bold text-gray-900 mt-1">${v.title}</h4>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderBlogsHTML(blogList) {
+            if (!blogList || blogList.length === 0) return `<p class="text-gray-500">No hay publicaciones.</p>`;
+            return blogList.map(b => `
+                <div onclick="openBlogModal('${b.id}')" class="bg-white rounded-2xl shadow border overflow-hidden cursor-pointer hover:shadow-lg transition">
+                    <img src="${b.img}" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-primary uppercase">${b.author} | ${b.date}</span>
+                        <h3 class="text-xl font-bold text-gray-900 mt-2">${b.title}</h3>
+                        <p class="text-gray-600 text-sm mt-2 line-clamp-3">${b.content}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.openBlogModal = (id) => {
+            const b = (currentData.blogs || []).find(item => item.id === id);
+            if (!b) return;
+            document.getElementById('blog-modal-title').innerText = b.title;
+            document.getElementById('blog-modal-author').innerText = b.author;
+            document.getElementById('blog-modal-date').innerText = b.date;
+            document.getElementById('blog-modal-img').src = b.img;
+            document.getElementById('blog-modal-content').innerText = b.content;
+            document.getElementById('blog-modal').classList.remove('hidden');
+        };
+
+        window.closeBlogModal = () => document.getElementById('blog-modal').classList.add('hidden');
+
+        window.toggleRadioPlay = () => {
+            const player = document.getElementById('radio-audio-player');
+            const hiddenIframe = document.getElementById('radio-hidden-iframe');
+            const btnIcon = document.getElementById('radio-btn-icon');
+            const btnText = document.getElementById('radio-btn-text');
+            const statusText = document.getElementById('radio-status-text');
+            const rawUrl = currentData.config.radioUrl || "";
+
+            if (!player.paused) {
+                player.pause();
+                btnIcon.className = "fa-solid fa-play text-primary";
+                btnText.innerText = "Reproducir Radio";
+                statusText.innerText = "Pausado";
+                return;
+            }
+
+            statusText.innerText = "Conectando...";
+            player.src = rawUrl;
+            player.play().then(() => {
+                btnIcon.className = "fa-solid fa-pause text-red-600";
+                btnText.innerText = "Pausar Radio";
+                statusText.innerText = "Sintonizando Radio Bautista 106.1 FM";
+            }).catch(() => {
+                hiddenIframe.src = rawUrl;
+                btnIcon.className = "fa-solid fa-pause text-red-600";
+                btnText.innerText = "Detener Radio";
+                statusText.innerText = "Reproduciendo en vivo";
+            });
+        };
+
+        window.handleContactSubmit = (e) => {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const destEmail = currentData.config.receiverEmail || "contacto@taberbypass.org";
+            alert(`¡Gracias ${name}! Tu mensaje ha sido enviado.`);
         };
 
         function renderPublicSite() {
@@ -522,11 +1029,149 @@
             document.getElementById('dynamic-nav-links').innerHTML = (data.menuItems || []).map(item => `
                 <button onclick="showSingleView('${item.link}')" class="text-gray-600 hover:text-primary transition font-medium">${item.title}</button>
             `).join('');
+
             document.getElementById('nav-brand-title').innerText = data.config.brand;
             document.getElementById('nav-brand-subtitle').innerText = data.config.subtitle;
             document.getElementById('hero-title').innerText = data.config.heroTitle;
             document.getElementById('hero-subtitle').innerText = data.config.heroSub;
+
+            loadHlsStream(data.config.liveTv);
+
+            document.getElementById('videos-grid').innerHTML = renderSermonsHTML((data.videos || []).slice(0, 4));
+            if ((data.videos || []).length > 4) document.getElementById('videos-more-container').classList.remove('hidden');
+
+            document.getElementById('blog-grid').innerHTML = renderBlogsHTML((data.blogs || []).slice(0, 4));
+
+            document.getElementById('albums-grid').innerHTML = (data.albums || []).map(album => `
+                <div onclick="openAlbumModal('${album.id}')" class="bg-white rounded-2xl shadow border overflow-hidden cursor-pointer">
+                    <img src="${album.cover}" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h4 class="font-bold text-gray-900">${album.title}</h4>
+                        <p class="text-gray-500 text-xs mt-1">${album.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('horarios-grid').innerHTML = (data.schedules || []).map(s => `
+                <div class="bg-white p-6 rounded-2xl shadow border text-center">
+                    <h4 class="font-bold text-lg text-gray-900">${s.day}</h4>
+                    <p class="text-primary font-bold text-xl my-1">${s.time}</p>
+                    <p class="text-gray-500 text-sm">${s.desc}</p>
+                </div>
+            `).join('');
         }
+
+        window.openAlbumModal = (id) => {
+            const album = (currentData.albums || []).find(a => a.id === id);
+            if (!album) return;
+            document.getElementById('modal-album-title').innerText = album.title;
+            document.getElementById('modal-album-desc').innerText = album.desc;
+            document.getElementById('modal-album-photos').innerHTML = (album.photos || []).map(url => `
+                <img src="${url}" class="rounded-xl w-full h-40 object-cover border shadow">
+            `).join('');
+            document.getElementById('album-view-modal').classList.remove('hidden');
+        };
+
+        window.closeAlbumModal = () => document.getElementById('album-view-modal').classList.add('hidden');
+
+        function renderAdminLists() {
+            const data = currentData;
+            document.getElementById('cfg-brand').value = data.config.brand;
+            document.getElementById('cfg-subtitle').value = data.config.subtitle;
+            document.getElementById('cfg-livetv').value = data.config.liveTv || "";
+            document.getElementById('cfg-radio').value = data.config.radioUrl || "";
+        }
+
+        window.openLoginModal = () => document.getElementById('login-modal').classList.remove('hidden');
+        window.closeLoginModal = () => document.getElementById('login-modal').classList.add('hidden');
+
+        window.handleLogin = (e) => {
+            e.preventDefault();
+            const user = document.getElementById('login-user').value;
+            const pass = document.getElementById('login-pass').value;
+            if (user === 'admin' && pass === 'Taber2026%') {
+                closeLoginModal();
+                document.getElementById('admin-panel').classList.remove('hidden');
+                renderAdminLists();
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        };
+
+        window.closeAdminPanel = () => document.getElementById('admin-panel').classList.add('hidden');
+
+        window.switchTab = (tabName) => {
+            ['general', 'banners', 'menu', 'blog', 'videos', 'galeria', 'horarios'].forEach(t => {
+                document.getElementById(`tab-${t}`).classList.add('hidden');
+                document.getElementById(`tab-btn-${t}`).classList.remove('text-primary', 'border-b-2', 'border-primary');
+            });
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-btn-${tabName}`).classList.add('text-primary', 'border-b-2', 'border-primary');
+        };
+
+        window.saveGeneralConfig = (e) => {
+            e.preventDefault();
+            currentData.config.brand = document.getElementById('cfg-brand').value;
+            currentData.config.subtitle = document.getElementById('cfg-subtitle').value;
+            currentData.config.liveTv = document.getElementById('cfg-livetv').value;
+            currentData.config.radioUrl = document.getElementById('cfg-radio').value;
+            saveData(currentData);
+            alert('¡Configuración guardada!');
+        };
+
+        window.saveBanner = (e) => {
+            e.preventDefault();
+            const newBanner = { id: Date.now().toString(), title: document.getElementById('banner-title').value, subtitle: document.getElementById('banner-subtitle').value, img: document.getElementById('banner-img').value };
+            if (!currentData.banners) currentData.banners = [];
+            currentData.banners.unshift(newBanner);
+            saveData(currentData);
+            alert('Banner agregado!');
+        };
+
+        window.saveMenuItem = (e) => {
+            e.preventDefault();
+            const newItem = { id: Date.now().toString(), title: document.getElementById('menu-title').value, link: document.getElementById('menu-link').value };
+            if (!currentData.menuItems) currentData.menuItems = [];
+            currentData.menuItems.push(newItem);
+            saveData(currentData);
+            alert('Enlace agregado!');
+        };
+
+        window.saveBlog = (e) => {
+            e.preventDefault();
+            const newBlog = { id: Date.now().toString(), title: document.getElementById('blog-title').value, author: document.getElementById('blog-author').value, date: document.getElementById('blog-date').value, img: document.getElementById('blog-img').value, content: document.getElementById('blog-content').value };
+            if (!currentData.blogs) currentData.blogs = [];
+            currentData.blogs.unshift(newBlog);
+            saveData(currentData);
+            alert('Artículo publicado!');
+        };
+
+        window.saveVideo = (e) => {
+            e.preventDefault();
+            const newVideo = { id: Date.now().toString(), title: document.getElementById('vid-title').value, author: document.getElementById('vid-author').value, ytId: document.getElementById('vid-url').value, audioUrl: document.getElementById('vid-audio-url').value };
+            if (!currentData.videos) currentData.videos = [];
+            currentData.videos.unshift(newVideo);
+            saveData(currentData);
+            alert('Sermón guardado!');
+        };
+
+        window.saveAlbum = (e) => {
+            e.preventDefault();
+            const newAlbum = { id: Date.now().toString(), title: document.getElementById('album-title').value, cover: document.getElementById('album-cover').value, desc: document.getElementById('album-desc').value, photos: document.getElementById('album-photos').value.split('\n') };
+            if (!currentData.albums) currentData.albums = [];
+            currentData.albums.unshift(newAlbum);
+            saveData(currentData);
+            alert('Álbum guardado!');
+        };
+
+        window.saveSchedule = (e) => {
+            e.preventDefault();
+            const newSch = { id: Date.now().toString(), day: document.getElementById('sch-day').value, time: document.getElementById('sch-time').value, desc: document.getElementById('sch-desc').value };
+            if (!currentData.schedules) currentData.schedules = [];
+            currentData.schedules.push(newSch);
+            saveData(currentData);
+            alert('Horario guardado!');
+        };
     </script>
 </body>
 </html>
